@@ -1,16 +1,16 @@
 #import "@preview/grape-suite:3.1.0": seminar-paper, german-dates
 
-#set text(lang: "de")
+#set text(lang: "en")
 
 #show: seminar-paper.project.with(
-    title: "Die Intensionalität von dass-Sätzen",
-    subtitle: "Intensionale Kontexte in philosophischen Argumenten",
+    title: "Machine design my gpa",
+    subtitle: "yes",
 
-    university: [Universität Musterstadt],
-    faculty: [Exemplarische Fakultät],
-    institute: [Institut für Philosophie],
-    docent: [Dr. phil. Berta Beispielprüferin],
-    seminar: [Beispielseminar],
+    university: [University of British Colombia],
+    faculty: [],
+    institute: [],
+    docent: [],
+    seminar: [],
 
     submit-to: [Eingereicht bei],
     submit-by: [Eingereicht durch],
@@ -25,32 +25,15 @@
     ]
 )
 
-= Einleitung
-#lorem(100)
+= ARI CHOLAKIAN
 
+= ARI CHOLAKIAN
 
-#lorem(100)
+== SAMUEL SJODEN
 
-= Hauptteil
-#lorem(100)
+== SAMUEL SJODEN
 
-#lorem(100)
+== SAMUEL SJODEN
 
-== These
-#lorem(200)
+= ARI CHOLAKIAN
 
-== Antithese
-#lorem(100)
-
-#lorem(200)
-
-== Synthese
-#lorem(100)
-
-#lorem(200)
-
-= Fazit
-
-#lorem(100)
-
-#lorem(100)
