@@ -1,28 +1,21 @@
-#import "@preview/grape-suite:3.1.0": seminar-paper, german-dates
+#import "@preview/clean-cnam-template:1.3.0": *
 
 #set text(lang: "en")
 
-#show: seminar-paper.project.with(
-    title: "Machine design my gpa",
-    subtitle: "yes",
-
-    university: [University of British Colombia],
-    faculty: [],
-    institute: [],
-    docent: [],
-    seminar: [],
-
-    submit-to: [Eingereicht bei],
-    submit-by: [Eingereicht durch],
-
-    semester: german-dates.semester(datetime.today()),
-
-    author: "Max Muster",
-    email: "max.muster@uni-musterstadt.uni",
-    address: [
-        12345 Musterstadt \
-        Musterstraße 67
-    ]
+#show: clean-cnam-template.with(
+  title: "Machine design my gpa",
+  author: "Yuvraj Cheema, Samuel Sjoden, Connor Floyd, Taichi Kamei,
+  Ari Cholakian, Bram Banik",
+  class: "MECH 325",
+  subtitle: "StarTracker",
+  main-color: "#C4122E",
+  default-font: "MS Gothic",
+  code-font: "Jetbrains Mono Nerd Font",
+  outline-code: outline(
+    title: "Table of Contents",
+    depth: 2,
+    indent: auto,
+  ),
 )
 
 = ARI CHOLAKIAN
