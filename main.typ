@@ -5,7 +5,7 @@
 #show: clean-cnam-template.with(
   title: "Machine design my gpa",
   author: "Yuvraj Cheema, Samuel Sjoden, Connor Floyd, Taichi Kamei,
-  Ari Cholakian, Bram Banik",
+  Ari Cholakian, Bram Banik, Austin Bai",
   class: "MECH 325",
   subtitle: "StarTracker",
   main-color: "#C4122E",
