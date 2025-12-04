@@ -9,7 +9,7 @@
   class: "MECH 325",
   subtitle: "StarTracker",
   main-color: "#C4122E",
-  default-font: "MS Gothic",
+  default-font: "Hiragino Sans",
   code-font: "Jetbrains Mono Nerd Font",
   outline-code: outline(
     title: "Table of Contents",
@@ -47,11 +47,10 @@ Price was also another important consideration, which the Nylon bushings meet, w
 
 In total this is why I selected Dry-Running Nylon Sleeve bushings.
 
-= RESULTS and FINAL DESIGN
+= RESULTS & FINAL DESIGN
 
-= CONLUSIONS and RECOMENDATIONS
+= CONLUSIONS & RECOMENDATIONS
 
 = APPENDIX A
 
 = APPENDIX B
-
