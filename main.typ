@@ -34,7 +34,6 @@ To suppport both ends of the two shafts in the reduction stage, two sets of Dry-
 - The bushings must have minimal maintenance and lubrication requirements for the convience of the hobbiysts
 - Minimize length to keep overall reduction stage small
 
-
 Bushings were selected instead of bearings because of the small loads required, keeping costs low and occupying minimal space. In particular,
 dry bushings were selected to minimize maintenance on the StarTracker and eliminating lubrication requirements
 to make construction convienient for hobbiysts.
@@ -45,7 +44,7 @@ because of its low friction and minimal wearing properties.
 
 Price was also another important consideration, which the Nylon bushings meet, with a unit price of \$4.59.
 
-In total this is why I selected Dry-Running Nylon Sleeve bushings.
+In total this is why Dry-Running Nylon Sleeve bushings were selected.
 
 = RESULTS and FINAL DESIGN
 
