@@ -24,6 +24,12 @@
 
 = DETAILED ANALYSIS
 
+== RPM Considerations
+
+== Worm Gear Selection
+
+== Shaft Design 
+
 == Bushing Selection and Design Rationale
 
 === Overview
