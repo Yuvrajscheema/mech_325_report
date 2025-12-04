@@ -26,10 +26,10 @@
 
 == Bushing Selection and Design Rationale
 
-# Overview
+=== Overview
 To suppport both ends of the two shafts in the reduction stage, two sets of Dry-Running Nylon Sleeve bushings were chosen for their minimal wear properties, low cost, and light weight.
 
-## Key Selection Requirements
+==== Key Selection Requirements
 - The bushings must have minimal wear to maintain the accuracy of the speed of the rotation 
 - The bushings must have minimal maintenance and lubrication requirements for the convience of the hobbiysts
 - Minimize length to keep overall reduction stage small
