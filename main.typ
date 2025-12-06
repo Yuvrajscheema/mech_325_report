@@ -30,6 +30,34 @@
 
 == Shaft Design 
 
+- 2nd Shaft Analysis
+#figure(
+  // The image function goes here (no '#' needed inside figure)
+  image("2nd_shaft_FBD.jpeg", width: 70%),
+  // Add a caption using a content block ([...])
+  caption: [FBD of 2nd shaft],
+  // Add a label for referencing (use a name enclosed in angle brackets)
+) <fig:2nd_shaft_FBD>
+
+#figure(
+  // The image function goes here (no '#' needed inside figure)
+  image("2nd_shaft_torque.jpeg", width: 70%),
+  // Add a caption using a content block ([...])
+  caption: [Torque diagram of 2nd shaft],
+  // Add a label for referencing (use a name enclosed in angle brackets)
+) <fig:2nd_shaft_Torque>
+
+#figure(
+  // The image function goes here (no '#' needed inside figure)
+  image("2nd_shaft_shear_moment.jpeg", width: 70%),
+  // Add a caption using a content block ([...])
+  caption: [Shear and bending moment diagram],
+  // Add a label for referencing (use a name enclosed in angle brackets)
+) <fig:2nd_shaft_shear_moment>
+
+
+
+
 == Bushing Selection and Design Rationale
 
 === Overview
