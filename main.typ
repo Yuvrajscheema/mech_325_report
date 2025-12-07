@@ -61,8 +61,6 @@ As a way to ensure that a small mishap does not cause an entire night's worth of
   caption: [Equatorial Mount Explained cont.],
 )
 
-
-== 3D Printing
 The advent of affordable 3D printing technology has fundamentally transformed the landscape of all hobbyist and amateur technical pursuits. Hobbies, such as astrophotography, which previouly required boutique and expensive products are now being approached from a new  perspective. Desktop 3D printers, which have dropped in price from tens of thousands to just a few hundred dollars over the past decade, have democratized the ability to rapidly prototype and fabricate custom tools. This accessibility has enabled hobbyists to tackle increasingly sophisticated projects that would have been impractical or impossible just years ago. The maker community has flourished as enthusiasts share designs, collaborate on complex builds, and push the boundaries of what can be achieved outside traditional manufacturing settings. 
 
 Astrophotography is one such older hobby with already established industry that serves it. All forms of telescopes, filters, cameras, mounts, controllers, and respective accessories already exist on the market, but due to the small volume of products these companies sell, design and manufacturing remains very expensive and outside of the range of many hobbiysts. In particular, equatorial mounts from astrophotography hobbyist stores can cost anywhere between \$1000 and \$10,000 CAD. 
@@ -205,22 +203,47 @@ Calculations for the following results can be found in #link(<Other_worm>)[appen
   These are very small total loads on the teeth. Bronze gear fatigue strengths are in the range of 17,000 to 24,000 psi, so this type of loading is more than acceptable. There is no more analysis we can do in this section since (10-42) and beyond apply solely to steel worms and bronze gears.
 
 
-== Shaft Design 
+== Shaft Design
 
-=== Shaft 1 Selection
+=== Shaft 1 Overview
 
-#figure(
-  image("CFImages/shaft1.jpg", width: 70%),
-  caption: [Shaft 1],
-)
+Shaft 1 is part of an intermediate stage in the speed reducer system. Two pulleys are mounted on it, and it is secured with bushings on either end. The shaft is subject to forces from the two pulleys and two bushings. There are no axial forces.
 
-#figure(
-  image("CFImages/gearboxShaft1Image.jpg", width: 70%),
-  caption: [Shaft 1 in CAD assembly],
-)
+#align(center)[
+  #figure(
+    image("CFImages/shaft1.jpg", width: 60%),
+    caption: [Shaft 1],
+  )
+]
 
+#align(center)[
+  #figure(
+    image("CFImages/gearboxShaft1Image.jpg", width: 70%),
+    caption: [Shaft 1 in CAD assembly],
+  )
+]
 
-=== 2nd Shaft Overview
+#align(center)[
+  #table(
+    columns: 2,
+    stroke: none,
+    align: center,
+
+    [Shaft Length],
+    [2-in],
+
+    [Shaft Diameter],
+    [1/4\" major diameter],
+
+    [Shoulders],
+    [1/4\" long, 3/16\" diameter],
+
+    [Material],
+    [2014 O aluminum]
+  )
+]
+
+=== Shaft 2 Overview
 The 2nd shaft transmits torque from the worm gear to the pulley which drives the timing belt. The shaft is supported by two bushings on either end. The shaft is subjected to forces from the worm gear and pulley as well as reaction forces from the bushings.
 \
 ==== 2nd Shaft Key Specifications:
@@ -341,7 +364,66 @@ application. Both of these bearings can be purchased for arund \$14 each on Bear
 
 = RESULTS & FINAL DESIGN
 
+#align(center)[#table(
+  columns: 3,
+  align: (left, left),
+  table.header([*Part*], [*Specification*], [*Part Number*]),
+  [Worm], [12 pitch, 14.5° pitch angle, 4.76° lead angle, Single thread, Bronze], [rushgears.com, WB12L],
+  [Worm Gear], [12 pitch, 100 teeth, 14.5° pitch angle, 4.76° lead angle, Bronze], [rushgears.com, WB1200L],
+  [Bushing], [Dry-Running PEEK Flanged Sleeve Bearing, for 3/8" Shaft Diameter and 15/32" Housing ID, 1/4" Long], [McMaster-Carr 6627K412],
+  [Shaft 1], [1/4" major diameter, 2" long],[N/A],
+  [Deep-Groove Ball Bearing],[5/8" bore, deep groove ball bearing],[R10ZZ 5/8", BearingsCanada.com],
+  [Angular Contact Ball Bearing],[5/8" bore, angular contact],[201-2RS Angular Contact Bearing, Temu.com],
+  [Smaller Pulley], [18 groove pulley], [ www.mcmaster.com 3764N106],
+  [Larger Pulley], [72 groove pulley],  [www.mcmaster.com 3764N119],
+  [Timing Belt], [7.559 in pitch length timing belt], [www.motioncanada.ca E2MR-192-04]
+)]
+
+Here are some final photos of the design of the equatorial mount.
+
+#figure(
+  image("images/Design 1.png", width: 100%),
+  caption: [Labelled design],
+)
+
+#figure(
+  image("images/Design 2.png", width: 100%),
+  caption: [Design],
+)
+
+#figure(
+  image("images/Design 3.png", width: 80%),
+  caption: [Section View],
+)
+
+#figure(
+  image("images/Design 4.png", width: 90%),
+  caption: [Design],
+)
+
+#figure(
+  image("images/Design 5.png", width: 90%),
+  caption: [Design],
+)
+
+#figure(
+  image("images/Design 6.png", width: 90%),
+  caption: [Design],
+)
+
+
+
 = CONLUSIONS & RECOMENDATIONS
+
+The mechanical design developed for our star-tracking system successfully meets the performance requirements established earlier in 
+the project. Through iterative concept development, load analysis, bearing and shaft sizing, and gear-train refinement, we verified 
+that the structure can reliably support a typical hobbyist camera load while maintaining the extremely small angular tracking tolerance necessary for long-exposure astrophotography. The combination of a multi-stage reduction system, worm gear, belt and pulley, custom shaft designs, and precise alignment features ensures smooth, controlled rotation, while the use of accessible, low-cost components keeps the system obtainable for our intended hobbyist demographic.
+
+Our analyses confirm that deflections in the primary support structure remain within acceptable limits, stresses in the shafts and 
+bushings stay well below material yield strengths, and the worm-drive and belt-reduction stages deliver the required motion uniformity. These results demonstrate that the design is both mechanically feasible and robust under real operating conditions, including operation in 
+outdoor environmental conditions. The systems calculated safety factor also verifies that the design is safe under operating conditions for users.
+
+Overall, the system can perform with the consistency and precision demanded by astrophotography while still achieving the project’s central goals of affordability, accessibility, and reliability. If the project were to continue moving forward, the next stages will focus on prototype fabrication, tolerance control, system integration with the electronics and control subsystem, and validation through experimental testing under realistic outdoor conditions.
 
 = APPENDIX A
 
@@ -1060,6 +1142,7 @@ Our worst case safety factor, which shouldn't occur is $S F = frac(1.35, 1.2)=1.
 Now we calculate the wrap angles to be: \
 $phi.alt_(D) = pi - arcsin frac(P D - p d, 2C D) = 2.364 "rad" quad "and" quad phi.alt_(D) 
 = pi + arcsin frac(P D - p d, 2C D) = 3.92 "rad"$
+
 == Shaft 1 Force Calculations
 
 As stated earlier, the torque on shaft 1 is 14.7 N*mm. The first stage of the force calculations was determining the direction in which the belt tension acts. In the CAD below, the endview of the gear reducer has been shown, with the diagonal lines representing belts going between pulleys. As can be seen, the belts act at a 19.79 degree angle.
