@@ -186,16 +186,25 @@ Shaft 1 is part of an intermediate stage in the speed reducer system. Two pulley
   image("CFImages/gearboxShaft1Image.jpg", width: 70%),
   caption: [Shaft 1 in CAD assembly],
 )
-
 #align(center)[
-$ 
-  "Shaft Length" &: "3-in" \
-  "Pulley" &: "3/4-in long shoulder with 1/5-in diameter" \
-  "Pulley" &: "3/4-in long shoulder with 1/5-in diameter" \
-  "Bushings" &: "1/4-in long shoulders with 3/16-in diameter" \
-$
-]
+  #table(
+    columns: 2,
+    stroke: none,
+    align: center,
 
+    [Shaft Length],
+    [2-in],
+
+    [Shaft Diameter],
+    [1/4\" major diameter],
+
+    [Shoulders],
+    [1/4\" long, 3/16\" diameter],
+
+    [Material],
+    [2014 O aluminum]
+  )
+]
 
 === 2nd Shaft Overview
 The 2nd shaft transmits torque from the worm gear to the pulley which drives the timing belt. The shaft is supported by two bushings on either end. The shaft is subjected to forces from the worm gear and pulley as well as reaction forces from the bushings.
@@ -936,7 +945,7 @@ $phi_(D) = pi - arcsin frac(P D - p d, 2C D) = 2.364 "rad" quad "and" quad phi_(
 
 == Shaft 1 Force Calculations
 
-As stated earlier, the torque on shaft 1 is 14.7 N*mm. The first stage of the force calculations was determining the direction in which the belt tension acts. In the CAD below, the endview of the speed reducer has been shown, with the diagonal lines representing belts going between pulleys. As can be seen, the belts act at a 19.79 degree angle.
+As stated earlier, the torque on shaft 1 is 14.7 N*mm. The first stage of the force calculations was determining the direction in which the belt tension acts. In the CAD below, the end view of the speed reducer has been shown, with the diagonal lines representing belts going between pulleys. As can be seen, the belts act at a 19.79 degree angle.
 
 #figure(
   image("CFImages/shaft1Pulleys.jpg", width: 70%),
@@ -988,15 +997,15 @@ From these forces, the following torsion, shear, and bending diagrams were plott
 
 The next step of the force calculations is to determine the stress concentration factors for the setscrew flat and shoulders. Since a specific value was not given, we assumed a conservative stress concentration factor $K_t$ of 2 for the setscrew flat.
 
-For the shoulder we assume a sharp radius, which gives us $K_t = 2.5$.
+For the shoulder, we assume a sharp radius, which gives us $K_t = 2.5$.
 
 We then calculate the required minimum diameters.
 
-We start with endurance strength $S_n = 13"ksi"$ from appendix B.I. We choose $K_a = 0.8$ for machined finish, $K_b = 0.879d^(-0.107) = 1.02$, $K_c = 1$ for no axial load, $K_d = 1$ as operating temperature is around 20 celcius, $K_e = 1$ since we do not require infinite life, and $K_f$ = 1 for no miscelenous factors.
+We start with endurance strength $S_n = 13"ksi"$ from Appendix B.I. We choose $K_a = 0.8$ for machined finish, $K_b = 0.879d^(-0.107) = 1.02$, $K_c = 1$ for no axial load, $K_d = 1$ as operating temperature is around 20 celcius, $K_e = 1$ since we do not require infinite life, and $K_f$ = 1 for no miscelenous factors.
 
 This gives us $S_n' = 10.608 "ksi"$
 
-We then plug in the equation for minimum diameter based on bending and torque 
+We then plug in the equation for minimum diameter based on bending and torque.
 
 $ D = ((32N)/pi sqrt(((K_t M)/(s'_n))^2 + (3/4) (T/s_y)^2))^(1/3) $ 
 
@@ -1013,12 +1022,12 @@ That gives us the following minimum diameters.
   caption: [Minimum shaft diameters],
 )
 
-This gives us a minimum diamter of \~0.1\", which is limited by the shear at the small pulley. Therefore shaft 1 is strong enough.
+This gives us a minimum diameter of \~0.1\", which is limited by the shear at the small pulley. Therefore shaft 1 is strong enough.
 
 
 == Shaft 1 & 2 Setscrew Calculations
 
-There are four pulleys which are secured to shafts through setscrews. The ones to fail, if any, would be either pulley 3, which expereinces the highest torque of the small pulleys, or pulley 4, which experiences the highest torque of the large pulleys.
+There are four pulleys which are secured to shafts through setscrews. The ones to fail, if any, would be either pulley 3, which experiences the highest torque of the small pulleys, or pulley 4, which experiences the highest torque of the large pulleys.
 
 $ T_(max) = (F_(max) D) / 2$
 
