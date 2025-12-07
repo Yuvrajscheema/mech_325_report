@@ -261,7 +261,7 @@ application. Both of these bearings can be purchased for arund \$14 each on Bear
 
 = APPENDIX A
 
-=== Shaft 2 Calculations
+== Shaft 2 Calculations
 
 #figure(
   // The image function goes here (no '#' needed inside figure)
@@ -582,12 +582,6 @@ end near the camera, and a stabilizing deep grove bearing opposite the camera to
 allowed us to determine that *R10ZZ 5/8" Deep Groove Ball Bearing* and *3201-2RS Angular Contact Bearing* are ideal for this
 application. Both of these bearings can be purchased for arund \$14 each on BearingsCanada.com and Temu.com, respectively.
 
-= RESULTS & FINAL DESIGN
-
-= CONLUSIONS & RECOMENDATIONS
-
-= APPENDIX A
-
 === Bushing Calculations
 
 ===== Geometery Calculations
@@ -842,8 +836,8 @@ A typical stepper motor can outpout around $3000 "rpm"$ and $1.2 "N" dot "m"$ of
 We desire an output speed of around $0.05886 "rpm"$ at $0.0694 "N" dot "m"$ of torque. \
 Our system will use this power but we design for the stepper maximum. \
 \
-From table *ENTER TABLE* we select a 2GMT belt. \
-We can assume that the belt is going to run at less than $10 "rpm"$ so from table *ENTER TABLE* 
+From @belt_sizing we select a 2GMT belt. \
+We can assume that the belt is going to run at less than $10 "rpm"$ so from table @smaller_sheave 
 we select a $6 "mm"$ wide belt and the smaller sprocket size of $18$ grooves which is rated for 
 $1.35 "N" dot "m"$ of torque at this speed. \
 \
@@ -852,14 +846,14 @@ reduce complexity we use the same pair of sprockets twice. \
 Since a stepper motor can run at variable speed we will say that each belt will 
 need a reduction of $1:4$. \ 
 So we select the larger sprocket size to be $72$ groove. The pitch diameters 
-are found from *ENTER TABLE* to be:
+are found from @pulley_inf:
 $ p d = 0.301 "in" quad P D = 1.805 "in" $
 \
 We want the center distance to be small so temporarily select $C D=1.9 "in"$ since
 we want to minimize size.\
 $ P L = 2 dot C D + [1.57 dot (p d + P D)] + frac((P D - p d)^2, 4 C D) = 1.984 "in" $
 \
-So using *ENTER TABLE* we select a 2MR-192 belt with a pitch length $P L = 7.559$
+So using @belt_selection $P L = 7.559$
 which is a stock length. \
 $ K = 4 P L - 6.28 dot (P D + p d) $
 $ C D = frac(K + sqrt(K^2 - 32(P D - p d)^2), 17 ) = 1.984 "in" $
@@ -867,7 +861,7 @@ Giving our center distance.\
 Our nominal safety factor is given by $S F = frac(1.35, 0.05886)=23$.\
 Our worst case safety factor, which shouldn't occur is $S F = frac(1.35, 1.2)=1.125$.\
 Now we calculate the wrap angles to be: \
-$phi_(D) = pi - arcsin frac(P D - p d, 2C D) = 2.364 "rad" quad "and" quad phi_(D) 
+$phi.alt_(D) = pi - arcsin frac(P D - p d, 2C D) = 2.364 "rad" quad "and" quad phi.alt_(D) 
 = pi + arcsin frac(P D - p d, 2C D) = 3.92 "rad"$
 == Shaft 1 Force Calculations
 
@@ -984,3 +978,21 @@ $ (1/2)*T_("max,lg") = 2718.5 N*"mm" > 58.86 N*"mm" $
 
 
 = APPENDIX B
+
+== Gates Manual
+#figure(
+  image("yuvy_images/Gates_manual_selection_zones.png", width: 100%),
+  caption: [Belt Size Selection],
+) <belt_sizing>
+#figure(
+  image("yuvy_images/gates_smaller_sheave.png", width: 100%),
+  caption: [Smaller Sprocket Selection],
+) <smaller_sheave>
+#figure(
+  image("yuvy_images/sprocket_numbers.png", width: 100%),
+  caption: [Pulley Information],
+) <pulley_inf>
+#figure(
+  image("yuvy_images/Gates_manual_belts.png", width: 100%),
+  caption: [Belt Selection],
+) <belt_selection>
