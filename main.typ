@@ -487,10 +487,11 @@ so our shaft is fit for our needs!
 
 == Shaft 3 Bearing Calculations
 
-=== Angular Contact Ball Bearing
+=== Angular Contact Ball Bearing at C
 
-  
-=== Deep-Groove Ball Bearing
+We assume the inner ring is rotating, so V = 1. We also have a shaft diameter of $0.625 text("in") $
+
+=== Deep-Groove Ball Bearing at A
 
 == Belt and Pulley Calculations
 A typical stepper motor can outpout around $3000 "rpm"$ and $1.2 "N" dot "m"$ of torque. \
