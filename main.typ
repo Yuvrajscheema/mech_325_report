@@ -21,26 +21,80 @@
   size: 12pt
 )
 
+#show figure.where(
+  kind: image
+): set figure.caption(position: bottom)
+
 = INTRODUCTION
+
+#figure(
+  image("images/Galaxy.jpg", width: 100%),
+  caption: [Equatorial Mount Explained cont.],
+)
+
 
 The fundemental challenge of astrophotography is the amount of light gathered by a camera. While most cameras have no problem capturing photos in bright daylight, deep space objects and stars tend to be very dim. The amount of light gathered by a lens or telescope depends on a few factors, one of which is  its cross-sectional area (or _aperture_). To capture increasingly darker objects, it quickly becomes impractical to increase the diameter of the lens. A much more appropriate solution is to gather light for over a longer period of time at the camera, but this introduces its own issues.
 
 The main issue is that if a camera is held pointing at a particular area of the sky, over a significant period of time (as little as 2-4 seconds on a regular 50mm lens & camera), the earth will have rotated slightly, and the camera will be pointing in a marginally different direction. The net result of this is called _star streaking_ where instead of appearing as points, stars appear as _lines or arcs_ around the north star.
 
-IMAGE HERE 
+#figure(
+  image("images/Untracked.jpg", width: 50%),
+  caption: [Untracker Long Exposure],
+)
 
 An _Equatorial Mount_ is a mechanical device intended to solve this issue. It was first invented in 1842, and its design has largely remained unchanged since. The idea is to mount your camera and have it rotate around one axis. This axis is the polar axis, and it points at the north star (polaris), which does not move in the sky from the perspective of an observer on Earth.
 
-IMAGE HERE
+#figure(
+  image("images/Explainer 1.jpg", width: 70%),
+  caption: [Equatorial Mount Explained],
+)
+
+#figure(
+  image("images/Explainer 2.png", width: 50%),
+  caption: [Equatorial Mount Explained cont.],
+)
+
+As a way to ensure that a small mishap does not cause an entire night's worth of exposure to be erased, astrophotograpers commonly take 10-30 second exposures, and later "stack" them in software. This also helps average out noise that is common in dark photos. After several hours of smaller exposures are stacked in software, you can expect an image to look like this.
+
+#figure(
+  image("images/Tracked.jpeg", width: 70%),
+  caption: [Equatorial Mount Explained cont.],
+)
+
 
 == 3D Printing
 The advent of affordable 3D printing technology has fundamentally transformed the landscape of all hobbyist and amateur technical pursuits. Hobbies, such as astrophotography, which previouly required boutique and expensive products are now being approached from a new  perspective. Desktop 3D printers, which have dropped in price from tens of thousands to just a few hundred dollars over the past decade, have democratized the ability to rapidly prototype and fabricate custom tools. This accessibility has enabled hobbyists to tackle increasingly sophisticated projects that would have been impractical or impossible just years ago. The maker community has flourished as enthusiasts share designs, collaborate on complex builds, and push the boundaries of what can be achieved outside traditional manufacturing settings. 
 
-IMAGE HERE
-
 Astrophotography is one such older hobby with already established industry that serves it. All forms of telescopes, filters, cameras, mounts, controllers, and respective accessories already exist on the market, but due to the small volume of products these companies sell, design and manufacturing remains very expensive and outside of the range of many hobbiysts. In particular, equatorial mounts from astrophotography hobbyist stores can cost anywhere between \$1000 and \$10,000 CAD. 
 
+#figure(
+  image("images/Market.png", width: 70%),
+  caption: [Equatorial Mount Explained cont.],
+)
+
 = PURPOSE
+
+The purpose of this project is to create an equatorial mount for student and hobbyist astrophotographers. Our ideal client is only a beginner astrophotograper, with access to a machine shop and 3D printer, very basic turning skills,  and some patience in wanting to learn how to put together the equatorial mount. Our specific design is intended to be used near the 49th latitude line, but this is easily modified due to the 3D printed nature of the design. If the hobbysit is travelling, then the base can be customized to take on an angle equal to the latitude.
+
+The star tracker must be able to support a variety of cameras and lenses. For long distance photos, these lenses can become long and heavy. We will design a camera and a lens which weighs at most 4kg with a center of mass 150mm away from the point of rotation. This configuration conservatively supports typical hobby cameras like the Nikon Z50 II or Nikon Z8 which weigh around 1kg and can support various lenses like the high quality NIKKOR Z 600mm (1.39kg) for high quality astrophotography. Due to the large variation in length and weight, we chose a conservative upper bound for both metrics.
+
+To allow for maximum compatibilty with existing astrophotography equipment, the mount must be able to support the Vixen (V-style) Mount for most common/light telescopes, but also allow for the mounting of an adapter to a 1/4" UNC camera mount.
+
+
+#align(center)[#table(
+  columns: 2,
+  align: (left, left),
+  table.header([*Requirement*], [*Specification*]),
+  [Focal length], [50 mm],
+  [Maximum smear], [20 pixels],
+  [Weight], [ < 4kg],
+  [Length], [ < 30 cm],
+  [Output rotation speed], [1 rotation/day],
+  [Output rotation torque], [5.8 Nm],
+  [Lifetime], [20x nights, 4 hours/night, 5 years],
+  [Operation temperature], [-5°C],
+  [Budget], [<\$500],
+)]
 
 = DETAILED ANALYSIS
 
@@ -114,24 +168,9 @@ Given the  $5.886 N dot m m$ output torque, we can analyze the forces of the wor
 - Worm lead angle: $lambda = 4.7666°$ (= 0.083176 rad)
 - Coefficient of friction: $mu = 0.124$
 
-The coefficient of friction is calculated using $ 0.124 e^(-0.74 v_s^0.645)$ (10–26). Due to the very slow speed, but $v_s != 0$, the coefficient is not $0.15$
-
-=== Mott equations
-
-- Tangential force (10–29):
-  $ W_(t G) = (2 T_0) / D_G $
-
-- Axial force (10–30):
-  $ W_(x G) = W_(t G) (cos phi_n sin lambda + mu cos lambda) / (cos phi_n cos lambda - mu sin lambda) $
-
-- Radial force (10–31):
-  $ W_(r G) = (W_(x G) sin phi_n) / (cos phi_n cos lambda - mu sin lambda) $
-
-- Friction force (10–32):
-  $ W_f = (mu W_(t G)) / (cos lambda cos phi_n - mu sin lambda) $
 
 === Numerical results
-
+Calculations for the following results can be found in #link(<MOTT_worm>)[appendix].
 - $W_(t G) = 54.701 "N"$
 
 - $W_(x G) = 11.698 "N"$ (axial / along worm axis)
@@ -151,42 +190,62 @@ As we can see, these forces are extremely small.
 - Diametral pitch: $P_d = 12 "teeth/in"$
 - Lewis form factor (for $phi_n = 14.5°$): $y = 0.100$
 
-=== Calculations
+=== Results
+Calculations for the following results can be found in #link(<Other_worm>)[appendix].
+- $p_n  = 0.2608 "in" = 0.006624 "m" $
 
-- Normal circular pitch (10–38):
-  $ p_n = (pi cos lambda) / P_d = 0.2608 "in" = 0.006624 "m" $
+- $v_(t G) = 0.001508 "ft/min" $
 
-- Pitch line speed (10–41):
-  $ v_(t G) = (pi D_G n_G) / 12 = 0.001508 "ft/min" $
+- $K_v approx 1.000 $
 
-- Velocity factor (10–40):
-  $ K_v = 1200 / (1200 + v_(t G)) = 1200 / (1200 + 0.001508) = 0.99999874 approx 1.000 $
+- $W_d = 54.701 "N" = 12.293 "lbf" $
 
-- Dynamic load (10–39):
-  $ W_d = 54.701 "N" = 12.293 "lbf" $
-
-- Tooth bending stress (10–37):
-  $ sigma = W_d / (y F p_n) = (12.293 "lbf") / (0.100 times 0.5 "in" times 0.2608 "in") = 942.6 "psi" = 6.50 "MPa" $
+- $sigma = 942.6 "psi" = 6.50 "MPa" $
 
   These are very small total loads on the teeth. Bronze gear fatigue strengths are in the range of 17,000 to 24,000 psi, so this type of loading is more than acceptable. There is no more analysis we can do in this section since (10-42) and beyond apply solely to steel worms and bronze gears.
 
 
-== Shaft Design 
+== Shaft Design
 
-=== Shaft 1 Selection
+=== Shaft 1 Overview
 
-#figure(
-  image("CFImages/shaft1.jpg", width: 70%),
-  caption: [Shaft 1],
-)
+Shaft 1 is part of an intermediate stage in the speed reducer system. Two pulleys are mounted on it, and it is secured with bushings on either end. The shaft is subject to forces from the two pulleys and two bushings. There are no axial forces.
 
-#figure(
-  image("CFImages/gearboxShaft1Image.jpg", width: 70%),
-  caption: [Shaft 1 in CAD assembly],
-)
+#align(center)[
+  #figure(
+    image("CFImages/shaft1.jpg", width: 60%),
+    caption: [Shaft 1],
+  )
+]
 
+#align(center)[
+  #figure(
+    image("CFImages/gearboxShaft1Image.jpg", width: 70%),
+    caption: [Shaft 1 in CAD assembly],
+  )
+]
 
-=== 2nd Shaft Overview
+#align(center)[
+  #table(
+    columns: 2,
+    stroke: none,
+    align: center,
+
+    [Shaft Length],
+    [2-in],
+
+    [Shaft Diameter],
+    [1/4\" major diameter],
+
+    [Shoulders],
+    [1/4\" long, 3/16\" diameter],
+
+    [Material],
+    [2014 O aluminum]
+  )
+]
+
+=== Shaft 2 Overview
 The 2nd shaft transmits torque from the worm gear to the pulley which drives the timing belt. The shaft is supported by two bushings on either end. The shaft is subjected to forces from the worm gear and pulley as well as reaction forces from the bushings.
 \
 ==== 2nd Shaft Key Specifications:
@@ -252,7 +311,19 @@ Reasons:
 - Easy to machine
 - Required minimum diameter below all components' bore diameter
 
+=== Shaft 3 Overview
+#figure(
+  image("bram-images-420340594432/naked_shaft.png", width: 70%),
+  caption: [Shaft 3],
+)
 
+#figure(
+  image("bram-images-420340594432/shaft3.png", width: 70%),
+  caption: [Shaft 3 in CAD assembly],
+)
+
+Shaft 3 transfers torque from the worm gear to actually rotating the camera to track stars! It is subjected to radial and axial forces and thus features
+an angular contact bearing as well as a deep groove bearing. It is machined out Aluminum 2014-O, same as the other two shafts.
 == Bushing Selection and Design Rationale
 
 === Overview
@@ -293,13 +364,46 @@ end near the camera, and a stabilizing deep grove bearing opposite the camera to
 allowed us to determine that *R10ZZ 5/8" Deep Groove Ball Bearing* and *3201-2RS Angular Contact Bearing* are ideal for this
 application. Both of these bearings can be purchased for arund \$14 each on BearingsCanada.com and Temu.com, respectively.
 
-= RESULTS & FINAL DEssSIGN
+= RESULTS & FINAL DESIGN
 
 = CONLUSIONS & RECOMENDATIONS
 
 = APPENDIX A
 
-=== Shaft 2 Calculations
+== Worm Gear Calculations
+
+Calculate the coefficient of friction to be: 
+$ 0.124 e^(-0.74 v_s^0.645)$ (10–26). Due to the very slow speed, but $v_s != 0$, the coefficient is not $0.15$
+
+=== MOTT Calculations <MOTT_worm>
+- Tangential force (10–29):
+  $ W_(t G) = (2 T_0) / D_G $
+
+- Axial force (10–30):
+  $ W_(x G) = W_(t G) (cos phi_n sin lambda + mu cos lambda) / (cos phi_n cos lambda - mu sin lambda) $
+
+- Radial force (10–31):
+  $ W_(r G) = (W_(x G) sin phi_n) / (cos phi_n cos lambda - mu sin lambda) $
+
+- Friction force (10–32):
+  $ W_f = (mu W_(t G)) / (cos lambda cos phi_n - mu sin lambda) $
+
+=== Other Calculations <Other_worm>
+- Normal circular pitch (10–38):
+  $ p_n = (pi cos lambda) / P_d = 0.2608 "in" = 0.006624 "m" $
+
+- Pitch line speed (10–41):
+  $ v_(t G) = (pi D_G n_G) / 12 = 0.001508 "ft/min" $
+
+- Velocity factor (10–40):
+  $ K_v = 1200 / (1200 + v_(t G)) = 1200 / (1200 + 0.001508) = 0.99999874 approx 1.000 $
+
+- Dynamic load (10–39):
+  $ W_d = 54.701 "N" = 12.293 "lbf" $
+
+- Tooth bending stress (10–37):
+  $ sigma = W_d / (y F p_n) = (12.293 "lbf") / (0.100 times 0.5 "in" times 0.2608 "in") = 942.6 "psi" = 6.50 "MPa" $
+== Shaft 2 Calculations
 
 Net driving force on the timing belt pulley is given by:
 $
@@ -500,7 +604,7 @@ D_min = [
 $
 \
 For the material choice, we want to use an affordable, and easy to machine. Therefore, we will use Aluminum for the shaft material. \
-From Appendix B III, we choose Aluminum 2014 O for its high ductility, decent strength, and cheap cost of about \$1 per inch.
+From Appendix B II, we choose Aluminum 2014 O for its high ductility, decent strength, and cheap cost of about \$1 per inch.
 \
 #align(center,
   figure(
@@ -510,49 +614,39 @@ From Appendix B III, we choose Aluminum 2014 O for its high ductility, decent st
       inset: 4pt,
         [$S_u$], [27 ksi],
         [$S_y$], [14 ksi],
-        [$S_(n)$], [13 ksi],
+        [$S_(n')$], [13 ksi],
     ),
     caption: [Material Properties of Aluminum 2014 O],
   )
 )
-
-Since the shaft condition is identical to the 1st shaft, the calculation for the modified endurance limit is the same as well.
-This gives us $S_n' = 10.608 "ksi"$
-
-
 \
 $K_t = 2.5$ as sharp fillet is used for the shaft shoulders.\
 $N = 2.0$ is chosen for our design factor since aluminum is a ductile material and the design factor is in the range of $1.5 < N < 2.5$. 
 \
-Substituting the values into the minimum diameter based on moment and torque, we get:
+Substituting the values into the minimum diameter equation, we get:
 $
 D_(min, i) = [
-  (64) / pi sqrt((2.5 M_("total", i) / 10608)^2 + (3/4) (T_i / 14000)^2)
+  (64) / pi sqrt((2.5 M_("total", i) / 13000)^2 + (3/4) (T_i / 14000)^2)
 ]^(1/3) "for" i = A, B, C, D
 $
 \
-Minimum diameter based on shear:
-$
-D_(min, i) = sqrt((2.95 K_t V_i N)/(s'_n))$
-
-Using above equations and tables, we calculate the minimum shaft diameter at each location: \
+Using eqn () and table (), we calculate the minimum shaft diameter at each location: \
 \
 #align(center,
   figure(
     table(
-      columns: 4,
+      columns: 3,
       stroke: 1pt + black,
       inset: 4pt,
-        [], [$D_(min M T) "(in)"$],[$D_(min "Shear")$], [$D_"Allowable" "(in)"$],
-        [$D_A$], [0.00],[0.130],[-],
-        [$D_B$], [0.387],[0.0345],[0.75],
-        [$D_C$], [0.84],[0.370],[0.25],
-        [$D_D$], [0.00],[0.00], [-]
+        [], [$D_min "(in)"$],[$D_"Allowable" "(in)"$],
+        [$D_A$], [0.00],[-],
+        [$D_B$], [0.362],[0.75],
+        [$D_C$], [0.172],[0.25],
+        [$D_D$], [0.00], [-]
     ),
     caption: [Minimum and Allowable Shaft Diameters],
   )
 )
-
 
 \
 The minimum shaft diameter at each location is well below the allowable shaft diameter determined by the components. 
@@ -634,12 +728,6 @@ To support the axial thrust from the camera's weight down on the shaft, we used 
 end near the camera, and a stabilizing deep grove bearing opposite the camera to maintain axial alignment. Bearing calculations
 allowed us to determine that *R10ZZ 5/8" Deep Groove Ball Bearing* and *3201-2RS Angular Contact Bearing* are ideal for this
 application. Both of these bearings can be purchased for arund \$14 each on BearingsCanada.com and Temu.com, respectively.
-
-= RESULTS & FINAL DESIGN
-
-= CONLUSIONS & RECOMENDATIONS
-
-= APPENDIX A
 
 === Bushing Calculations
 
@@ -753,6 +841,7 @@ so our shaft is fit for our needs!
 
 == Shaft 3 Calculations
 
+=== Force and Material Analysis
 #align(center,image("bram-images-420340594432/shaft_anal.png", width: 70%))
 _Note: the angle of 49\u{00B0} is dependent on the location of the star tracker. In Vancouver, the latitude angle
 is 49\u{00B0} so that's what we use._
@@ -851,10 +940,9 @@ D = 0.42 text("in") < 0.625 text("in")
 $
 so our shaft is fit for our needs!
 
-== Shaft 3 Bearing Calculations
+=== Shaft 3 Bearing Calculations
 
-We plan to use an angular contact ball bearing at C and a deep groove ball bearing at A. These locations are referenced in the figures
-for Shaft 3 Calculations. 
+We plan to use an angular contact ball bearing at C and a deep groove ball bearing at A. These locations are referenced in the figures for Shaft 3 Calculations. Our calculations are for 02-Series Deep-Groove and Angular-Contact ball bearings. 
 
 == Aluminum Material Properties
 
@@ -895,18 +983,83 @@ $
 We can now calculate our working value for $C_10$ with the following equation:
 
 $
-C_10 = 
+C_10 = a_f F_e [frac(x_D,x_0+(theta-chi_0)[ln(frac(1,R_D))]^frac(1,b))]^frac(1,a)
 $
 
-=== Deep Groove Ball Bearing at A 
+We use the following parameters:
+$
+  &a_f = 1 && text("from application factor") \
+  &x_0 = 0.02 && text("SKF Weibull Parameters") \
+  &theta = 4.459 && text("SKF Weibull Parameters") \
+  &b = 1.483 && text("SKF Weibull Parameters") \
+  &R_D = 0.9 && text("90% reliability") \
+  &a = 3 && text("for ball bearings") \
+$
 
+for $x_0$, we do the following calculations
+$
+  &L_10 = 10^6 \
+  &L_D = 500 "hours" \
+  &x_D = frac(60 L_D n, L_10) = 2*10^(-5)
+$
+Plugging these values in yields...
+
+$
+  C_10 = 1.39 text("kN") <= 8.87 text("kN")
+$
+
+so this bearing is suited for this task! Because we're using inches and SKF does not offer the exact 0.625 inch bearing bore, we use the *#201-2RS Angular Contact Bearing* because it has similar characteristics and can be purchase off Temu.com for relatively cheap.
+
+==== Deep Groove Ball Bearing at A 
+
+For the bearing at A, we have the following forces:
+
+$
+  A_x = -9.87 "N" wide A_z = -7.99 "N"
+$
+
+which results in an overall radial force of
+
+$
+  F_R = sqrt(A_x^2+A_z^2) = 12.7 "N"
+$
+
+$x_D$, $x_0$, $theta$, $b$, $R_D$ are the same as for the angular contact bearing, so we simply recalculate $C_10$:
+
+$
+  C_10 = 0.393 < 8.87 
+$
+
+so we can use the 0.625 inch 02-Series Deep-Groove bearing. Since this 02-Series is not available for inch-based shaft diameters, we opt for the over-specced *R10ZZ $frac(5,8)\" "Deep Groove Ball Bearing"$* available on BearingsCanada.com.
+
+=== Keyway Calculations for Worm Gear
+
+To allow for torque transmission from the worm gear to the camera shaft, we need a keyway. For this low-torque application, a square aluminum key is cheap, easy to manufacture, and effective. We will use Aluminum 6061 for this key, which has the following properties.
+
+$
+  s_u = 18 "ksi" wide s_y = 12 "ksi"
+$
+
+For a shaft diameter of 0.75 in at the worm gear, the recommended key width is 0.1875 in from Table 11-1. We use a standard safety factor N = 3. So, our key parameters are
+$
+  T = 5.886 "Nm" = 52.1 "lbf in" wide D = 0.75 wide N = 3 wide W = 0.1875
+$
+
+Since Aluminum 6061 is much weaker than Aluminum 2014-O, we can simply use the following equation:
+$
+  L_min = frac(4 T N, D W s_y) = 0.37 "in"
+$
+
+This is much smaller than usual key sizes, which are recommended to be between 1-1.5 inches. As such, we decide that the square Aluminum 6061 key be 1 inch long. 
+
+This is very short for a key, so we go up to a minimum key length 
 == Belt and Pulley Calculations <bnpcalc>
 A typical stepper motor can outpout around $3000 "rpm"$ and $1.2 "N" dot "m"$ of torque. \
 We desire an output speed of around $0.05886 "rpm"$ at $0.0694 "N" dot "m"$ of torque. \
 Our system will use this power but we design for the stepper maximum. \
 \
-From table *ENTER TABLE* we select a 2GMT belt. \
-We can assume that the belt is going to run at less than $10 "rpm"$ so from table *ENTER TABLE* 
+From @belt_sizing we select a 2GMT belt. \
+We can assume that the belt is going to run at less than $10 "rpm"$ so from table @smaller_sheave 
 we select a $6 "mm"$ wide belt and the smaller sprocket size of $18$ grooves which is rated for 
 $1.35 "N" dot "m"$ of torque at this speed. \
 \
@@ -915,14 +1068,14 @@ reduce complexity we use the same pair of sprockets twice. \
 Since a stepper motor can run at variable speed we will say that each belt will 
 need a reduction of $1:4$. \ 
 So we select the larger sprocket size to be $72$ groove. The pitch diameters 
-are found from *ENTER TABLE* to be:
+are found from @pulley_inf:
 $ p d = 0.301 "in" quad P D = 1.805 "in" $
 \
 We want the center distance to be small so temporarily select $C D=1.9 "in"$ since
 we want to minimize size.\
 $ P L = 2 dot C D + [1.57 dot (p d + P D)] + frac((P D - p d)^2, 4 C D) = 1.984 "in" $
 \
-So using *ENTER TABLE* we select a 2MR-192 belt with a pitch length $P L = 7.559$
+So using @belt_selection $P L = 7.559$
 which is a stock length. \
 $ K = 4 P L - 6.28 dot (P D + p d) $
 $ C D = frac(K + sqrt(K^2 - 32(P D - p d)^2), 17 ) = 1.984 "in" $
@@ -930,11 +1083,12 @@ Giving our center distance.\
 Our nominal safety factor is given by $S F = frac(1.35, 0.05886)=23$.\
 Our worst case safety factor, which shouldn't occur is $S F = frac(1.35, 1.2)=1.125$.\
 Now we calculate the wrap angles to be: \
-$phi_(D) = pi - arcsin frac(P D - p d, 2C D) = 2.364 "rad" quad "and" quad phi_(D) 
+$phi.alt_(D) = pi - arcsin frac(P D - p d, 2C D) = 2.364 "rad" quad "and" quad phi.alt_(D) 
 = pi + arcsin frac(P D - p d, 2C D) = 3.92 "rad"$
+
 == Shaft 1 Force Calculations
 
-As stated earlier, the torque on shaft 1 is 14.7 N*mm. The first stage of the force calculations was determining the direction in which the belt tension acts. In the CAD below, the endview of the gear reducer has been shown, with the diagonal lines representing belts going between pulleys. As can be seen, the belts act at a 19.79 degree angle.
+As stated earlier, the torque on shaft 1 is 14.7 N*mm. The first stage of the force calculations was determining the direction in which the belt tension acts. In the CAD below, the end view of the speed reducer has been shown, with the diagonal lines representing belts going between pulleys. As can be seen, the belts act at a 19.79 degree angle.
 
 #figure(
   image("CFImages/shaft1Pulleys.jpg", width: 70%),
@@ -986,22 +1140,17 @@ From these forces, the following torsion, shear, and bending diagrams were plott
 
 The next step of the force calculations is to determine the stress concentration factors for the setscrew flat and shoulders. Since a specific value was not given, we assumed a conservative stress concentration factor $K_t$ of 2 for the setscrew flat.
 
-For the shoulder we assume a sharp radius, which gives us $K_t = 2.5$.
+For the shoulder, we assume a sharp radius, which gives us $K_t = 2.5$.
 
 We then calculate the required minimum diameters.
 
-#figure(
-  image("CFImages/aluminumProperties.jpg", width: 70%),
-  caption: [Properties of Aluminum 2014 O],
-)
-
-We start with endurance strength $S_n = 13"ksi"$ from the table above. We choose $K_a = 0.8$ for machined finish, $K_b = 0.879d^(-0.107) = 1.02$, $K_c = 1$ for no axial load, $K_d = 1$ as operating temperature is around 20 celcius, $K_e = 1$ since we do not require infinite life, and $K_f$ = 1 for no miscelenous factors.
+We start with endurance strength $S_n = 13"ksi"$ from Appendix B.I. We choose $K_a = 0.8$ for machined finish, $K_b = 0.879d^(-0.107) = 1.02$, $K_c = 1$ for no axial load, $K_d = 1$ as operating temperature is around 20 celcius, $K_e = 1$ since we do not require infinite life, and $K_f$ = 1 for no miscelenous factors.
 
 This gives us $S_n' = 10.608 "ksi"$
 
-We then plug in the equation for minimum diameter based on bending and torque 
+We then plug in the equation for minimum diameter based on bending and torque.
 
-$ D = ((32N)/pi sqrt(((K_t M)/(s'_n))^2 + (3/4) (T/s_y)^2))^(1/3) $ 
+$ D = ((32N)/pi sqrt(((K_t M)/(s_n'))^2 + (3/4) (T/s_y)^2))^(1/3) $ 
 
 and minimum diameter based on shear 
 
@@ -1016,12 +1165,12 @@ That gives us the following minimum diameters.
   caption: [Minimum shaft diameters],
 )
 
-This gives us a minimum diamter of \~0.1", which is limited by the shear at the small pulley. Therefore shaft 1 is strong enough.
+This gives us a minimum diameter of \~0.1\", which is limited by the shear at the small pulley. Therefore shaft 1 is strong enough.
 
 
 == Shaft 1 & 2 Setscrew Calculations
 
-There are four pulleys which are secured to shafts through setscrews. The ones to fail, if any, would be either pulley 3, which expereinces the highest torque of the small pulleys, or pulley 4, which experiences the highest torque of the large pulleys.
+There are four pulleys which are secured to shafts through setscrews. The ones to fail, if any, would be either pulley 3, which experiences the highest torque of the small pulleys, or pulley 4, which experiences the highest torque of the large pulleys.
 
 $ T_(max) = (F_(max) D) / 2$
 
@@ -1047,3 +1196,29 @@ $ (1/2)*T_("max,lg") = 2718.5 N*"mm" > 58.86 N*"mm" $
 
 
 = APPENDIX B
+== Gates Manual
+#figure(
+  image("yuvy_images/Gates_manual_selection_zones.png", width: 80%),
+  caption: [Belt Size Selection],
+) <belt_sizing>
+#figure(
+  image("yuvy_images/gates_smaller_sheave.png", width: 100%),
+  caption: [Smaller Sprocket Selection],
+) <smaller_sheave>
+#figure(
+  image("yuvy_images/sprocket_numbers.png", width: 100%),
+  caption: [Pulley Information],
+) <pulley_inf>
+#figure(
+  image("yuvy_images/Gates_manual_belts.png", width: 100%),
+  caption: [Belt Selection],
+) <belt_selection>
+
+== Aluminum Material Properties
+#figure(
+  // The image function goes here (no '#' needed inside figure)
+  image("images/Mott_appendix_9.png", width: 70%),
+  // Add a caption using a content block ([...])
+  caption: [Typical Properties of Aluminum from Mott Appendix 9],
+  // Add a label for referencing (use a name enclosed in angle brackets)
+)
