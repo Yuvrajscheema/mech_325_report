@@ -116,8 +116,8 @@ _Distances for moment calculations are in mm._
 From worm gear calculations, we know:
 $
 B_x, B_y, B_z
-  &=3.28 text("lbf"), 3.019 text("lbf"), 1.61 text("lbf") \
-  &= 14.5 text("N"), 13.42 text("N"), 7.16 text("N")
+  &=-3.28 text("lbf"), 3.019 text("lbf"), -1.61 text("lbf") \
+  &=-14.5 text("N"), 13.42 text("N"), -7.16 text("N")
 $
   Using these values, we get reaction forces of:
 
@@ -182,8 +182,24 @@ the minimum diameter required for this section of the shaft to ensure it is smal
 shaft diameter. We use the following equation:
 
 $
+D = [frac(32 N, pi) sqrt([frac(k_t M, s'_n)]^2+frac(3,4)[frac(T,s_y)]^2) thin]^frac(1,3)
+$
+
+All of these parameters were either previously derived or from the diagrams:
 
 $
+s'_n = 872.9 text("psi") wide T = 5.886 text("Nm") = 52.1 text("lbf in") \
+N = 2.5 wide s_y = 14 text("ksi") wide k_t = 3
+$
+
+Plugging in these values yields...
+$
+D = 0.42 text("in") < 0.625 text("in")
+$
+so our shaft is fit for our needs!
+
+
+
 == Shaft 3 Bearing Calculations
 
 = APPENDIX B
