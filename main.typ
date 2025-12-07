@@ -156,81 +156,174 @@ $
   // Add a label fo r referencing (use a name enclosed in angle brackets)
 ) <fig:2nd_shaft_itself>
 
-=== 2nd Shaft Analysis
 
-Point A and D are the bushings, B is the worm gear, and C is the pulley for the timing belt.
-Force calculations are as follows: \
+== Bushing Selection and Design Rationale
+
+=== Overview
+To suppport both ends of the two shafts in the reduction stage, two sets of Dry-Running Nylon Sleeve bushings were chosen for their minimal wear properties, low cost, and light weight.
+
+=== Key Selection Requirements
+- The bushings must have minimal wear to maintain the accuracy of the speed of the rotation 
+- The bushings must have minimal maintenance and lubrication requirements for the convience of the hobbiysts
+- Minimize length to keep overall reduction stage small
+
+Bushings were selected instead of bearings because of the small loads required, keeping costs low and occupying minimal space. In particular,
+dry bushings were selected to minimize maintenance on the StarTracker and eliminating lubrication requirements
+to make construction convienient for hobbiysts.
+
+To support the axial load of the worm gear, a flanged bushing is used. The low speed of the shafts allow the 
+shoulder of the shafts to directly transfer axial load into the bushing flange with minimal wear. Nylon is perfect for this
+because of its low friction and minimal wearing properties.
+
+Price was also another important consideration, which the Nylon bushings meet, with a unit price of \$4.59.
+
+In total this is why Dry-Running Nylon Sleeve bushings were selected.
+
+== Bearing Selection and Design Rationale
+
+=== Overview
+To support the shaft on which the worm gear and camera are mounted, we will use an angular contact ball bearing and a deep groove ball bearing. 
+
+==== Key Selection Requirements
+- The bearings must be able to withstand the shaft thrust
+- Minimize cost so project remains accessible to hobbyists
+
+Bearings were selected for this shaft to ensure a smooth, frictionless rotation of the camera shaft to help with clear imaging. 
+While bushings could work for this application due to the low rpm, minimal friction and smooth rotation are worth this increased
+cost. 
+
+To support the axial thrust from the camera's weight down on the shaft, we used a combination of an angular contact bearing at the 
+end near the camera, and a stabilizing deep grove bearing opposite the camera to maintain axial alignment. Bearing calculations
+allowed us to determine that *R10ZZ 5/8" Deep Groove Ball Bearing* and *3201-2RS Angular Contact Bearing* are ideal for this
+application. Both of these bearings can be purchased for arund \$14 each on BearingsCanada.com and Temu.com, respectively.
+
+= RESULTS & FINAL DEssSIGN
+
+= CONLUSIONS & RECOMENDATIONS
+
+= APPENDIX A
+
+=== Shaft 2 Calculations
+
+#figure(
+  // The image function goes here (no '#' needed inside figure)
+  image("images/2nd_shaft_FBD.jpeg", width: 70%),
+  // Add a caption using a content block ([...])
+  caption: [FBD of shaft 2],
+  // Add a label for referencing (use a name enclosed in angle brackets)
+)
 \
+Point A and D are the bushings, B is the worm gear, and C is the pulley for the timing belt.
+Given forces:
+#align(center,
+  grid(
+    columns: 2,
+    gutter: 1cm,
 
-  $
-  Sigma F_x = 0 : -F_(A x) + F_(B x) - F_(C x) - F_(D x) &= 0 \
+    $F_(B x) = 3.28 "lbf" \
+    F_(B y) = 2.67 "lbf" \
+    F_(B z) = 12.5 "lbf" \ $,
+
+    $F_(C x) = 0.819 "lbf" \
+    F_(C y) = 0.00 "lbf" \
+    F_(C z) = 0.00 "lbf" \ $
+  )
+)
+
+Force calculations are as follows:
+\
+#align(left,
+$Sigma F_x = 0 :$
+) $
+  -F_(A x) + F_(B x) - F_(C x) - F_(D x) &= 0 \
   F_(A x) + F_(D x) &= F_(B x) - F_(C x) \
   F_(A x) &= F_(B x) - F_(C x) - F_(D x) \
   $
+
+#align(left,
+$Sigma F_y = 0 :$
+)
   $
-  Sigma F_y = 0 : F_(A y) - F_(B y) &= 0 \
+  F_(A y) - F_(B y) &= 0 \
   F_(A y) &= F_(B y)
   \
   $
+
+#align(left,
+$Sigma F_z = 0 :$
+)
   $
-  Sigma F_z = 0 : F_(A z) - F_(B z) + F_(D z) &= 0 \
+  F_(A z) - F_(B z) + F_(D z) &= 0 \
   F_(A z) + F_(D z) &= F_(B z) \
   F_(A z) &= F_(B z) - F_(D z)
   $
 
+#align(left,
+$Sigma M_(A x) = 0 :$
+)
   $
-  Sigma M_(A x) = 0 : -L_(A B)F_(B z) + L_(A D)F_(D z) &= 0 \
+  -L_(A B)F_(B z) + L_(A D)F_(D z) &= 0 \
   F_(D z) &= L_(A B)/L_(A D)F_(B z) \ 
   $
+
+#align(left,
+$Sigma M_(A z) = 0 :$
+)
   $
-  Sigma M_(A z) = 0 : -L_(A B)F_(B x) + L_(A C)F_(C x) +  L_(A D)F_(D x) &= 0 \
+  -L_(A B)F_(B x) + L_(A C)F_(C x) +  L_(A D)F_(D x) &= 0 \
   F_(D x) &= (L_(A B)F_(B x) - L_(A C)F_(C x))/L_(A D) \ 
   $
 
 Using the known forces, we get following forces on A and D:
 
+#align(center,
+  grid(
+    columns: 2,
+    gutter: 1cm,  
+    $F_(A x) = 3.01 "lbf" \
+    F_(A y) = 2.67 "lbf" \
+    F_(A z) = 11.7 "lbf" \
+    $,
+    $F_(D x) = -0.553 "lbf" \
+    F_(D y) =  0.00 "lbf" \
+    F_(D z) = 0.812 "lbf" \
+    $
+  )
+)
+\
 
-$
-F_(A x) = 3.01 "lbf" \
-F_(A y) = 2.67 "lbf" \
-F_(A z) = 11.7 "lbf" \
-$
+#align(center,
+  grid(
+    columns: 2,
+    gutter: 1cm,
 
-$
-F_(D x) = -0.553 "lbf" \
-F_(D y) =  0.00 "lbf" \
-F_(D z) = 0.812 "lbf" \
-$
-
-#grid(
-  columns: 2,
-
-  figure(
-    table(
-      columns: 3,
-      stroke: 1pt + black,
-      inset: 4pt,
-        [],[$"V"_("horizontal") "(lbf)"$],  [$"V"_("vertical") "(lbf)"$],
-        [A],[-3.01],  [11.7],
-        [B],[0.267],  [-0.812],
-        [C],[-0.553], [-0.812],
-        [D],[0.00],   [0.00]
+    figure(
+      table(
+        columns: 3,
+        stroke: 1pt + black,
+        inset: 4pt,
+          [],[$"V"_("horizontal") "(lbf)"$],  [$"V"_("vertical") "(lbf)"$],
+          [A],[-3.01],  [11.7],
+          [B],[0.267],  [-0.812],
+          [C],[-0.553], [-0.812],
+          [D],[0.00],   [0.00]
+      ),
+      caption: [Shear Forces],
     ),
-    caption: [Vertical and Horizontal Plane Shear],
-  ),
 
-  figure(
-    table(
-      columns: 4,
-      stroke: 1pt + black,
-      inset: 4pt,
-        [], [$"M"_("horizontal") "(lbf)"$], [$"M"_("vertical") "(lbf)"$], [$"M"_("total") "(lbf)"$],
-        [A],[0.00],[0.00],[0.00],
-        [B],[-3.01],[11.7],[12.1],
-        [C],[-1.23],[0.406],[1.30],
-        [D],[0.00],[0.00],[0.00]
-    ),
-    caption: [Vertical and Horizontal Bending Moments],
+    figure(
+      table(
+        columns: 4,
+        stroke: 1pt + black,
+        inset: 4pt,
+          [], [$"M"_("horizontal") "(lbf)"$], [$"M"_("vertical") "(lbf)"$], [$"M"_("total") "(lbf)"$],
+          [A],[0.00],[0.00],[0.00],
+          [B],[-3.01],[11.7],[12.1],
+          [C],[-1.23],[0.406],[1.30],
+          [D],[0.00],[0.00],[0.00]
+      ),
+      caption: [Bending Moments],
+    )
   )
 )
 
@@ -241,31 +334,36 @@ $
   caption: [Shear and bending moment diagram],
   // Add a label for referencing (use a name enclosed in angle brackets)
 ) <fig:2nd_shaft_shear_moment>
+\
+#align(center,
+  block(width: auto,
+    grid(
+      columns: 2,
+      gutter: 1cm,
 
+      figure(
+        table(
+          columns: 2,
+          stroke: 1pt + black,
+          inset: 4pt,
+            [], [$"T (lbf·in)"$],
+            [A], [0.00],
+            [B], [0.521],
+            [C], [-0.521],
+            [D], [0.00]
+        ),
+        caption: [Torque],
+      ),
 
-
-#figure(
-  table(
-    columns: 2,
-    stroke: 1pt + black,
-    inset: 4pt,
-      [], [$"T (lbf·in)"$],
-      [A], [0.00],
-      [B],   [0.521],
-      [C],   [-0.521],
-      [D], [0.00]
-  ),
-  caption: [Torque],
+      figure(
+        image("images/2nd_shaft_torque.jpeg", width: 70%),
+        caption: [Torque diagram of 2nd shaft],
+      ),
+    )
+  )
 )
 
-#figure(
-  // The image function goes here (no '#' needed inside figure)
-  image("images/2nd_shaft_torque.jpeg", width: 70%),
-  // Add a caption using a content block ([...])
-  caption: [Torque diagram of 2nd shaft],
-  // Add a label for referencing (use a name enclosed in angle brackets)
-) <fig:2nd_shaft_Torque>
-
+\
 #figure(
 table(
   columns: 3,
@@ -289,12 +387,9 @@ D_min = [
   (32N) / pi sqrt((k_t M / S_n')^2 + (3/4) (T / S_y)^2)
 ]^(1/3)
 $
-
-$K_t = 2.5$ as sharp fillet is used for the shaft shoulders.\
-Aluminum is a ductile material so the design factor shoud range from $1.5 < N < 2.5$. We choose $N = 2.0$ for our design.
-
+\
 For the material choice, we want to use an affordable, and easy to machine. Therefore, we will use Aluminum for the shaft material. \
-From Mott Appendix 9, we choose Aluminum 2014 O for its high ductility and decent strength as well as cheap cost of about \$1 per inch.
+From Mott Appendix 9, we choose Aluminum 2014 O for its high ductility, decent strength, and cheap cost of about \$1 per inch.
 \
 #align(center,
   figure(
@@ -310,6 +405,9 @@ From Mott Appendix 9, we choose Aluminum 2014 O for its high ductility and decen
   )
 )
 \
+$K_t = 2.5$ as sharp fillet is used for the shaft shoulders.\
+$N = 2.0$ is chosen for our design since aluminum is a ductile material and the design factor is in the range of $1.5 < N < 2.5$. 
+\
 Substituting the values into the minimum diameter equation, we get:
 $
 D_(min, i) = [
@@ -317,23 +415,30 @@ D_(min, i) = [
 ]^(1/3) "for" i = A, B, C, D
 $
 \
-Using the 
+Using eqn () and table (), we calculate the minimum shaft diameter at each location: \
 \
-#table(
-  columns: 3,
-  stroke: 1pt + black,
-  inset: 4pt,
-    [], [$D_min "(in)"$],[$D_"Allowable" "(in)"$],
-    [$D_A$], [0.00],[],
-    [$D_B$], [0.362],[0.75],
-    [$D_C$], [0.172],[0.25],
-    [$D_D$], [0.00], []
+#align(center,
+  figure(
+    table(
+      columns: 3,
+      stroke: 1pt + black,
+      inset: 4pt,
+        [], [$D_min "(in)"$],[$D_"Allowable" "(in)"$],
+        [$D_A$], [0.00],[-],
+        [$D_B$], [0.362],[0.75],
+        [$D_C$], [0.172],[0.25],
+        [$D_D$], [0.00], [-]
+    ),
+    caption: [Minimum and Allowable Shaft Diameters],
+  )
 )
+
 \
-Therefore, the minimum shaft diameter at each location is well below the  allowable shaft diameter determined by the components mounted on the shaft. 
+The minimum shaft diameter at each location is well below the allowable shaft diameter determined by the components. 
 Thus, Aluminum 2014 O is a suitable material for the 2nd shaft.
 \
 
+== Shaft 3 Calculations
 
 
 
