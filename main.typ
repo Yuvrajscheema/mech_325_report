@@ -1,9 +1,5 @@
 #import "@preview/clean-cnam-template:1.3.0": *
 
-#set text(
-  lang: "en",
-  size: 12pt
-)
 
 #show: clean-cnam-template.with(
   title: "Machine design my gpa",
@@ -18,6 +14,11 @@
     depth: 2,
     indent: auto,
   ),
+)
+
+#set text(
+  lang: "en",
+  size: 12pt
 )
 
 = INTRODUCTION
