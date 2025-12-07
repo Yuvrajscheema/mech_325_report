@@ -61,7 +61,7 @@ As a way to ensure that a small mishap does not cause an entire night's worth of
   caption: [Equatorial Mount Explained cont.],
 )
 
-The advent of affordable 3D printing technology has fundamentally transformed the landscape of all hobbyist and amateur technical pursuits. Hobbies, such as astrophotography, which previouly required boutique and expensive products are now being approached from a new  perspective. Desktop 3D printers, which have dropped in price from tens of thousands to just a few hundred dollars over the past decade, have democratized the ability to rapidly prototype and fabricate custom tools. This accessibility has enabled hobbyists to tackle increasingly sophisticated projects that would have been impractical or impossible just years ago. The maker community has flourished as enthusiasts share designs, collaborate on complex builds, and push the boundaries of what can be achieved outside traditional manufacturing settings. 
+The advent of affordable 3D printing technology has fundamentally transformed the landscape of all hobbyist and amateur technical pursuits. Hobbies, such as astrophotography, which previously required boutique and expensive products are now being approached from a new  perspective. Desktop 3D printers, which have dropped in price from tens of thousands to just a few hundred dollars over the past decade, have democratized the ability to rapidly prototype and fabricate custom tools. This accessibility has enabled hobbyists to tackle increasingly sophisticated projects that would have been impractical or impossible just years ago. The maker community has flourished as enthusiasts share designs, collaborate on complex builds, and push the boundaries of what can be achieved outside traditional manufacturing settings. 
 
 Astrophotography is one such older hobby with already established industry that serves it. All forms of telescopes, filters, cameras, mounts, controllers, and respective accessories already exist on the market, but due to the small volume of products these companies sell, design and manufacturing remains very expensive and outside of the range of many hobbiysts. In particular, equatorial mounts from astrophotography hobbyist stores can cost anywhere between \$1000 and \$10,000 CAD. 
 
@@ -72,7 +72,7 @@ Astrophotography is one such older hobby with already established industry that 
 
 = PURPOSE
 
-The purpose of this project is to create an equatorial mount for student and hobbyist astrophotographers. Our ideal client is only a beginner astrophotograper, with access to a machine shop and 3D printer, very basic turning skills,  and some patience in wanting to learn how to put together the equatorial mount. Our specific design is intended to be used near the 49th latitude line, but this is easily modified due to the 3D printed nature of the design. If the hobbysit is travelling, then the base can be customized to take on an angle equal to the latitude.
+The purpose of this project is to create an equatorial mount for student and hobbyist astrophotographers. Our ideal client is only a beginner astrophotograper, with access to a machine shop and 3D printer, very basic turning skills,  and some patience in wanting to learn how to put together the equatorial mount. Our specific design is intended to be used near the 49th latitude line, but this is easily modified due to the 3D printed nature of the design. If the hobbyist is travelling, then the base can be customized to take on an angle equal to the latitude.
 
 The star tracker must be able to support a variety of cameras and lenses. For long distance photos, these lenses can become long and heavy. We will design a camera and a lens which weighs at most 4kg with a center of mass 150mm away from the point of rotation. This configuration conservatively supports typical hobby cameras like the Nikon Z50 II or Nikon Z8 which weigh around 1kg and can support various lenses like the high quality NIKKOR Z 600mm (1.39kg) for high quality astrophotography. Due to the large variation in length and weight, we chose a conservative upper bound for both metrics.
 
@@ -144,17 +144,17 @@ This system has a nominal saftey factor of $23$ and a worst case scenario of $1.
 so the belts have little to no chance of failing or slipping. This is very good
 as we require a high precission system.\
 The pulleys can be found from McMaster-Carr for \$12 and \$22 and the belt for
-under \$6 from motion giving us cheap, reliable and available components.
+under \$6 from Motion giving us cheap, reliable and available components.
 
 
 == Worm Gear Selection
 For the fine resolution required at the output, it was important to able to do large gear ratios for the last stage of the drive. After the 1:16 ratio of the timing belt drive stage, a solution was needed to achieve single stage large ratio in the magnitude of 1:100. In reality, there are several ways to achieve this (e.g. see #link("https://en.wikipedia.org/wiki/Cycloidal_drive")[Cycloidal Drives]) but a solution for high ratios explicitly recommended by Mott and Shigley is a worm gear drive. These are sold commercially in gear ratios of up to 1:100 and this was what was selected for the final design. 
 
-A worm and worm gear set from rushgears.com, and American manufacturing company was selected. This manufacturer sells standard gears but can also grind custom gears if required. We selected the WB12L and WB1200L gears for our prototype. The set is a 12 pitch, has a 14.5° standard pitch angle and a very low 4.6° lead angle. The worm has a signle thread and the worm gear has 100 teeth. The self-locking feature is somewhat important to ensure that unbalanced loads are not created on the rest of the system.
+A worm and worm gear set from rushgears.com, and American manufacturing company was selected. This manufacturer sells standard gears but can also grind custom gears if required. We selected the WB12L and WB1200L gears for our prototype. The set is a 12 pitch, has a 14.5° standard pitch angle and a very low 4.6° lead angle. The worm has a single thread and the worm gear has 100 teeth. The self-locking feature is somewhat important to ensure that unbalanced loads are not created on the rest of the system.
 
 Due to the low power and speed conditions under which this worm drive will run, consideration of the material in terms of maximum strength is not as critical as the precision of the drive. While theoretically any material can be used as the worm and worm gear material, commercially, it is easiest to find bronze or cast iron gears. For this project, we selected bronze as opposed to cast iron for its precise machinability. For the final product, whatever is a good tradeoff between wear, precision, and cost would be selected. 
 
-In most other precision applications, the use of a worm gear may not be ideal due to the fundemental nature of gear backlash, but thankfully, this is not a concern here. Over the course of an exposure (and over the course of the night), the base only ever rotates in one direction. Thus, as far as precision is concened, all we can really do quantatively for this section with the tools learned in MECH 235 is analyze the forces and confirm that they are acceptable for the given material. 
+In most other precision applications, the use of a worm gear may not be ideal due to the fundamental nature of gear backlash, but thankfully, this is not a concern here. Over the course of an exposure (and over the course of the night), the base only ever rotates in one direction. Thus, as far as precision is concened, all we can really do quantatively for this section with the tools learned in MECH 235 is analyze the forces and confirm that they are acceptable for the given material. 
 
 Given the  $5.886 N dot m m$ output torque, we can analyze the forces of the worm and gear as follows.
 
@@ -244,7 +244,7 @@ Shaft 1 is part of an intermediate stage in the speed reducer system. Two pulley
 ]
 
 === Shaft 2 Overview
-The 2nd shaft transmits torque from the worm gear to the pulley which drives the timing belt. The shaft is supported by two bushings on either end. The shaft is subjected to forces from the worm gear and pulley as well as reaction forces from the bushings.
+The 2nd shaft transmits torque from the pulley to the worm gear. The shaft is supported by two bushings on either end. The shaft is subjected to forces from the worm gear and pulley as well as reaction forces from the bushings.
 \
 ==== 2nd Shaft Key Specifications:
 $"Shaft Length" &: "8-in" \
@@ -300,7 +300,7 @@ The 2nd shaft will be made of Aluminum 2014 O for its high ductility, decent str
 )
 
 Shaft 3 transfers torque from the worm gear to actually rotating the camera to track stars! It is subjected to radial and axial forces and thus features
-an angular contact bearing as well as a deep groove bearing. It is machined out Aluminum 2014-O, same as the other two shafts.
+an angular contact bearing as well as a deep groove bearing. It is machined out of Aluminum 2014-O, same as the other two shafts.
 
 === Aluminum 2014 O Material Properties
 #align(center,
@@ -391,8 +391,8 @@ cost.
 To support the axial thrust from the camera's weight down on the shaft, we used a combination of an angular contact bearing at the 
 end near the camera, and a stabilizing deep grove bearing opposite the camera to maintain axial alignment. Bearing calculations
 allowed us to determine that *R10ZZ 5/8" Deep Groove Ball Bearing* and *3201-2RS Angular Contact Bearing* are ideal for this
-application. Both of these bearings can be purchased for arund \$14 each on BearingsCanada.com and Temu.com, respectively.
-
+application. Both of these bearings can be purchased for around \$14 each on BearingsCanada.com and Temu.com, respectively.
+u
 = RESULTS & FINAL DESIGN
 
 #align(center)[#table(
@@ -466,7 +466,7 @@ Here are some final photos of the design of the equatorial mount.
 
 
 
-= CONLUSIONS & RECOMENDATIONS
+= CONCLUSIONS & RECOMMENDATIONS
 
 The mechanical design developed for our star-tracking system successfully meets the performance requirements established earlier in 
 the project. Through iterative concept development, load analysis, bearing and shaft sizing, and gear-train refinement, we verified 
@@ -1090,6 +1090,33 @@ This is much smaller than usual key sizes, which are recommended to be between 1
 
 This is very short for a key, so we go up to a minimum key length 
 
+== Shaft 1 & 2 Setscrew Calculations
+
+There are four pulleys which are secured to shafts through setscrews. The ones to fail, if any, would be either pulley 3, which experiences the highest torque of the small pulleys, or pulley 4, which experiences the highest torque of the large pulleys.
+
+$ T_(max) = (F_(max) D) / 2$
+
+Where $T_(max)$ is the maximum torque the setscrews can trasmit, $F_(max)$ is the setscrew holding power according to the table below, and D is the shaft diameter.
+
+#figure(
+  image("CFImages/setscrewTable.png", width: 50%),
+  caption: [Shigley table 7-4 Typical Holding Power (Force) for Socket Setscrews],
+)
+
+The small pulley uses \#4 setscrews, while the large pulley uses \#8 setscrews.
+
+$ T_("max,sm") = (160 dot (1/4))/2 "lb"dot"in" = 20 "lb"dot"in" = 2260 "N" dot"mm" $
+
+
+$ T_("max,lg") = (385*(1/4))/2 "lb"dot"in" = 48.125 "lb"dot"in" = 5437 "N"dot"mm" $
+
+After applying a design factor of 2, as Shigley recommends for static loads, we can see that neither setscrew will fail.
+
+$ (1/2)dot T_("max,sm") = 1130 "N" dot "mm" > 14.7 "N" dot"mm" $
+
+$ (1/2)dot T_("max,lg") = 2718.5 "N"dot"mm" > 58.86 "N"dot"mm" $
+
+
 == Bushing Calculations
 
 === Geometery Calculations
@@ -1155,12 +1182,12 @@ The bushing selected comforatbly meets the requirements for presure and velocity
   shaft rotating inside of the bushing. Due to small loads and low friction effects like
   stick-slip and major shaft misalignment and deflections can be ignored. 
 2. The next assumption is that eccentricity comes from three primary sources:
-    - Bushing tolerances: Assume worst case senario as eccentric as possible
+    - Bushing tolerances: Assume worst case scenario as eccentric as possible
     - Wear: Eccentricity caused by runout
     - Compression: Eccentricity caused by compression of the bushing
 
 To calculate the maximum possible eccentricity, find the sum of all of the maximum possible
-displacements. Displacements come from the material properties of the bushing, the manufactuer specified tolerance
+displacements. Displacements come from the material properties of the bushing, the manufacturer specified tolerance
 on the inner diameter (contacting the shaft) and the lifetime of the bushings.
 
 $ delta_("tolerance") = 0.001 "in" $
