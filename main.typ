@@ -161,15 +161,20 @@ Calculations for the following results can be found in #link(<Other_worm>)[appen
 
 Shaft 1 is part of an intermediate stage in the speed reducer system. Two pulleys are mounted on it, and it is secured with bushings on either end. The shaft is subject to forces from the two pulleys and two bushings. There are no axial forces.
 
-#figure(
-  image("CFImages/shaft1.jpg", width: 70%),
-  caption: [Shaft 1],
-)
+#align(center)[
+  #figure(
+    image("CFImages/shaft1.jpg", width: 60%),
+    caption: [Shaft 1],
+  )
+]
 
-#figure(
-  image("CFImages/gearboxShaft1Image.jpg", width: 70%),
-  caption: [Shaft 1 in CAD assembly],
-)
+#align(center)[
+  #figure(
+    image("CFImages/gearboxShaft1Image.jpg", width: 70%),
+    caption: [Shaft 1 in CAD assembly],
+  )
+]
+
 #align(center)[
   #table(
     columns: 2,
