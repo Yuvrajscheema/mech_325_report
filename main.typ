@@ -1002,7 +1002,7 @@ $
 This is much smaller than usual key sizes, which are recommended to be between 1-1.5 inches. As such, we decide that the square Aluminum 6061 key be 1 inch long. 
 
 This is very short for a key, so we go up to a minimum key length 
-== Belt and Pulley Calculations
+== Belt and Pulley Calculations <bnpcalc>
 A typical stepper motor can outpout around $3000 "rpm"$ and $1.2 "N" dot "m"$ of torque. \
 We desire an output speed of around $0.05886 "rpm"$ at $0.0694 "N" dot "m"$ of torque. \
 Our system will use this power but we design for the stepper maximum. \
