@@ -46,10 +46,36 @@ If we propagate this backwards through our 1600:1 reduction gear train, we get 1
 This is larger than most standard consumer-available stepper motors on the market, which range from 0.9\u{00B0} to 1.8\u{00B0}.
 == Belt and Pulley Design
 
-Before the worm gear a reduction of almost $1:16$ is needed, see #link(<bnpcalc>)[calculations]
+Before the worm gear a reduction of almost $1:16$ is needed, see #link(<bnpcalc>)[calculations].
 We will use a timing belt pulley system as timing belts are accurate with minimal backlash and have
 a low noise profile. Due to the high reduction required we will use two timing
-belt systems each with a reduction ratio of $1:4$ which in total gives use the required ratio. \ 
+belt systems each with a reduction ratio of $1:4$ which in total gives use the required ratio. \
+
+The selection for the Pulley system will use Gate's timing belt manual as it is easy to follow
+and has readily available parts. We will use a 2GMT belt as it is appropriate for
+our use case. From Gates we select the following pulley's to
+get the appropriate speed reduction. \
+
+Smaller sprocket: $18$ groove with $0.301 "in"$ pitch diameter. \
+Larger sprocket: $72$ groove with $1.805 "in"$ pitch diameter. \ 
+
+More details for this result can be found in the #link(<bnpcalc>)[appendix]
+
+Next to select the belt our main consideration is the size constraint of the system.
+Therefore we will assume a center distance close to the pitch diameter of the 
+larger sprocket. Using this assumption we can select a belt after performing some
+#link(<bnpcalc>)[calculations]. \
+
+Select *2MR-192* $2 "mm"$ belt with pitch length $7.559 "in"$ and 
+center distance of $1.984 "in"$.
+
+This selection gives us wrap angles of $2.36 "rad"$ and $3.92 "rad"$. \
+\
+This system has a nominal saftey factor of $23$ and a worst case scenario of $1.25$
+so the belts have little to no chance of failing or slipping. This is very good
+as we require a high precission system.\
+The pulleys can be found from McMaster-Carr for \$12 and \$22 and the belt for
+under \$6 from motion giving us cheap, reliable and available components.
 
 
 == Worm Gear Selection
