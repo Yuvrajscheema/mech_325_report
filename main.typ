@@ -63,9 +63,37 @@ If we propagate this backwards through our 1600:1 reduction gear train, we get 1
 This is larger than most standard consumer-available stepper motors on the market, which range from 0.9\u{00B0} to 1.8\u{00B0}.
 == Belt and Pulley Design
 
-=== Overview
-Before the worm gear a reduction of almost 1:16 is needed, as found in . For this we will use 
-a two pulley system
+Before the worm gear a reduction of almost $1:16$ is needed, see #link(<bnpcalc>)[calculations].
+We will use a timing belt pulley system as timing belts are accurate with minimal backlash and have
+a low noise profile. Due to the high reduction required we will use two timing
+belt systems each with a reduction ratio of $1:4$ which in total gives use the required ratio. \
+
+The selection for the Pulley system will use Gate's timing belt manual as it is easy to follow
+and has readily available parts. We will use a 2GMT belt as it is appropriate for
+our use case. From Gates we select the following pulley's to
+get the appropriate speed reduction. \
+
+Smaller sprocket: $18$ groove with $0.301 "in"$ pitch diameter. \
+Larger sprocket: $72$ groove with $1.805 "in"$ pitch diameter. \ 
+
+More details for this result can be found in the #link(<bnpcalc>)[appendix]
+
+Next to select the belt our main consideration is the size constraint of the system.
+Therefore we will assume a center distance close to the pitch diameter of the 
+larger sprocket. Using this assumption we can select a belt after performing some
+#link(<bnpcalc>)[calculations]. \
+
+Select *2MR-192* $2 "mm"$ belt with pitch length $7.559 "in"$ and 
+center distance of $1.984 "in"$.
+
+This selection gives us wrap angles of $2.36 "rad"$ and $3.92 "rad"$. \
+\
+This system has a nominal saftey factor of $23$ and a worst case scenario of $1.25$
+so the belts have little to no chance of failing or slipping. This is very good
+as we require a high precission system.\
+The pulleys can be found from McMaster-Carr for \$12 and \$22 and the belt for
+under \$6 from motion giving us cheap, reliable and available components.
+
 
 == Worm Gear Selection
 For the fine resolution required at the output, it was important to able to do large gear ratios for the last stage of the drive. After the 1:16 ratio of the timing belt drive stage, a solution was needed to achieve single stage large ratio in the magnitude of 1:100. In reality, there are several ways to achieve this (e.g. see #link("https://en.wikipedia.org/wiki/Cycloidal_drive")[Cycloidal Drives]) but a solution for high ratios explicitly recommended by Mott and Shigley is a worm gear drive. These are sold commercially in gear ratios of up to 1:100 and this was what was selected for the final design. 
@@ -554,7 +582,7 @@ end near the camera, and a stabilizing deep grove bearing opposite the camera to
 allowed us to determine that *R10ZZ 5/8" Deep Groove Ball Bearing* and *3201-2RS Angular Contact Bearing* are ideal for this
 application. Both of these bearings can be purchased for arund \$14 each on BearingsCanada.com and Temu.com, respectively.
 
-= RESULTS & FINAL DEssSIGN
+= RESULTS & FINAL DESIGN
 
 = CONLUSIONS & RECOMENDATIONS
 
@@ -667,6 +695,7 @@ $
 D = 0.42 text("in") < 0.625 text("in")
 $
 so our shaft is fit for our needs!
+
 
 == Shaft 3 Calculations
 
@@ -808,7 +837,7 @@ $
 
 === Deep Groove Ball Bearing at A 
 
-== Belt and Pulley Calculations
+== Belt and Pulley Calculations <bnpcalc>
 A typical stepper motor can outpout around $3000 "rpm"$ and $1.2 "N" dot "m"$ of torque. \
 We desire an output speed of around $0.05886 "rpm"$ at $0.0694 "N" dot "m"$ of torque. \
 Our system will use this power but we design for the stepper maximum. \
@@ -955,5 +984,3 @@ $ (1/2)*T_("max,lg") = 2718.5 N*"mm" > 58.86 N*"mm" $
 
 
 = APPENDIX B
-
-
