@@ -27,24 +27,60 @@
 
 = INTRODUCTION
 
+#figure(
+  image("images/Galaxy.jpg", width: 100%),
+  caption: [Equatorial Mount Explained cont.],
+)
+
+
 The fundemental challenge of astrophotography is the amount of light gathered by a camera. While most cameras have no problem capturing photos in bright daylight, deep space objects and stars tend to be very dim. The amount of light gathered by a lens or telescope depends on a few factors, one of which is  its cross-sectional area (or _aperture_). To capture increasingly darker objects, it quickly becomes impractical to increase the diameter of the lens. A much more appropriate solution is to gather light for over a longer period of time at the camera, but this introduces its own issues.
 
 The main issue is that if a camera is held pointing at a particular area of the sky, over a significant period of time (as little as 2-4 seconds on a regular 50mm lens & camera), the earth will have rotated slightly, and the camera will be pointing in a marginally different direction. The net result of this is called _star streaking_ where instead of appearing as points, stars appear as _lines or arcs_ around the north star.
 
-IMAGE HERE 
+#figure(
+  image("images/Untracked.jpg", width: 50%),
+  caption: [Untracker Long Exposure],
+)
 
 An _Equatorial Mount_ is a mechanical device intended to solve this issue. It was first invented in 1842, and its design has largely remained unchanged since. The idea is to mount your camera and have it rotate around one axis. This axis is the polar axis, and it points at the north star (polaris), which does not move in the sky from the perspective of an observer on Earth.
 
-IMAGE HERE
+#figure(
+  image("images/Explainer 1.jpg", width: 70%),
+  caption: [Equatorial Mount Explained],
+)
+
+#figure(
+  image("images/Explainer 2.png", width: 50%),
+  caption: [Equatorial Mount Explained cont.],
+)
+
+As a way to ensure that a small mishap does not cause an entire night's worth of exposure to be erased, astrophotograpers commonly take 10-30 second exposures, and later "stack" them in software. This also helps average out noise that is common in dark photos. After several hours of smaller exposures are stacked in software, you can expect an image to look like this.
+
+#figure(
+  image("images/Tracked.jpeg", width: 70%),
+  caption: [Equatorial Mount Explained cont.],
+)
+
 
 == 3D Printing
 The advent of affordable 3D printing technology has fundamentally transformed the landscape of all hobbyist and amateur technical pursuits. Hobbies, such as astrophotography, which previouly required boutique and expensive products are now being approached from a new  perspective. Desktop 3D printers, which have dropped in price from tens of thousands to just a few hundred dollars over the past decade, have democratized the ability to rapidly prototype and fabricate custom tools. This accessibility has enabled hobbyists to tackle increasingly sophisticated projects that would have been impractical or impossible just years ago. The maker community has flourished as enthusiasts share designs, collaborate on complex builds, and push the boundaries of what can be achieved outside traditional manufacturing settings. 
 
-IMAGE HERE
-
 Astrophotography is one such older hobby with already established industry that serves it. All forms of telescopes, filters, cameras, mounts, controllers, and respective accessories already exist on the market, but due to the small volume of products these companies sell, design and manufacturing remains very expensive and outside of the range of many hobbiysts. In particular, equatorial mounts from astrophotography hobbyist stores can cost anywhere between \$1000 and \$10,000 CAD. 
 
+#figure(
+  image("images/Market.png", width: 70%),
+  caption: [Equatorial Mount Explained cont.],
+)
+
 = PURPOSE
+
+The purpose of this project is to create an equatorial mount for student and hobbyist astrophotographers. Our ideal client is only a beginner astrophotograper, with access to a machine shop and 3D printer, very basic turning skills,  and some patience in wanting to learn how to put together the equatorial mount. Our specific design is intended to be used near the 49th latitude line, but this is easily modified due to the 3D printed nature of the design. If the hobbysit is travelling 
+
+The requirements for the equatorial mount itself are 
+focal length 50mm 
+max smear of 20 pixels
+under \$500
+parts available to consumers
 
 = DETAILED ANALYSIS
 
