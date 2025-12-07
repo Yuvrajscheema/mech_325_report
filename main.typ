@@ -205,6 +205,21 @@ application. Both of these bearings can be purchased for arund \$14 each on Bear
 
 === Shaft 2 Calculations
 
+Net driving force on the timing belt pulley is given by:
+$
+  F_N = T_C / (D_C / 2) = 0.521 "lbf"
+$
+\
+Bending force on C is given by:
+$
+  F_C = 1.5 F_N = 0.866 "lbf"
+$
+Since z components of timing belt cancles out, we only consider x component of $F_C$.
+
+$
+F_(C x) = F_C cos(phi) = 0.819 "lbf"
+$
+\
 #figure(
   // The image function goes here (no '#' needed inside figure)
   image("images/2nd_shaft_FBD.jpeg", width: 70%),
@@ -213,8 +228,8 @@ application. Both of these bearings can be purchased for arund \$14 each on Bear
   // Add a label for referencing (use a name enclosed in angle brackets)
 )
 \
-Point A and D are the bushings, B is the worm gear, and C is the pulley for the timing belt.
-Given forces:
+Point A and D are the bushings, B is the worm gear, and C is the pulley for the timing belt.\
+Known forces from above calculations are:
 #align(center,
   grid(
     columns: 2,
@@ -224,13 +239,12 @@ Given forces:
     F_(B y) = 2.67 "lbf" \
     F_(B z) = 12.5 "lbf" \ $,
 
-    $F_(C x) = 0.819 "lbf" \
-    F_(C y) = 0.00 "lbf" \
-    F_(C z) = 0.00 "lbf" \ $
+    $F_(C x) = 0.819 "lbf"
+    $
   )
 )
-
-Force calculations are as follows:
+\
+Forces on A and D are calcualated as follows:
 \
 #align(left,
 $Sigma F_x = 0 :$
