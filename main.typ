@@ -21,6 +21,10 @@
   size: 12pt
 )
 
+#show figure.where(
+  kind: image
+): set figure.caption(position: bottom)
+
 = INTRODUCTION
 
 The fundemental challenge of astrophotography is the amount of light gathered by a camera. While most cameras have no problem capturing photos in bright daylight, deep space objects and stars tend to be very dim. The amount of light gathered by a lens or telescope depends on a few factors, one of which is  its cross-sectional area (or _aperture_). To capture increasingly darker objects, it quickly becomes impractical to increase the diameter of the lens. A much more appropriate solution is to gather light for over a longer period of time at the camera, but this introduces its own issues.
@@ -63,9 +67,37 @@ If we propagate this backwards through our 1600:1 reduction gear train, we get 1
 This is larger than most standard consumer-available stepper motors on the market, which range from 0.9\u{00B0} to 1.8\u{00B0}.
 == Belt and Pulley Design
 
-=== Overview
-Before the worm gear a reduction of almost 1:16 is needed, as found in . For this we will use 
-a two pulley system
+Before the worm gear a reduction of almost $1:16$ is needed, see #link(<bnpcalc>)[calculations].
+We will use a timing belt pulley system as timing belts are accurate with minimal backlash and have
+a low noise profile. Due to the high reduction required we will use two timing
+belt systems each with a reduction ratio of $1:4$ which in total gives use the required ratio. \
+
+The selection for the Pulley system will use Gate's timing belt manual as it is easy to follow
+and has readily available parts. We will use a 2GMT belt as it is appropriate for
+our use case. From Gates we select the following pulley's to
+get the appropriate speed reduction. \
+
+Smaller sprocket: $18$ groove with $0.301 "in"$ pitch diameter. \
+Larger sprocket: $72$ groove with $1.805 "in"$ pitch diameter. \ 
+
+More details for this result can be found in the #link(<bnpcalc>)[appendix]
+
+Next to select the belt our main consideration is the size constraint of the system.
+Therefore we will assume a center distance close to the pitch diameter of the 
+larger sprocket. Using this assumption we can select a belt after performing some
+#link(<bnpcalc>)[calculations]. \
+
+Select *2MR-192* $2 "mm"$ belt with pitch length $7.559 "in"$ and 
+center distance of $1.984 "in"$.
+
+This selection gives us wrap angles of $2.36 "rad"$ and $3.92 "rad"$. \
+\
+This system has a nominal saftey factor of $23$ and a worst case scenario of $1.25$
+so the belts have little to no chance of failing or slipping. This is very good
+as we require a high precission system.\
+The pulleys can be found from McMaster-Carr for \$12 and \$22 and the belt for
+under \$6 from motion giving us cheap, reliable and available components.
+
 
 == Worm Gear Selection
 For the fine resolution required at the output, it was important to able to do large gear ratios for the last stage of the drive. After the 1:16 ratio of the timing belt drive stage, a solution was needed to achieve single stage large ratio in the magnitude of 1:100. In reality, there are several ways to achieve this (e.g. see #link("https://en.wikipedia.org/wiki/Cycloidal_drive")[Cycloidal Drives]) but a solution for high ratios explicitly recommended by Mott and Shigley is a worm gear drive. These are sold commercially in gear ratios of up to 1:100 and this was what was selected for the final design. 
@@ -86,24 +118,9 @@ Given the  $5.886 N dot m m$ output torque, we can analyze the forces of the wor
 - Worm lead angle: $lambda = 4.7666°$ (= 0.083176 rad)
 - Coefficient of friction: $mu = 0.124$
 
-The coefficient of friction is calculated using $ 0.124 e^(-0.74 v_s^0.645)$ (10–26). Due to the very slow speed, but $v_s != 0$, the coefficient is not $0.15$
-
-=== Mott equations
-
-- Tangential force (10–29):
-  $ W_(t G) = (2 T_0) / D_G $
-
-- Axial force (10–30):
-  $ W_(x G) = W_(t G) (cos phi_n sin lambda + mu cos lambda) / (cos phi_n cos lambda - mu sin lambda) $
-
-- Radial force (10–31):
-  $ W_(r G) = (W_(x G) sin phi_n) / (cos phi_n cos lambda - mu sin lambda) $
-
-- Friction force (10–32):
-  $ W_f = (mu W_(t G)) / (cos lambda cos phi_n - mu sin lambda) $
 
 === Numerical results
-
+Calculations for the following results can be found in #link(<MOTT_worm>)[appendix].
 - $W_(t G) = 54.701 "N"$
 
 - $W_(x G) = 11.698 "N"$ (axial / along worm axis)
@@ -123,22 +140,17 @@ As we can see, these forces are extremely small.
 - Diametral pitch: $P_d = 12 "teeth/in"$
 - Lewis form factor (for $phi_n = 14.5°$): $y = 0.100$
 
-=== Calculations
+=== Results
+Calculations for the following results can be found in #link(<Other_worm>)[appendix].
+- $p_n  = 0.2608 "in" = 0.006624 "m" $
 
-- Normal circular pitch (10–38):
-  $ p_n = (pi cos lambda) / P_d = 0.2608 "in" = 0.006624 "m" $
+- $v_(t G) = 0.001508 "ft/min" $
 
-- Pitch line speed (10–41):
-  $ v_(t G) = (pi D_G n_G) / 12 = 0.001508 "ft/min" $
+- $K_v approx 1.000 $
 
-- Velocity factor (10–40):
-  $ K_v = 1200 / (1200 + v_(t G)) = 1200 / (1200 + 0.001508) = 0.99999874 approx 1.000 $
+- $W_d = 54.701 "N" = 12.293 "lbf" $
 
-- Dynamic load (10–39):
-  $ W_d = 54.701 "N" = 12.293 "lbf" $
-
-- Tooth bending stress (10–37):
-  $ sigma = W_d / (y F p_n) = (12.293 "lbf") / (0.100 times 0.5 "in" times 0.2608 "in") = 942.6 "psi" = 6.50 "MPa" $
+- $sigma = 942.6 "psi" = 6.50 "MPa" $
 
   These are very small total loads on the teeth. Bronze gear fatigue strengths are in the range of 17,000 to 24,000 psi, so this type of loading is more than acceptable. There is no more analysis we can do in this section since (10-42) and beyond apply solely to steel worms and bronze gears.
 
@@ -159,12 +171,11 @@ As we can see, these forces are extremely small.
 
 
 === 2nd Shaft Overview
-
-
 The 2nd shaft transmits torque from the worm gear to the pulley which drives the timing belt. The shaft is supported by two bushings on either end. The shaft is subjected to forces from the worm gear and pulley as well as reaction forces from the bushings.
-  
-$
-"Shaft Length" &: "8-in" \
+\
+==== 2nd Shaft Key Specifications:
+$"Shaft Length" &: "8-in" \
+\
 "Worm" &: "1⅝-in long shoulder with ¾-in diameter" \
 "Pulley" &: "¾-in long shoulder with ⅕-in diameter" \
 "Bushings" &: "¼-in long shoulders with 3/16-in diameter" \
@@ -172,19 +183,58 @@ $
 
 #figure(
   // The image function goes here (no '#' needed inside figure)
-  image("images/2nd_shaft _itself.png", width: 40%),
-  // Add a caption using a content block ([...])
-  caption: [2nd shaft],
-  // Add a label fo r referencing (use a name enclosed in angle brackets)
-) <fig:2nd_shaft_itself>
-
-#figure(
-  // The image function goes here (no '#' needed inside figure)
-  image("images/2nd_shaft_with_components.png", width: 40%),
+  image("images/2nd_shaft_with_components.png", width: 60%),
   // Add a caption using a content block ([...])
   caption: [2nd shaft with components],
   // Add a label fo r referencing (use a name enclosed in angle brackets)
 ) <fig:2nd_shaft_itself>
+\
+
+#grid(
+  columns: 2,
+  gutter: 1cm,
+  figure(
+    // The image function goes here (no '#' needed inside figure)
+    image("images/2nd_shaft _itself.png", width: 100%),
+    // Add a caption using a content block ([...])
+    caption: [2nd shaft],
+    // Add a label fo r referencing (use a name enclosed in angle brackets)
+  ),
+
+  figure(
+    // The image function goes here (no '#' needed inside figure)
+    image("images/2nd_shaft_FBD.jpeg", width: 100%),
+    // Add a caption using a content block ([...])
+    caption: [FBD of shaft 2],
+    // Add a label for referencing (use a name enclosed in angle brackets)
+  )
+)
+
+==== 2nd Shaft Design Choice:
+The 2nd shaft will be made of Aluminum 2014 O for its high ductility, decent strength, and cheap cost of about \$1 per inch. The shaft diameter is determined by bending and torsional stress calculations to ensure it can withstand the applied loads with an appropriate safety factor. Detailed calculations are provided in Appendix A.
+
+
+=== Aluminum 2014 O Material Properties
+#align(center,
+  figure(
+    table(
+      columns: 2,
+      stroke: (x: none),
+      row-gutter: (2.2pt, auto),
+      table.header[Property][Value],
+      [Tensile Strength], [27 ksi],
+      [Yield Strength], [14 ksi],
+      [Shear Strength], [18 ksi],
+      [Endurance Strength], [13 ksi],
+    ),
+    caption: [Material Properties of Aluminum 2014 O],
+  )
+)
+\
+Reasons:
+- Cheap (< \$1 per inch)
+- Easy to machine
+- Required minimum diameter below all components' bore diameter
 
 === Shaft 3 Overview
 #figure(
@@ -239,14 +289,62 @@ end near the camera, and a stabilizing deep grove bearing opposite the camera to
 allowed us to determine that *R10ZZ 5/8" Deep Groove Ball Bearing* and *3201-2RS Angular Contact Bearing* are ideal for this
 application. Both of these bearings can be purchased for arund \$14 each on BearingsCanada.com and Temu.com, respectively.
 
-= RESULTS & FINAL DEssSIGN
+= RESULTS & FINAL DESIGN
 
 = CONLUSIONS & RECOMENDATIONS
 
 = APPENDIX A
 
-=== Shaft 2 Calculations
+== Worm Gear Calculations
 
+Calculate the coefficient of friction to be: 
+$ 0.124 e^(-0.74 v_s^0.645)$ (10–26). Due to the very slow speed, but $v_s != 0$, the coefficient is not $0.15$
+
+=== MOTT Calculations <MOTT_worm>
+- Tangential force (10–29):
+  $ W_(t G) = (2 T_0) / D_G $
+
+- Axial force (10–30):
+  $ W_(x G) = W_(t G) (cos phi_n sin lambda + mu cos lambda) / (cos phi_n cos lambda - mu sin lambda) $
+
+- Radial force (10–31):
+  $ W_(r G) = (W_(x G) sin phi_n) / (cos phi_n cos lambda - mu sin lambda) $
+
+- Friction force (10–32):
+  $ W_f = (mu W_(t G)) / (cos lambda cos phi_n - mu sin lambda) $
+
+=== Other Calculations <Other_worm>
+- Normal circular pitch (10–38):
+  $ p_n = (pi cos lambda) / P_d = 0.2608 "in" = 0.006624 "m" $
+
+- Pitch line speed (10–41):
+  $ v_(t G) = (pi D_G n_G) / 12 = 0.001508 "ft/min" $
+
+- Velocity factor (10–40):
+  $ K_v = 1200 / (1200 + v_(t G)) = 1200 / (1200 + 0.001508) = 0.99999874 approx 1.000 $
+
+- Dynamic load (10–39):
+  $ W_d = 54.701 "N" = 12.293 "lbf" $
+
+- Tooth bending stress (10–37):
+  $ sigma = W_d / (y F p_n) = (12.293 "lbf") / (0.100 times 0.5 "in" times 0.2608 "in") = 942.6 "psi" = 6.50 "MPa" $
+== Shaft 2 Calculations
+
+Net driving force on the timing belt pulley is given by:
+$
+  F_N = T_C / (D_C / 2) = 0.521 "lbf"
+$
+Bending force on C is given by:
+$
+  F_C = 1.5 F_N = 0.866 "lbf"
+$
+Since z components of timing belt cancles out, we only consider x component of $F_C$.
+
+$
+F_(C x) = F_C cos(phi) = 0.819 "lbf"
+$
+Where $phi$ is the angle between the belt and horizontal plane, calculated in above section.\
+\
 #figure(
   // The image function goes here (no '#' needed inside figure)
   image("images/2nd_shaft_FBD.jpeg", width: 70%),
@@ -255,8 +353,9 @@ application. Both of these bearings can be purchased for arund \$14 each on Bear
   // Add a label for referencing (use a name enclosed in angle brackets)
 )
 \
-Point A and D are the bushings, B is the worm gear, and C is the pulley for the timing belt.
-Given forces:
+Point A and D are the bushings, B is the worm gear, and C is the pulley for the timing belt.\
+\
+Known forces from above calculations are:
 #align(center,
   grid(
     columns: 2,
@@ -266,13 +365,12 @@ Given forces:
     F_(B y) = 2.67 "lbf" \
     F_(B z) = 12.5 "lbf" \ $,
 
-    $F_(C x) = 0.819 "lbf" \
-    F_(C y) = 0.00 "lbf" \
-    F_(C z) = 0.00 "lbf" \ $
+    $F_(C x) = 0.819 "lbf"
+    $
   )
 )
-
-Force calculations are as follows:
+\
+Forces on A and D are calcualated as follows:
 \
 #align(left,
 $Sigma F_x = 0 :$
@@ -315,7 +413,7 @@ $Sigma M_(A z) = 0 :$
   -L_(A B)F_(B x) + L_(A C)F_(C x) +  L_(A D)F_(D x) &= 0 \
   F_(D x) &= (L_(A B)F_(B x) - L_(A C)F_(C x))/L_(A D) \ 
   $
-
+\
 Using the known forces, we get following forces on A and D:
 
 #align(center,
@@ -431,7 +529,7 @@ D_min = [
 $
 \
 For the material choice, we want to use an affordable, and easy to machine. Therefore, we will use Aluminum for the shaft material. \
-From Mott Appendix 9, we choose Aluminum 2014 O for its high ductility, decent strength, and cheap cost of about \$1 per inch.
+From Appendix B I, we choose Aluminum 2014 O for its high ductility, decent strength, and cheap cost of about \$1 per inch.
 \
 #align(center,
   figure(
@@ -448,7 +546,7 @@ From Mott Appendix 9, we choose Aluminum 2014 O for its high ductility, decent s
 )
 \
 $K_t = 2.5$ as sharp fillet is used for the shaft shoulders.\
-$N = 2.0$ is chosen for our design since aluminum is a ductile material and the design factor is in the range of $1.5 < N < 2.5$. 
+$N = 2.0$ is chosen for our design factor since aluminum is a ductile material and the design factor is in the range of $1.5 < N < 2.5$. 
 \
 Substituting the values into the minimum diameter equation, we get:
 $
@@ -512,34 +610,24 @@ A key requirement for the StarTracker is high accuracy with minimal speed variat
 + Shaft deflection at the bushing is negligible compared to bushing deformation.  
 + Eccentricities are small enough that the small-angle approximation applies.
 
+*Requirement*
+
+From the acceptable "smear" of pixels, we can calculate a constraint on the RMS variation
+of the speed from shaft wobble. To find the maximum RMS variation of the output speed that meets our requirements.
+
+This will depend on the maximum pixel smear permissible $s_("max")$ and the focal length $f$.
+$ Delta omega_("max RMS") approx s_("max")/ f = 20 / 50 = 40%_("RMS")  $
+
 The contributors to variance were approximated as coming from manufacturing tolerance, maximum permissible wear, and potential deformation of the bushing and shaft. Since the bushing is much more ductile than the shaft, its deformation dominates.
 
 *Tolerance Calculation Overview*
 
-The goal of this calculation is to determine the maximum amplitude of variation in speed caused by eccentricity. Calculations focus on the first stage of reduction, where speed is highest.
-The overall eccentricity was approximated as the root-mean-square (RMS) of all considered contributions:
-#show table.cell.where(y: 0): strong
-
-#set table(
-  stroke: (x, y) => if y == 0 { (bottom: 0.7pt + black) },
-  align: (x, y) => if x == 0 { left } else { center }
-)
-#set align(center)
-#table(
-  columns: 2,
-  table.header(
-    [Symbol],
-    [Description]
-  ),
-  [R], [Input pulley radius (inches)],
-  [$Omega$], [Shaft angular speed (rad/s)],
-  [e], [Eccentricity of the bushing (inches)]
-)
-#set align(left)
-
+The goal of this calculation is to determine the maximum amplitude of variation in speed caused by any eccentricity in the bushing
+resulting the shaft "warbling" in the bushing. Since the system is very sensitive to speed variations,
+a high tolerance bushing with low wear is required.
 $ Delta omega_("max") approx 0.00230"rad"/"s" $
 
-This represents $37%_("RMS")$ of the desired speed, which is below the acceptable limit of 50% based on the tracking tolerance of the optical system. Therefore, the design is deemed satisfactory. In-depth calculations can be found in the Appendix.
+This represents $37%_("RMS")$ of the desired speed, which is below the acceptable limit of 40% based on the tracking tolerance of the optical system. Therefore, the design is deemed satisfactory. In-depth calculations can be found in the Appendix.
 
 ===== Final Bushing Selection
 
@@ -565,12 +653,6 @@ To support the axial thrust from the camera's weight down on the shaft, we used 
 end near the camera, and a stabilizing deep grove bearing opposite the camera to maintain axial alignment. Bearing calculations
 allowed us to determine that *R10ZZ 5/8" Deep Groove Ball Bearing* and *3201-2RS Angular Contact Bearing* are ideal for this
 application. Both of these bearings can be purchased for arund \$14 each on BearingsCanada.com and Temu.com, respectively.
-
-= RESULTS & FINAL DEssSIGN
-
-= CONLUSIONS & RECOMENDATIONS
-
-= APPENDIX A
 
 === Bushing Calculations
 
@@ -672,13 +754,15 @@ $ (Delta omega) / omega = 0.5278 $
 
 $ ((Delta omega) / omega)_("RMS") = 37.7% $
 
-Which is within spec for this application
+Which is within spec for this application as specified in the Bushing Selection and Design Rationale.
+
 
 Plugging in these values yields...
 $
 D = 0.42 text("in") < 0.625 text("in")
 $
 so our shaft is fit for our needs!
+
 
 == Shaft 3 Calculations
 
@@ -785,7 +869,16 @@ so our shaft is fit for our needs!
 
 We plan to use an angular contact ball bearing at C and a deep groove ball bearing at A. These locations are referenced in the figures for Shaft 3 Calculations. Our calculations are for 02-Series Deep-Groove and Angular-Contact ball bearings. 
 
-==== Angular Contact Bearing at C
+== Aluminum Material Properties
+
+#figure(
+  // The image function goes here (no '#' needed inside figure)
+  image("images/Mott_appendix_9.png", width: 70%),
+  // Add a caption using a content block ([...])
+  caption: [Typical Properties of Aluminum from Mott Appendix 9],
+  // Add a label for referencing (use a name enclosed in angle brackets)
+)
+=== Angular Contact Bearing at C
 We are finding a bearing to fit our pre-defined shaft diameter of $frac(5,8)$ in, or 15.875 mm. We can use interpolation to find $C_0$ from table 11-2.
 For our shaft diameter,
 
@@ -890,8 +983,8 @@ A typical stepper motor can outpout around $3000 "rpm"$ and $1.2 "N" dot "m"$ of
 We desire an output speed of around $0.05886 "rpm"$ at $0.0694 "N" dot "m"$ of torque. \
 Our system will use this power but we design for the stepper maximum. \
 \
-From table *ENTER TABLE* we select a 2GMT belt. \
-We can assume that the belt is going to run at less than $10 "rpm"$ so from table *ENTER TABLE* 
+From @belt_sizing we select a 2GMT belt. \
+We can assume that the belt is going to run at less than $10 "rpm"$ so from table @smaller_sheave 
 we select a $6 "mm"$ wide belt and the smaller sprocket size of $18$ grooves which is rated for 
 $1.35 "N" dot "m"$ of torque at this speed. \
 \
@@ -900,14 +993,14 @@ reduce complexity we use the same pair of sprockets twice. \
 Since a stepper motor can run at variable speed we will say that each belt will 
 need a reduction of $1:4$. \ 
 So we select the larger sprocket size to be $72$ groove. The pitch diameters 
-are found from *ENTER TABLE* to be:
+are found from @pulley_inf:
 $ p d = 0.301 "in" quad P D = 1.805 "in" $
 \
 We want the center distance to be small so temporarily select $C D=1.9 "in"$ since
 we want to minimize size.\
 $ P L = 2 dot C D + [1.57 dot (p d + P D)] + frac((P D - p d)^2, 4 C D) = 1.984 "in" $
 \
-So using *ENTER TABLE* we select a 2MR-192 belt with a pitch length $P L = 7.559$
+So using @belt_selection $P L = 7.559$
 which is a stock length. \
 $ K = 4 P L - 6.28 dot (P D + p d) $
 $ C D = frac(K + sqrt(K^2 - 32(P D - p d)^2), 17 ) = 1.984 "in" $
@@ -915,7 +1008,7 @@ Giving our center distance.\
 Our nominal safety factor is given by $S F = frac(1.35, 0.05886)=23$.\
 Our worst case safety factor, which shouldn't occur is $S F = frac(1.35, 1.2)=1.125$.\
 Now we calculate the wrap angles to be: \
-$phi_(D) = pi - arcsin frac(P D - p d, 2C D) = 2.364 "rad" quad "and" quad phi_(D) 
+$phi.alt_(D) = pi - arcsin frac(P D - p d, 2C D) = 2.364 "rad" quad "and" quad phi.alt_(D) 
 = pi + arcsin frac(P D - p d, 2C D) = 3.92 "rad"$
 == Shaft 1 Force Calculations
 
@@ -1026,6 +1119,26 @@ $ T_("max,lg") = (385*(1/4))/2 "lb"*"in" = 48.125 "lb"*"in" = 5437 N*"mm" $
 
 After applying a design factor of 2, as Shigley recommends for static loads, we can see that neither setscrew will fail.
 
-$ (1/2) T_("max,sm") = 1130 N*"mm" > 14.7 N*"mm" $
+$ (1/2)*T_("max,sm") = 1130 N*"mm" > 14.7 N*"mm" $
 
-$ (1/2 T_("max,lg") = 2718.5 N*"mm" > 58.86 N*"mm" $
+$ (1/2)*T_("max,lg") = 2718.5 N*"mm" > 58.86 N*"mm" $
+
+
+= APPENDIX B
+== Gates Manual
+#figure(
+  image("yuvy_images/Gates_manual_selection_zones.png", width: 80%),
+  caption: [Belt Size Selection],
+) <belt_sizing>
+#figure(
+  image("yuvy_images/gates_smaller_sheave.png", width: 100%),
+  caption: [Smaller Sprocket Selection],
+) <smaller_sheave>
+#figure(
+  image("yuvy_images/sprocket_numbers.png", width: 100%),
+  caption: [Pulley Information],
+) <pulley_inf>
+#figure(
+  image("yuvy_images/Gates_manual_belts.png", width: 100%),
+  caption: [Belt Selection],
+) <belt_selection>
