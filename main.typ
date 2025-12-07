@@ -187,12 +187,11 @@ As we can see, these forces are extremely small.
 
 
 === 2nd Shaft Overview
-
-
 The 2nd shaft transmits torque from the worm gear to the pulley which drives the timing belt. The shaft is supported by two bushings on either end. The shaft is subjected to forces from the worm gear and pulley as well as reaction forces from the bushings.
-  
-$
-"Shaft Length" &: "8-in" \
+\
+==== 2nd Shaft Key Specifications:
+$"Shaft Length" &: "8-in" \
+\
 "Worm" &: "1⅝-in long shoulder with ¾-in diameter" \
 "Pulley" &: "¾-in long shoulder with ⅕-in diameter" \
 "Bushings" &: "¼-in long shoulders with 3/16-in diameter" \
@@ -200,19 +199,58 @@ $
 
 #figure(
   // The image function goes here (no '#' needed inside figure)
-  image("images/2nd_shaft _itself.png", width: 40%),
-  // Add a caption using a content block ([...])
-  caption: [2nd shaft],
-  // Add a label fo r referencing (use a name enclosed in angle brackets)
-) <fig:2nd_shaft_itself>
-
-#figure(
-  // The image function goes here (no '#' needed inside figure)
-  image("images/2nd_shaft_with_components.png", width: 40%),
+  image("images/2nd_shaft_with_components.png", width: 60%),
   // Add a caption using a content block ([...])
   caption: [2nd shaft with components],
   // Add a label fo r referencing (use a name enclosed in angle brackets)
 ) <fig:2nd_shaft_itself>
+\
+
+#grid(
+  columns: 2,
+  gutter: 1cm,
+  figure(
+    // The image function goes here (no '#' needed inside figure)
+    image("images/2nd_shaft _itself.png", width: 100%),
+    // Add a caption using a content block ([...])
+    caption: [2nd shaft],
+    // Add a label fo r referencing (use a name enclosed in angle brackets)
+  ),
+
+  figure(
+    // The image function goes here (no '#' needed inside figure)
+    image("images/2nd_shaft_FBD.jpeg", width: 100%),
+    // Add a caption using a content block ([...])
+    caption: [FBD of shaft 2],
+    // Add a label for referencing (use a name enclosed in angle brackets)
+  )
+)
+
+==== 2nd Shaft Design Choice:
+The 2nd shaft will be made of Aluminum 2014 O for its high ductility, decent strength, and cheap cost of about \$1 per inch. The shaft diameter is determined by bending and torsional stress calculations to ensure it can withstand the applied loads with an appropriate safety factor. Detailed calculations are provided in Appendix A.
+
+
+=== Aluminum 2014 O Material Properties
+#align(center,
+  figure(
+    table(
+      columns: 2,
+      stroke: (x: none),
+      row-gutter: (2.2pt, auto),
+      table.header[Property][Value],
+      [Tensile Strength], [27 ksi],
+      [Yield Strength], [14 ksi],
+      [Shear Strength], [18 ksi],
+      [Endurance Strength], [13 ksi],
+    ),
+    caption: [Material Properties of Aluminum 2014 O],
+  )
+)
+\
+Reasons:
+- Cheap (< \$1 per inch)
+- Easy to machine
+- Required minimum diameter below all components' bore diameter
 
 
 == Bushing Selection and Design Rationale
@@ -263,6 +301,21 @@ application. Both of these bearings can be purchased for arund \$14 each on Bear
 
 === Shaft 2 Calculations
 
+Net driving force on the timing belt pulley is given by:
+$
+  F_N = T_C / (D_C / 2) = 0.521 "lbf"
+$
+Bending force on C is given by:
+$
+  F_C = 1.5 F_N = 0.866 "lbf"
+$
+Since z components of timing belt cancles out, we only consider x component of $F_C$.
+
+$
+F_(C x) = F_C cos(phi) = 0.819 "lbf"
+$
+Where $phi$ is the angle between the belt and horizontal plane, calculated in above section.\
+\
 #figure(
   // The image function goes here (no '#' needed inside figure)
   image("images/2nd_shaft_FBD.jpeg", width: 70%),
@@ -271,8 +324,9 @@ application. Both of these bearings can be purchased for arund \$14 each on Bear
   // Add a label for referencing (use a name enclosed in angle brackets)
 )
 \
-Point A and D are the bushings, B is the worm gear, and C is the pulley for the timing belt.
-Given forces:
+Point A and D are the bushings, B is the worm gear, and C is the pulley for the timing belt.\
+\
+Known forces from above calculations are:
 #align(center,
   grid(
     columns: 2,
@@ -282,13 +336,12 @@ Given forces:
     F_(B y) = 2.67 "lbf" \
     F_(B z) = 12.5 "lbf" \ $,
 
-    $F_(C x) = 0.819 "lbf" \
-    F_(C y) = 0.00 "lbf" \
-    F_(C z) = 0.00 "lbf" \ $
+    $F_(C x) = 0.819 "lbf"
+    $
   )
 )
-
-Force calculations are as follows:
+\
+Forces on A and D are calcualated as follows:
 \
 #align(left,
 $Sigma F_x = 0 :$
@@ -331,7 +384,7 @@ $Sigma M_(A z) = 0 :$
   -L_(A B)F_(B x) + L_(A C)F_(C x) +  L_(A D)F_(D x) &= 0 \
   F_(D x) &= (L_(A B)F_(B x) - L_(A C)F_(C x))/L_(A D) \ 
   $
-
+\
 Using the known forces, we get following forces on A and D:
 
 #align(center,
@@ -447,7 +500,7 @@ D_min = [
 $
 \
 For the material choice, we want to use an affordable, and easy to machine. Therefore, we will use Aluminum for the shaft material. \
-From Mott Appendix 9, we choose Aluminum 2014 O for its high ductility, decent strength, and cheap cost of about \$1 per inch.
+From Appendix B I, we choose Aluminum 2014 O for its high ductility, decent strength, and cheap cost of about \$1 per inch.
 \
 #align(center,
   figure(
@@ -464,7 +517,7 @@ From Mott Appendix 9, we choose Aluminum 2014 O for its high ductility, decent s
 )
 \
 $K_t = 2.5$ as sharp fillet is used for the shaft shoulders.\
-$N = 2.0$ is chosen for our design since aluminum is a ductile material and the design factor is in the range of $1.5 < N < 2.5$. 
+$N = 2.0$ is chosen for our design factor since aluminum is a ductile material and the design factor is in the range of $1.5 < N < 2.5$. 
 \
 Substituting the values into the minimum diameter equation, we get:
 $
@@ -793,6 +846,15 @@ so our shaft is fit for our needs!
 We plan to use an angular contact ball bearing at C and a deep groove ball bearing at A. These locations are referenced in the figures
 for Shaft 3 Calculations. 
 
+== Aluminum Material Properties
+
+#figure(
+  // The image function goes here (no '#' needed inside figure)
+  image("images/Mott_appendix_9.png", width: 70%),
+  // Add a caption using a content block ([...])
+  caption: [Typical Properties of Aluminum from Mott Appendix 9],
+  // Add a label for referencing (use a name enclosed in angle brackets)
+)
 === Angular Contact Bearing at C
 We are finding a bearing to fit our pre-defined shaft diameter of $frac(5,8)$ in, or 15.875 mm. We can use interpolation to find $C_0$ from table 11-2.
 For our shaft diameter,
