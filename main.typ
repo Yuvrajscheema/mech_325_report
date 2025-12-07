@@ -82,19 +82,16 @@ The overall eccentricity was approximated as the root-mean-square (RMS) of all c
   [e], [Eccentricity of the bushing (inches)]
 )
 #set align(left)
-$ e_("RMS") = sqrt(e_("tolerance")^2 + e_("wear")^2 + e_("deformation")^2) $
 
-$ Delta omega_("max") approx (e_("RMS"))/(2 pi R) Omega $
+$ Delta omega_("max") approx 0.00230"rad"/"s" $
 
-$ Delta omega_("max") approx 0.000566"rad"/"s" $
-
-This represents $43%_("RMS")$ of the desired speed, which is below the acceptable limit of 50% based on the tracking tolerance of the optical system. Therefore, the design is deemed satisfactory. In-depth calculations can be found in the Appendix.
+This represents $37%_("RMS")$ of the desired speed, which is below the acceptable limit of 50% based on the tracking tolerance of the optical system. Therefore, the design is deemed satisfactory. In-depth calculations can be found in the Appendix.
 
 ===== Final Bushing Selection
 
 To support the axial load of the worm gear, a flanged bushing was selected. The low speed of the shafts allows the shaft shoulders to transfer axial load directly into the bushing flange with minimal wear. PEEK was chosen for its low friction, minimal wear, and resilience to moisture, making it suitable for outdoor operation.
-The final bushing selected is a 3/16" shaft diameter, 1/4" long, 3/8" flange OD moisture-resistant, dry-running flanged sleeve bearing from McMaster-Carr.
-For design consistency, all bushings are standardized throughout the system. With a unit cost of \$5.44, the total cost for bushings in the design is \$21.76.
+The final bushing selected is a 3/8:" shaft diameter, 1/4" long, 11/16" flange OD moisture-resistant, dry-running flanged sleeve bearing from McMaster-Carr.
+For design consistency, all bushings are standardized throughout the system. With a unit cost of \$6.42, the total cost for bushings in the design is \$25.68.
 
 
 = RESULTS & FINAL DESIGN
@@ -105,6 +102,102 @@ For design consistency, all bushings are standardized throughout the system. Wit
 
 === Bushing Calculations
 
+===== Geometery Calculations
+From the shaft diameter, choose D = 3/16 in  
+To minimize the footprint, select a minimal length L = 1/4 in  
+This satisfies
+
+$
+0.5 <= L / D <= 2.0
+$
+
+
+This bearing application requires high precision, with low lubrication, but remains under constant load. Since the application is non-critical, a safety factor of 2 will be used:
+
+$
+n_d = 2.0
+$
+
+
+Validate length under thermal conditions.
+
+*Assumptions*:  
+
+The StarTracker will only be operated at night and is primarily targeted to hobbyists in North America.  
+$T_("inf") = 77$ F - Typical summer nighttime temperature near the 49th parallel.  
+For nylon on steel, $f_s = 0.3$
+
+$
+L >= (720  f_s  n_d  F  N) / (J h_("CR")  (T_f - T_("inf"))) $
+$
+L >= (720  0.3 * 1.0 * 11.6 * 0.000694) / (778 * 2.7 * (300 - 77)) $
+$ L >= 4.95"e"-6 "in" $
+
+
+This is sufficiently smaller than the chosen L = 1/4 in
+
+===== Force and Velocity Calculations
+At the point experiencing the greatest load (next to the worm gear):
+
+$
+P_("max") = (4 / pi)  (F  n_d) / (D  L) = ((4 / pi)  11.6) / ((3/16)(1/4)) = 388.71 "psi" < 4,500 "psi"
+$
+
+$
+V = (pi  D  N  n_d) / 12 = 6.81"e"-5 "fpm" < 400 "fpm"
+$
+
+$
+P V = 0.00520 "psi-fpm" < 25,000 "psi-fpm"
+$
+
+The bushing selected comforatbly meets the requirements for presure and velocity.
+
+===== Tolerance Calculations
+
+
+*Assumptions*
+
+ 1. The primary assumption for calculations done to specify the tolerances on the bushings that the primary effect of bushing wear and ill-tolerancing impact the eccentricity of the 
+  shaft rotating inside of the bushing. Due to small loads and low friction effects like
+  stick-slip and major shaft misalignment and deflections can be ignored. 
+2. The next assumption is that eccentricity comes from three primary sources:
+    - Bushing tolerances: Assume worst case senario as eccentric as possible
+    - Wear: Eccentricity caused by runout
+    - Compression: Eccentricity caused by compression of the bushing
+
+To calculate the maximum possible eccentricity, find the sum of all of the maximum possible
+displacements. Displacements come from the material properties of the bushing, the manufactuer specified tolerance
+on the inner diameter (contacting the shaft) and the lifetime of the bushings.
+
+$ delta_("tolerance") = 0.001 "in" $
+$ delta_("wear") = 0.0001 "in" $
+$ delta_("deformation") = sigma / E = 328 "psi" / 435000 "psi" = 0.00075 "in" $
+
+#figure(
+  image("sam_images/eccentricity.jpg", width: 70%),
+  caption: [ Demonstration of how displacement is being converted to eccentricity
+  ],
+)
+
+Now calculating the eccentricity where $d$ is the diameter of the shaft.
+
+$ e = sqrt(1 - (d/ (d + delta_("tolerance") + delta_("wear") + delta_("deformation") ))^2) $
+$ e = 0.0989 $
+
+Then to find the variation in speed, since eccentricity is small, a small angle approximation
+can be used. Then using the output speed of the reduction system, the variation of the speed 
+can be found.
+$ Delta omega approx e / R omega_0 = 0.0989 /((1/2)(3/8)) (0.000694 "rpm") 2 pi $
+
+Then comparing the $Delta omega$ to the operating $omega$ 
+
+$ (Delta omega) / omega = 0.5278 $
+ Which gives an RMS within $50%$ of $omega$
+
+$ ((Delta omega) / omega)_("RMS") = 37.7% $
+
+Which is within spec for this application
 
 
 = APPENDIX B
