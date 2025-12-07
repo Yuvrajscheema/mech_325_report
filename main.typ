@@ -204,19 +204,9 @@ Calculations for the following results can be found in #link(<Other_worm>)[appen
 
 
 == Shaft Design
-== Shaft Design
 
 === Shaft 1 Overview
-=== Shaft 1 Overview
 
-Shaft 1 is part of an intermediate stage in the speed reducer system. Two pulleys are mounted on it, and it is secured with bushings on either end. The shaft is subject to forces from the two pulleys and two bushings. There are no axial forces.
-
-#align(center)[
-  #figure(
-    image("CFImages/shaft1.jpg", width: 60%),
-    caption: [Shaft 1],
-  )
-]
 Shaft 1 is part of an intermediate stage in the speed reducer system. Two pulleys are mounted on it, and it is secured with bushings on either end. The shaft is subject to forces from the two pulleys and two bushings. There are no axial forces.
 
 #align(center)[
@@ -252,34 +242,7 @@ Shaft 1 is part of an intermediate stage in the speed reducer system. Two pulley
     [2014 O aluminum]
   )
 ]
-#align(center)[
-  #figure(
-    image("CFImages/gearboxShaft1Image.jpg", width: 70%),
-    caption: [Shaft 1 in CAD assembly],
-  )
-]
 
-#align(center)[
-  #table(
-    columns: 2,
-    stroke: none,
-    align: center,
-
-    [Shaft Length],
-    [2-in],
-
-    [Shaft Diameter],
-    [1/4\" major diameter],
-
-    [Shoulders],
-    [1/4\" long, 3/16\" diameter],
-
-    [Material],
-    [2014 O aluminum]
-  )
-]
-
-=== Shaft 2 Overview
 === Shaft 2 Overview
 The 2nd shaft transmits torque from the worm gear to the pulley which drives the timing belt. The shaft is supported by two bushings on either end. The shaft is subjected to forces from the worm gear and pulley as well as reaction forces from the bushings.
 \
@@ -324,6 +287,21 @@ $
 The 2nd shaft will be made of Aluminum 2014 O for its high ductility, decent strength, and cheap cost of about \$1 per inch. The shaft diameter is determined by bending and torsional stress calculations to ensure it can withstand the applied loads with an appropriate safety factor. Detailed calculations are provided in Appendix A.
 
 
+
+=== Shaft 3 Overview
+#figure(
+  image("bram-images-420340594432/naked_shaft.png", width: 70%),
+  caption: [Shaft 3],
+)
+
+#figure(
+  image("bram-images-420340594432/shaft3.png", width: 70%),
+  caption: [Shaft 3 in CAD assembly],
+)
+
+Shaft 3 transfers torque from the worm gear to actually rotating the camera to track stars! It is subjected to radial and axial forces and thus features
+an angular contact bearing as well as a deep groove bearing. It is machined out Aluminum 2014-O, same as the other two shafts.
+
 === Aluminum 2014 O Material Properties
 #align(center,
   figure(
@@ -345,21 +323,6 @@ Reasons:
 - Cheap (< \$1 per inch)
 - Easy to machine
 - Required minimum diameter below all components' bore diameter
-
-=== Shaft 3 Overview
-#figure(
-  image("bram-images-420340594432/naked_shaft.png", width: 70%),
-  caption: [Shaft 3],
-)
-
-#figure(
-  image("bram-images-420340594432/shaft3.png", width: 70%),
-  caption: [Shaft 3 in CAD assembly],
-)
-
-Shaft 3 transfers torque from the worm gear to actually rotating the camera to track stars! It is subjected to radial and axial forces and thus features
-an angular contact bearing as well as a deep groove bearing. It is machined out Aluminum 2014-O, same as the other two shafts.
-
 == Bushing Selection and Design Rationale
 
 === Overview
@@ -440,11 +403,33 @@ application. Both of these bearings can be purchased for arund \$14 each on Bear
   [Worm Gear], [12 pitch, 100 teeth, 14.5° pitch angle, 4.76° lead angle, Bronze], [rushgears.com, WB1200L],
   [Bushing], [Dry-Running PEEK Flanged Sleeve Bearing, for 3/8" Shaft Diameter and 15/32" Housing ID, 1/4" Long], [McMaster-Carr 6627K412],
   [Shaft 1], [1/4" major diameter, 2" long],[N/A],
+  [Shaft 2], [3/4" major diameter, 8" long],[N/A],
+  [Shaft 3], [3/4" major diameter, 4" long],[N/A],
   [Deep-Groove Ball Bearing],[5/8" bore, deep groove ball bearing],[R10ZZ 5/8", BearingsCanada.com],
   [Angular Contact Ball Bearing],[5/8" bore, angular contact],[201-2RS Angular Contact Bearing, Temu.com],
   [Smaller Pulley], [18 groove pulley], [ www.mcmaster.com 3764N106],
   [Larger Pulley], [72 groove pulley],  [www.mcmaster.com 3764N119],
   [Timing Belt], [7.559 in pitch length timing belt], [www.motioncanada.ca E2MR-192-04]
+)]
+
+#pagebreak()
+===== Cost
+
+As a tool designed for hobbyists, a key design critera was the cost of the components.
+This design is full of consumer available components with reasonable costs for each. Below is a table 
+which lists all of the components and their associated costs.
+
+#align(center)[#table(
+  columns: 4,
+  align: (left, left),
+  table.header([Component], [Unit Price], [Number of Units], [Total Cost]),
+  [Small Pulley], [\$12], [2], [\$14],
+  [Big Pulley], [\$22], [2], [\$44],
+  [Belts], [\$6], [2], [\$12],
+  [Shaft Material], [\$1/"in"], [16"in"], [\$16],
+  [Bushings], [\$14.84], [4], [\$59.36],
+  [Bearings], [\$14], [1], [\$14],
+  [Total Cost], [], [], [\$159.36],
 )]
 
 Here are some final photos of the design of the equatorial mount.
@@ -561,9 +546,9 @@ $ 0.124 e^(-0.74 v_s^0.645)$ (10–26). Due to the very slow speed, but $v_s != 
 
 - Tooth bending stress (10–37):
   $ sigma = W_d / (y F p_n) = (12.293 "lbf") / (0.100 times 0.5 "in" times 0.2608 "in") = 942.6 "psi" = 6.50 "MPa" $
-== Shaft 1 Force Calculations
+== Shaft 1 Calculations
 
-As stated earlier, the torque on shaft 1 is 14.7 N*mm. The first stage of the force calculations was determining the direction in which the belt tension acts. In the CAD below, the end view of the speed reducer has been shown, with the diagonal lines representing belts going between pulleys. As can be seen, the belts act at a 19.79 degree angle.
+As stated earlier, the torque on shaft 1 is $14.7 "N" dot "mm"$. The first stage of the force calculations was determining the direction in which the belt tension acts. In the CAD below, the end view of the speed reducer has been shown, with the diagonal lines representing belts going between pulleys. As can be seen, the belts act at a 19.79 degree angle.
 
 #figure(
   image("CFImages/shaft1Pulleys.jpg", width: 70%),
@@ -1104,143 +1089,10 @@ $
 This is much smaller than usual key sizes, which are recommended to be between 1-1.5 inches. As such, we decide that the square Aluminum 6061 key be 1 inch long. 
 
 This is very short for a key, so we go up to a minimum key length 
-== Belt and Pulley Calculations <bnpcalc>
-A typical stepper motor can outpout around $3000 "rpm"$ and $1.2 "N" dot "m"$ of torque. \
-We desire an output speed of around $0.05886 "rpm"$ at $0.0694 "N" dot "m"$ of torque. \
-Our system will use this power but we design for the stepper maximum. \
-\
-From @belt_sizing we select a 2GMT belt. \
-We can assume that the belt is going to run at less than $10 "rpm"$ so from table @smaller_sheave 
-we select a $6 "mm"$ wide belt and the smaller sprocket size of $18$ grooves which is rated for 
-$1.35 "N" dot "m"$ of torque at this speed. \
-\
-We want the stepper to spin at around $1.1" rpm"$ so then $V R = 14.4$ and to 
-reduce complexity we use the same pair of sprockets twice. \
-Since a stepper motor can run at variable speed we will say that each belt will 
-need a reduction of $1:4$. \ 
-So we select the larger sprocket size to be $72$ groove. The pitch diameters 
-are found from @pulley_inf:
-$ p d = 0.301 "in" quad P D = 1.805 "in" $
-\
-We want the center distance to be small so temporarily select $C D=1.9 "in"$ since
-we want to minimize size.\
-$ P L = 2 dot C D + [1.57 dot (p d + P D)] + frac((P D - p d)^2, 4 C D) = 1.984 "in" $
-\
-So using @belt_selection $P L = 7.559$
-which is a stock length. \
-$ K = 4 P L - 6.28 dot (P D + p d) $
-$ C D = frac(K + sqrt(K^2 - 32(P D - p d)^2), 17 ) = 1.984 "in" $
-Giving our center distance.\
-Our nominal safety factor is given by $S F = frac(1.35, 0.05886)=23$.\
-Our worst case safety factor, which shouldn't occur is $S F = frac(1.35, 1.2)=1.125$.\
-Now we calculate the wrap angles to be: \
-$phi.alt_(D) = pi - arcsin frac(P D - p d, 2C D) = 2.364 "rad" quad "and" quad phi.alt_(D) 
-= pi + arcsin frac(P D - p d, 2C D) = 3.92 "rad"$
 
-== Shaft 1 Force Calculations
+== Bushing Calculations
 
-As stated earlier, the torque on shaft 1 is 14.7 N*mm. The first stage of the force calculations was determining the direction in which the belt tension acts. In the CAD below, the endview of the gear reducer has been shown, with the diagonal lines representing belts going between pulleys. As can be seen, the belts act at a 19.79 degree angle.
-
-#figure(
-  image("CFImages/shaft1Pulleys.jpg", width: 70%),
-  caption: [End view of shaft 1, belt angles shown],
-)
-
-Then, a FBD diagram was drawn, and forces calculated.
-
-#figure(
-  image("CFImages/setscrewTable.png", width: 50%),
-  caption: [Shigley table 7-4 Typical Holding Power (Force) for Socket Setscrews],
-)
-
-The small pulley uses \#4 setscrews, while the large pulley uses \#8 setscrews.
-
-$ T_("max,sm") = (160*(1/4))/2 "lb"*"in" = 20 "lb"*"in" = 2260 N*"mm" $
-
-
-$ T_("max,lg") = (385*(1/4))/2 "lb"*"in" = 48.125 "lb"*"in" = 5437 N*"mm" $
-
-After applying a design factor of 2, as Shigley recommends for static loads, we can see that neither setscrew will fail.
-
-$ (1/2)*T_("max,sm") = 1130 N*"mm" > 14.7 N*"mm" $
-
-$ (1/2)*T_("max,lg") = 2718.5 N*"mm" > 58.86 N*"mm" $
-
-== Bushing Selection and Design Rationale
-
-=== Overview
-To support both ends of the two shafts in the reduction stage, two sets of Moisture-Resistant Dry-Running Flanged Sleeve Bearings were chosen for their minimal wear properties, high tolerances, low cost, and light weight.
-
-==== Key Selection Requirements
-+ The bushings must have minimal wear to maintain the accuracy of rotational speed.
-+ The bushings must require minimal maintenance and eliminate lubrication requirements for the convenience of hobbyists.
-+ Minimize length to keep the overall reduction stage compact.
-+ Be resilient to moisture for outdoor operation.
-
-Bushings were selected instead of bearings due to the small loads involved, which reduces cost and minimizes space requirements. Dry bushings eliminate lubrication requirements and reduce maintenance, improving reliability and ease of construction for hobbyists.
-The low forces in this system allow the use of inexpensive bushings without compromising performance. The dominant selection criterion was tolerance.
-
-===== Tolerances
-
-A key requirement for the StarTracker is high accuracy with minimal speed variation. Bushing selection plays a role in achieving this. The primary contributors to speed variation are:
-
-- _Eccentricity:_ radial play between the shafts and bushings can lead to wobble in the reduction system.  
-- _Friction (stick–slip):_ high friction can produce stick–slip motion, generating speed fluctuations.  
-- _Elastic deformation:_ loading of the bushing can compress it, introducing additional eccentricity.
-
-*Assumptions*
-
-+ The shaft rolls without slipping.  
-+ Shaft deflection at the bushing is negligible compared to bushing deformation.  
-+ Eccentricities are small enough that the small-angle approximation applies.
-
-*Requirement*
-
-From the acceptable "smear" of pixels, we can calculate a constraint on the RMS variation
-of the speed from shaft wobble. To find the maximum RMS variation of the output speed that meets our requirements.
-
-This will depend on the maximum pixel smear permissible $s_("max")$ and the focal length $f$.
-$ Delta omega_("max RMS") approx s_("max")/ f = 20 / 50 = 40%_("RMS")  $
-
-The contributors to variance were approximated as coming from manufacturing tolerance, maximum permissible wear, and potential deformation of the bushing and shaft. Since the bushing is much more ductile than the shaft, its deformation dominates.
-
-*Tolerance Calculation Overview*
-
-The goal of this calculation is to determine the maximum amplitude of variation in speed caused by any eccentricity in the bushing
-resulting the shaft "warbling" in the bushing. Since the system is very sensitive to speed variations,
-a high tolerance bushing with low wear is required.
-$ Delta omega_("max") approx 0.00230"rad"/"s" $
-
-This represents $37%_("RMS")$ of the desired speed, which is below the acceptable limit of 40% based on the tracking tolerance of the optical system. Therefore, the design is deemed satisfactory. In-depth calculations can be found in the Appendix.
-
-===== Final Bushing Selection
-
-To support the axial load of the worm gear, a flanged bushing was selected. The low speed of the shafts allows the shaft shoulders to transfer axial load directly into the bushing flange with minimal wear. PEEK was chosen for its low friction, minimal wear, and resilience to moisture, making it suitable for outdoor operation.
-The final bushing selected is a 3/8:" shaft diameter, 1/4" long, 11/16" flange OD moisture-resistant, dry-running flanged sleeve bearing from McMaster-Carr.
-For design consistency, all bushings are standardized throughout the system. With a unit cost of \$14.84, the total cost for bushings in the design is \$59.36.
-
-
-== Bearing Selection and Design Rationale
-
-=== Overview
-To support the shaft on which the worm gear and camera are mounted, we will use an angular contact ball bearing and a deep groove ball bearing. 
-
-==== Key Selection Requirements
-- The bearings must be able to withstand the shaft thrust
-- Minimize cost so project remains accessible to hobbyists
-
-Bearings were selected for this shaft to ensure a smooth, frictionless rotation of the camera shaft to help with clear imaging. 
-While bushings could work for this application due to the low rpm, minimal friction and smooth rotation are worth this increased
-cost. 
-
-To support the axial thrust from the camera's weight down on the shaft, we used a combination of an angular contact bearing at the 
-end near the camera, and a stabilizing deep grove bearing opposite the camera to maintain axial alignment. Bearing calculations
-allowed us to determine that *R10ZZ 5/8" Deep Groove Ball Bearing* and *3201-2RS Angular Contact Bearing* are ideal for this
-application. Both of these bearings can be purchased for arund \$14 each on BearingsCanada.com and Temu.com, respectively.
-
-=== Bushing Calculations
-
-===== Geometery Calculations
+=== Geometery Calculations
 From the shaft diameter, choose D = 3/16 in  
 To minimize the footprint, select a minimal length L = 1/4 in  
 This satisfies
@@ -1274,7 +1126,7 @@ $ L >= 4.95"e"-6 "in" $
 
 This is sufficiently smaller than the chosen L = 1/4 in
 
-===== Force and Velocity Calculations
+=== Force and Velocity Calculations
 
 Using the Shigley method of calculating bushing pressure and velocity. Using equations
 12-40, 12-41, 12-42.
@@ -1294,7 +1146,7 @@ $
 
 The bushing selected comforatbly meets the requirements for presure and velocity.
 
-===== Tolerance Calculations
+=== Tolerance Calculations
 
 
 *Assumptions*
@@ -1339,18 +1191,6 @@ $ (Delta omega) / omega = 0.5278 $
 $ ((Delta omega) / omega)_("RMS") = 37.7% $
 
 Which is within spec for this application as specified in the Bushing Selection and Design Rationale.
-
-
-Plugging in these values yields...
-$
-D = 0.42 text("in") < 0.625 text("in")
-$
-so our shaft is fit for our needs!
-
-
-
-
-
 
 
 = APPENDIX B
