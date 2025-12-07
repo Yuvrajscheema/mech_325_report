@@ -112,35 +112,38 @@ F_(D y) =  0.00 "lbf" \
 F_(D z) = 0.812 "lbf" \
 $
 
-#grid(
-  columns: 2,
+#align(center,
+  grid(
+    columns: 2,
+    gutter: 1cm,
 
-  figure(
-    table(
-      columns: 3,
-      stroke: 1pt + black,
-      inset: 4pt,
-        [],[$"V"_("horizontal") "(lbf)"$],  [$"V"_("vertical") "(lbf)"$],
-        [A],[-3.01],  [11.7],
-        [B],[0.267],  [-0.812],
-        [C],[-0.553], [-0.812],
-        [D],[0.00],   [0.00]
+    figure(
+      table(
+        columns: 3,
+        stroke: 1pt + black,
+        inset: 4pt,
+          [],[$"V"_("horizontal") "(lbf)"$],  [$"V"_("vertical") "(lbf)"$],
+          [A],[-3.01],  [11.7],
+          [B],[0.267],  [-0.812],
+          [C],[-0.553], [-0.812],
+          [D],[0.00],   [0.00]
+      ),
+      caption: [Shear Forces],
     ),
-    caption: [Vertical and Horizontal Plane Shear],
-  ),
 
-  figure(
-    table(
-      columns: 4,
-      stroke: 1pt + black,
-      inset: 4pt,
-        [], [$"M"_("horizontal") "(lbf)"$], [$"M"_("vertical") "(lbf)"$], [$"M"_("total") "(lbf)"$],
-        [A],[0.00],[0.00],[0.00],
-        [B],[-3.01],[11.7],[12.1],
-        [C],[-1.23],[0.406],[1.30],
-        [D],[0.00],[0.00],[0.00]
-    ),
-    caption: [Vertical and Horizontal Bending Moments],
+    figure(
+      table(
+        columns: 4,
+        stroke: 1pt + black,
+        inset: 4pt,
+          [], [$"M"_("horizontal") "(lbf)"$], [$"M"_("vertical") "(lbf)"$], [$"M"_("total") "(lbf)"$],
+          [A],[0.00],[0.00],[0.00],
+          [B],[-3.01],[11.7],[12.1],
+          [C],[-1.23],[0.406],[1.30],
+          [D],[0.00],[0.00],[0.00]
+      ),
+      caption: [Bending Moments],
+    )
   )
 )
 
@@ -151,31 +154,36 @@ $
   caption: [Shear and bending moment diagram],
   // Add a label for referencing (use a name enclosed in angle brackets)
 ) <fig:2nd_shaft_shear_moment>
+\
+#align(center,
+  block(width: auto,
+    grid(
+      columns: 2,
+      gutter: 1cm,
 
+      figure(
+        table(
+          columns: 2,
+          stroke: 1pt + black,
+          inset: 4pt,
+            [], [$"T (lbf·in)"$],
+            [A], [0.00],
+            [B], [0.521],
+            [C], [-0.521],
+            [D], [0.00]
+        ),
+        caption: [Torque],
+      ),
 
-
-#figure(
-  table(
-    columns: 2,
-    stroke: 1pt + black,
-    inset: 4pt,
-      [], [$"T (lbf·in)"$],
-      [A], [0.00],
-      [B],   [0.521],
-      [C],   [-0.521],
-      [D], [0.00]
-  ),
-  caption: [Torque],
+      figure(
+        image("images/2nd_shaft_torque.jpeg", width: 70%),
+        caption: [Torque diagram of 2nd shaft],
+      ),
+    )
+  )
 )
 
-#figure(
-  // The image function goes here (no '#' needed inside figure)
-  image("images/2nd_shaft_torque.jpeg", width: 70%),
-  // Add a caption using a content block ([...])
-  caption: [Torque diagram of 2nd shaft],
-  // Add a label for referencing (use a name enclosed in angle brackets)
-) <fig:2nd_shaft_Torque>
-
+\
 #figure(
 table(
   columns: 3,
