@@ -369,8 +369,9 @@ The contributors to variance were approximated as coming from manufacturing tole
 
 *Tolerance Calculation Overview*
 
-The goal of this calculation is to determine the maximum amplitude of variation in speed caused by eccentricity. Calculations focus on the first stage of reduction, where speed is highest.
-The overall eccentricity was approximated as the root-mean-square (RMS) of all considered contributions:
+The goal of this calculation is to determine the maximum amplitude of variation in speed caused by any eccentricity in the bushing
+resulting the shaft "warbling" in the bushing. Since the system is very sensitive to speed variations,
+a high tolerance bushing with low wear is required.
 #show table.cell.where(y: 0): strong
 
 #set table(
