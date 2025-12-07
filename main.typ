@@ -440,139 +440,195 @@ Thus, Aluminum 2014 O is a suitable material for the 2nd shaft.
 
 == Shaft 3 Calculations
 
-#align(center,image("bram-images-420340594432/shaft_anal.png", width: 70%))
-_Note: the angle of 49\u{00B0} is dependent on the location of the star tracker. In Vancouver, the latitude angle
-is 49\u{00B0} so that's what we use._
-#align(center,image("bram-images-420340594432/shaft_outline.png"))
-$
-Sigma F_z= A_z+B_z+C_z -F sin(phi)= 0 \
-Sigma F_y= A_y+B_y+C_y - F cos(phi) =0 \
-Sigma F_x= A_x+B_x+C_x = 0 \
-Sigma M_(A,text("vertical")) = B_z (17.397)+C_z (54.5)-F sin(phi)(86.624) = 0 \
-Sigma M_(A,text("horizontal")) = B_x (17.397)+C_x (54.5) = 0
-$
-_Distances for moment calculations are in mm._
 
-From worm gear calculations, we know:
-$
-B_x, B_y, B_z
-  &=-3.28 text("lbf"), 3.019 text("lbf"), -1.61 text("lbf") \
-  &=-14.5 text("N"), 13.42 text("N"), -7.16 text("N")
-$
-  Using these values, we get reaction forces of:
 
-$
-A_x = -9.87 text("N") wide A_z = -7.99 text("N") \
-C_x = -4.63 text("N") wide C_y = 25.72 text("N") wide C_z = 44.7 text("N") 
-$
+== Bushing Selection and Design Rationale
 
-We now verify that Aluminum 2014-O is suitable for this application.
+=== Overview
+To support both ends of the two shafts in the reduction stage, two sets of Moisture-Resistant Dry-Running Flanged Sleeve Bearings were chosen for their minimal wear properties, high tolerances, low cost, and light weight.
 
-Aluminum 2014-O has the following characteristics:
-$
-S_u = 27 wide S_y = 14 wide V_text("str") = 18 wide S_n' = 13
-$
-To find all the parameters, we consulted the following tables and got these results:
-$
-  &k_a = 0.8 && text("from Table x.x") \ 
-  &k_b = 0.924 && text("from equation") 0.879 d^(-0.107) \ 
-  &k_c = 1 && text("from Table x.x, bending") \
-  &k_d = 1 && text("from Table x.x") \ 
-  &k_e = 0.814 && text("for 99% reliability") \ 
-  &k_f = 1 && text("No misc. factors") \
-  &S_e' = 13.5 text("ksi") && text("from Eqn x.x") \
-$
-$
-  S_e = k_a k_b k_c k_d k_e k_f S_e' = 8.12 text("ksi")
-$
+==== Key Selection Requirements
++ The bushings must have minimal wear to maintain the accuracy of rotational speed.
++ The bushings must require minimal maintenance and eliminate lubrication requirements for the convenience of hobbyists.
++ Minimize length to keep the overall reduction stage compact.
++ Be resilient to moisture for outdoor operation.
 
-For this material to be considered valid for this operation, we need to verify
-$
-  S_e >= frac(32 M_max n_d, pi d^3)
-$
+Bushings were selected instead of bearings due to the small loads involved, which reduces cost and minimizes space requirements. Dry bushings eliminate lubrication requirements and reduce maintenance, improving reliability and ease of construction for hobbyists.
+The low forces in this system allow the use of inexpensive bushings without compromising performance. The dominant selection criterion was tolerance.
 
-We use shear and bending moment diagrams in X and Z to find the maximum bending moment along the shaft.
-#figure(
-  grid(
-    columns: 2,
-    gutter: 1mm,
-    image("bram-images-420340594432/shearx.png", width: 100%),
-    image("bram-images-420340594432/shearz.png", width: 100%),
-    image("bram-images-420340594432/bendx.png", width: 100%),
-    image("bram-images-420340594432/bendz.png", width: 100%),
-  )
+===== Tolerances
+
+A key requirement for the StarTracker is high accuracy with minimal speed variation. Bushing selection plays a role in achieving this. The primary contributors to speed variation are:
+
+- _Eccentricity:_ radial play between the shafts and bushings can lead to wobble in the reduction system.  
+- _Friction (stick–slip):_ high friction can produce stick–slip motion, generating speed fluctuations.  
+- _Elastic deformation:_ loading of the bushing can compress it, introducing additional eccentricity.
+
+*Assumptions*
+
++ The shaft rolls without slipping.  
++ Shaft deflection at the bushing is negligible compared to bushing deformation.  
++ Eccentricities are small enough that the small-angle approximation applies.
+
+The contributors to variance were approximated as coming from manufacturing tolerance, maximum permissible wear, and potential deformation of the bushing and shaft. Since the bushing is much more ductile than the shaft, its deformation dominates.
+
+*Tolerance Calculation Overview*
+
+The goal of this calculation is to determine the maximum amplitude of variation in speed caused by eccentricity. Calculations focus on the first stage of reduction, where speed is highest.
+The overall eccentricity was approximated as the root-mean-square (RMS) of all considered contributions:
+#show table.cell.where(y: 0): strong
+
+#set table(
+  stroke: (x, y) => if y == 0 { (bottom: 0.7pt + black) },
+  align: (x, y) => if x == 0 { left } else { center }
 )
-#image("bram-images-420340594432/shaft_calcs_shear.png")
-#image("bram-images-420340594432/bend_calcs.png")
+#set align(center)
+#table(
+  columns: 2,
+  table.header(
+    [Symbol],
+    [Description]
+  ),
+  [R], [Input pulley radius (inches)],
+  [$Omega$], [Shaft angular speed (rad/s)],
+  [e], [Eccentricity of the bushing (inches)]
+)
+#set align(left)
 
-We see that the bending moment maximum is 
+$ Delta omega_("max") approx 0.00230"rad"/"s" $
+
+This represents $37%_("RMS")$ of the desired speed, which is below the acceptable limit of 50% based on the tracking tolerance of the optical system. Therefore, the design is deemed satisfactory. In-depth calculations can be found in the Appendix.
+
+===== Final Bushing Selection
+
+To support the axial load of the worm gear, a flanged bushing was selected. The low speed of the shafts allows the shaft shoulders to transfer axial load directly into the bushing flange with minimal wear. PEEK was chosen for its low friction, minimal wear, and resilience to moisture, making it suitable for outdoor operation.
+The final bushing selected is a 3/8:" shaft diameter, 1/4" long, 11/16" flange OD moisture-resistant, dry-running flanged sleeve bearing from McMaster-Carr.
+For design consistency, all bushings are standardized throughout the system. With a unit cost of \$6.42, the total cost for bushings in the design is \$25.68.
+
+
+== Bearing Selection and Design Rationale
+
+=== Overview
+To support the shaft on which the worm gear and camera are mounted, we will use an angular contact ball bearing and a deep groove ball bearing. 
+
+==== Key Selection Requirements
+- The bearings must be able to withstand the shaft thrust
+- Minimize cost so project remains accessible to hobbyists
+
+Bearings were selected for this shaft to ensure a smooth, frictionless rotation of the camera shaft to help with clear imaging. 
+While bushings could work for this application due to the low rpm, minimal friction and smooth rotation are worth this increased
+cost. 
+
+To support the axial thrust from the camera's weight down on the shaft, we used a combination of an angular contact bearing at the 
+end near the camera, and a stabilizing deep grove bearing opposite the camera to maintain axial alignment. Bearing calculations
+allowed us to determine that *R10ZZ 5/8" Deep Groove Ball Bearing* and *3201-2RS Angular Contact Bearing* are ideal for this
+application. Both of these bearings can be purchased for arund \$14 each on BearingsCanada.com and Temu.com, respectively.
+
+= RESULTS & FINAL DEssSIGN
+
+= CONLUSIONS & RECOMENDATIONS
+
+= APPENDIX A
+
+=== Bushing Calculations
+
+===== Geometery Calculations
+From the shaft diameter, choose D = 3/16 in  
+To minimize the footprint, select a minimal length L = 1/4 in  
+This satisfies
+
 $
-M_max = 950.18 text("N")text("mm") = 8.409 text("lbf") thin text("in")
+0.5 <= L / D <= 2.0
 $
 
-Our shaft diameter was decided to be $frac(5,8)$\", so with a design factor of $n_d = 2.5$, we calculate
+
+This bearing application requires high precision, with low lubrication, but remains under constant load. Since the application is non-critical, a safety factor of 2 will be used:
 
 $
-S_e >= frac(32 M_max n_d, pi d^3) = 872.9 text("psi") \
-8.12 text("ksi") >= 872.9 text("psi")
+n_d = 2.0
 $
 
-so we can be sure that the aluminum material is strong enough to resist the stress. We now calculate
-the minimum diameter required for this section of the shaft to ensure it is smaller than our design
-shaft diameter. We use the following equation:
+
+Validate length under thermal conditions.
+
+*Assumptions*:  
+
+The StarTracker will only be operated at night and is primarily targeted to hobbyists in North America.  
+$T_("inf") = 77$ F - Typical summer nighttime temperature near the 49th parallel.  
+For nylon on steel, $f_s = 0.3$
 
 $
-D = [frac(32 N, pi) sqrt([frac(k_t M, s'_n)]^2+frac(3,4)[frac(T,s_y)]^2) thin]^frac(1,3)
+L >= (720  f_s  n_d  F  N) / (J h_("CR")  (T_f - T_("inf"))) $
+$
+L >= (720  0.3 * 1.0 * 11.6 * 0.000694) / (778 * 2.7 * (300 - 77)) $
+$ L >= 4.95"e"-6 "in" $
+
+
+This is sufficiently smaller than the chosen L = 1/4 in
+
+===== Force and Velocity Calculations
+At the point experiencing the greatest load (next to the worm gear):
+
+$
+P_("max") = (4 / pi)  (F  n_d) / (D  L) = ((4 / pi)  11.6) / ((3/16)(1/4)) = 388.71 "psi" < 4,500 "psi"
 $
 
-All of these parameters were either previously derived or from the diagrams:
-
 $
-s'_n = 872.9 text("psi") wide T = 5.886 text("Nm") = 52.1 text("lbf in") \
-N = 2.5 wide s_y = 14 text("ksi") wide k_t = 3
+V = (pi  D  N  n_d) / 12 = 6.81"e"-5 "fpm" < 400 "fpm"
 $
 
-Plugging in these values yields...
 $
-D = 0.42 text("in") < 0.625 text("in")
+P V = 0.00520 "psi-fpm" < 25,000 "psi-fpm"
 $
-so our shaft is fit for our needs!
+
+The bushing selected comforatbly meets the requirements for presure and velocity.
+
+===== Tolerance Calculations
 
 
+*Assumptions*
 
-== Shaft 3 Bearing Calculations
-== Belt and Pulley Calculations
-A typical stepper motor can outpout around $3000 "rpm"$ and $1.2 "N" dot "m"$ of torque. \
-We desire an output speed of around $0.05886 "rpm"$ at $0.0694 "N" dot "m"$ of torque. \
-Our system will use this power but we design for the stepper maximum. \
-\
-From table *ENTER TABLE* we select a 2GMT belt. \
-We can assume that the belt is going to run at less than $10 "rpm"$ so from table *ENTER TABLE* 
-we select a $6 "mm"$ wide belt and the smaller sprocket size of $18$ grooves which is rated for 
-$1.35 "N" dot "m"$ of torque at this speed. \
-\
-We want the stepper to spin at around $1.1" rpm"$ so then $V R = 14.4$ and to 
-reduce complexity we use the same pair of sprockets twice. \
-Since a stepper motor can run at variable speed we will say that each belt will 
-need a reduction of $1:4$. \ 
-So we select the larger sprocket size to be $72$ groove. The pitch diameters 
-are found from *ENTER TABLE* to be:
-$ p d = 0.301 "in" quad P D = 1.805 "in" $
-\
-We want the center distance to be small so temporarily select $C D=1.9 "in"$ since
-we want to minimize size.\
-$ P L = 2 dot C D + [1.57 dot (p d + P D)] + frac((P D - p d)^2, 4 C D) = 1.984 "in" $
-\
-So using *ENTER TABLE* we select a 2MR-192 belt with a pitch length $P L = 7.559$
-which is a stock length. \
-$ K = 4 P L - 6.28 dot (P D + p d) $
-$ C D = frac(K + sqrt(K^2 - 32(P D - p d)^2), 17 ) = 1.984 "in" $
-Giving our center distance.\
-Our nominal safety factor is given by $S F = frac(1.35, 0.05886)=23$.\
-Our worst case safety factor, which shouldn't occur is $S F = frac(1.35, 1.2)=1.125$.\
-Now we calculate the wrap angles to be: \
-$phi_(D) = pi - arcsin frac(P D - p d, 2C D) = 2.364 "rad" quad "and" quad phi_(D) 
-= pi + arcsin frac(P D - p d, 2C D) = 3.92 "rad"$
+ 1. The primary assumption for calculations done to specify the tolerances on the bushings that the primary effect of bushing wear and ill-tolerancing impact the eccentricity of the 
+  shaft rotating inside of the bushing. Due to small loads and low friction effects like
+  stick-slip and major shaft misalignment and deflections can be ignored. 
+2. The next assumption is that eccentricity comes from three primary sources:
+    - Bushing tolerances: Assume worst case senario as eccentric as possible
+    - Wear: Eccentricity caused by runout
+    - Compression: Eccentricity caused by compression of the bushing
+
+To calculate the maximum possible eccentricity, find the sum of all of the maximum possible
+displacements. Displacements come from the material properties of the bushing, the manufactuer specified tolerance
+on the inner diameter (contacting the shaft) and the lifetime of the bushings.
+
+$ delta_("tolerance") = 0.001 "in" $
+$ delta_("wear") = 0.0001 "in" $
+$ delta_("deformation") = sigma / E = 328 "psi" / 435000 "psi" = 0.00075 "in" $
+
+#figure(
+  image("sam_images/eccentricity.jpg", width: 70%),
+  caption: [ Demonstration of how displacement is being converted to eccentricity
+  ],
+)
+
+Now calculating the eccentricity where $d$ is the diameter of the shaft.
+
+$ e = sqrt(1 - (d/ (d + delta_("tolerance") + delta_("wear") + delta_("deformation") ))^2) $
+$ e = 0.0989 $
+
+Then to find the variation in speed, since eccentricity is small, a small angle approximation
+can be used. Then using the output speed of the reduction system, the variation of the speed 
+can be found.
+$ Delta omega approx e / R omega_0 = 0.0989 /((1/2)(3/8)) (0.000694 "rpm") 2 pi $
+
+Then comparing the $Delta omega$ to the operating $omega$ 
+
+$ (Delta omega) / omega = 0.5278 $
+ Which gives an RMS within $50%$ of $omega$
+
+$ ((Delta omega) / omega)_("RMS") = 37.7% $
+
+Which is within spec for this application
+
 
 = APPENDIX B
 
