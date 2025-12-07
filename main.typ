@@ -46,6 +46,8 @@ This is larger than most standard consumer-available stepper motors on the marke
 
 == Shaft Design 
 
+
+
 == Bushing Selection and Design Rationale
 
 === Overview
@@ -60,14 +62,33 @@ Bushings were selected instead of bearings because of the small loads required, 
 dry bushings were selected to minimize maintenance on the StarTracker and eliminating lubrication requirements
 to make construction convienient for hobbiysts.
 
-To support the axial load of the worm gear, so a flanged bushing is used. The low speed of the shafts allow the 
+To support the axial load of the worm gear, a flanged bushing is used. The low speed of the shafts allow the 
 shoulder of the shafts to directly transfer axial load into the bushing flange with minimal wear. Nylon is perfect for this
 because of its low friction and minimal wearing properties.
 
 Price was also another important consideration, which the Nylon bushings meet, with a unit price of \$4.59.
 
-In total this is why Dry-Running Nylon Sleeve bushings were selected.+
+In total this is why Dry-Running Nylon Sleeve bushings were selected.
 
+== Bearing Selection and Design Rationale
+
+=== Overview
+To support the shaft on which the worm gear and camera are mounted, we will use an angular contact ball bearing and a deep groove ball bearing. 
+
+==== Key Selection Requirements
+- The bearings must be able to withstand the shaft thrust
+- Minimize cost so project remains accessible to hobbyists
+
+Bearings were selected for this shaft to ensure a smooth, frictionless rotation of the camera shaft to help with clear imaging. 
+While bushings could work for this application due to the low rpm, minimal friction and smooth rotation are worth this increased
+cost. 
+
+To support the axial thrust from the camera's weight down on the shaft, we used a combination of an angular contact bearing at the 
+end opposite of the camera, and a stabilizing deep grove bearing near the camera to maintain axial alignment. Bearing calculations
+allowed us to determine that *R10ZZ 5/8" Deep Groove Ball Bearing* and *3201-2RS Angular Contact Bearing* are ideal for this
+application. Both of these bearings can be purchased for arund \$14 each on BearingsCanada.com and Temu.com, respectively.
+
+=== Overview 
 = RESULTS & FINAL DESIGN
 
 = CONLUSIONS & RECOMENDATIONS
