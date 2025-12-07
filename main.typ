@@ -644,7 +644,7 @@ Using the known forces, we get following forces on A and D:
         columns: 4,
         stroke: 1pt + black,
         inset: 4pt,
-          [], [$"M"_("horizontal") "(lbf)"$], [$"M"_("vertical") "(lbf)"$], [$"M"_("total") "(lbf)"$],
+          [], [$"M"_("horizontal") "(lbf·in)"$], [$"M"_("vertical") "(lbf·in)"$], [$"M"_("total") "(lbf·in)"$],
           [A],[0.00],[0.00],[0.00],
           [B],[-3.01],[11.7],[12.1],
           [C],[-1.23],[0.406],[1.30],
@@ -697,7 +697,7 @@ table(
   columns: 3,
   stroke: 1pt + black,
   inset: 4pt,
-    [], [$"M"_("total") "(lbf)"$], [$"T (lbf·in)"$],
+    [], [$"M"_("total") "(lbf·in)"$], [$"T (lbf·in)"$],
     [A], [0.00],  [0.00],
     [B], [12.1],  [0.521],
     [C], [1.30],  [-0.521],
@@ -759,10 +759,10 @@ Using eqn (6.4.25), (6.4.26) and table 2,3, we calculate the minimum shaft diame
       stroke: 1pt + black,
       inset: 4pt,
         [], [$D_min "(in)"$],[$D_(min "shear") "(in)"$],[$D_"Allowable" "(in)"$],
-        [$D_A$], [0.00],[0.130],[-],
+        [$D_A$], [0.00],[0.130],[0.186],
         [$D_B$], [0.362],[0.0345],[0.75],
         [$D_C$], [0.172],[0.0370],[0.25],
-        [$D_D$], [0.00],[0.00], [-]
+        [$D_D$], [0.00],[0.00], [0.186]
     ),
     caption: [Minimum and Allowable Shaft Diameters],
   )
