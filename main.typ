@@ -157,7 +157,7 @@ Calculations for the following results can be found in #link(<Other_worm>)[appen
 
 == Shaft Design
 
-=== Shaft 1 Selection
+=== Shaft 1 Overview
 
 Shaft 1 is part of an intermediate stage in the speed reducer system. Two pulleys are mounted on it, and it is secured with bushings on either end. The shaft is subject to forces from the two pulleys and two bushings. There are no axial forces.
 
@@ -195,7 +195,7 @@ Shaft 1 is part of an intermediate stage in the speed reducer system. Two pulley
   )
 ]
 
-=== 2nd Shaft Overview
+=== Shaft 2 Overview
 The 2nd shaft transmits torque from the worm gear to the pulley which drives the timing belt. The shaft is supported by two bushings on either end. The shaft is subjected to forces from the worm gear and pulley as well as reaction forces from the bushings.
 \
 ==== 2nd Shaft Key Specifications:
