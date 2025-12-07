@@ -1210,6 +1210,6 @@ $ (1/2)*T_("max,lg") = 2718.5 N*"mm" > 58.86 N*"mm" $
   caption: [Pulley Information],
 ) <pulley_inf>
 #figure(
-  image("yuvy_images/Gates_manual_belts.png", width: 100%),
+  image("yuvy_images/Gates_Manual_belts.png", width: 100%),
   caption: [Belt Selection],
 ) <belt_selection>
