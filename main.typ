@@ -27,24 +27,60 @@
 
 = INTRODUCTION
 
+#figure(
+  image("images/Galaxy.jpg", width: 100%),
+  caption: [Equatorial Mount Explained cont.],
+)
+
+
 The fundemental challenge of astrophotography is the amount of light gathered by a camera. While most cameras have no problem capturing photos in bright daylight, deep space objects and stars tend to be very dim. The amount of light gathered by a lens or telescope depends on a few factors, one of which is  its cross-sectional area (or _aperture_). To capture increasingly darker objects, it quickly becomes impractical to increase the diameter of the lens. A much more appropriate solution is to gather light for over a longer period of time at the camera, but this introduces its own issues.
 
 The main issue is that if a camera is held pointing at a particular area of the sky, over a significant period of time (as little as 2-4 seconds on a regular 50mm lens & camera), the earth will have rotated slightly, and the camera will be pointing in a marginally different direction. The net result of this is called _star streaking_ where instead of appearing as points, stars appear as _lines or arcs_ around the north star.
 
-IMAGE HERE 
+#figure(
+  image("images/Untracked.jpg", width: 50%),
+  caption: [Untracker Long Exposure],
+)
 
 An _Equatorial Mount_ is a mechanical device intended to solve this issue. It was first invented in 1842, and its design has largely remained unchanged since. The idea is to mount your camera and have it rotate around one axis. This axis is the polar axis, and it points at the north star (polaris), which does not move in the sky from the perspective of an observer on Earth.
 
-IMAGE HERE
+#figure(
+  image("images/Explainer 1.jpg", width: 70%),
+  caption: [Equatorial Mount Explained],
+)
+
+#figure(
+  image("images/Explainer 2.png", width: 50%),
+  caption: [Equatorial Mount Explained cont.],
+)
+
+As a way to ensure that a small mishap does not cause an entire night's worth of exposure to be erased, astrophotograpers commonly take 10-30 second exposures, and later "stack" them in software. This also helps average out noise that is common in dark photos. After several hours of smaller exposures are stacked in software, you can expect an image to look like this.
+
+#figure(
+  image("images/Tracked.jpeg", width: 70%),
+  caption: [Equatorial Mount Explained cont.],
+)
+
 
 == 3D Printing
 The advent of affordable 3D printing technology has fundamentally transformed the landscape of all hobbyist and amateur technical pursuits. Hobbies, such as astrophotography, which previouly required boutique and expensive products are now being approached from a new  perspective. Desktop 3D printers, which have dropped in price from tens of thousands to just a few hundred dollars over the past decade, have democratized the ability to rapidly prototype and fabricate custom tools. This accessibility has enabled hobbyists to tackle increasingly sophisticated projects that would have been impractical or impossible just years ago. The maker community has flourished as enthusiasts share designs, collaborate on complex builds, and push the boundaries of what can be achieved outside traditional manufacturing settings. 
 
-IMAGE HERE
-
 Astrophotography is one such older hobby with already established industry that serves it. All forms of telescopes, filters, cameras, mounts, controllers, and respective accessories already exist on the market, but due to the small volume of products these companies sell, design and manufacturing remains very expensive and outside of the range of many hobbiysts. In particular, equatorial mounts from astrophotography hobbyist stores can cost anywhere between \$1000 and \$10,000 CAD. 
 
+#figure(
+  image("images/Market.png", width: 70%),
+  caption: [Equatorial Mount Explained cont.],
+)
+
 = PURPOSE
+
+The purpose of this project is to create an equatorial mount for student and hobbyist astrophotographers. Our ideal client is only a beginner astrophotograper, with access to a machine shop and 3D printer, very basic turning skills,  and some patience in wanting to learn how to put together the equatorial mount. Our specific design is intended to be used near the 49th latitude line, but this is easily modified due to the 3D printed nature of the design. If the hobbysit is travelling 
+
+The requirements for the equatorial mount itself are 
+focal length 50mm 
+max smear of 20 pixels
+under \$500
+parts available to consumers
 
 = DETAILED ANALYSIS
 
@@ -779,6 +815,7 @@ so our shaft is fit for our needs!
 
 == Shaft 3 Calculations
 
+=== Force and Material Analysis
 #align(center,image("bram-images-420340594432/shaft_anal.png", width: 70%))
 _Note: the angle of 49\u{00B0} is dependent on the location of the star tracker. In Vancouver, the latitude angle
 is 49\u{00B0} so that's what we use._
@@ -877,10 +914,9 @@ D = 0.42 text("in") < 0.625 text("in")
 $
 so our shaft is fit for our needs!
 
-== Shaft 3 Bearing Calculations
+=== Shaft 3 Bearing Calculations
 
-We plan to use an angular contact ball bearing at C and a deep groove ball bearing at A. These locations are referenced in the figures
-for Shaft 3 Calculations. 
+We plan to use an angular contact ball bearing at C and a deep groove ball bearing at A. These locations are referenced in the figures for Shaft 3 Calculations. Our calculations are for 02-Series Deep-Groove and Angular-Contact ball bearings. 
 
 == Aluminum Material Properties
 
@@ -921,11 +957,76 @@ $
 We can now calculate our working value for $C_10$ with the following equation:
 
 $
-C_10 = 
+C_10 = a_f F_e [frac(x_D,x_0+(theta-chi_0)[ln(frac(1,R_D))]^frac(1,b))]^frac(1,a)
 $
 
-=== Deep Groove Ball Bearing at A 
+We use the following parameters:
+$
+  &a_f = 1 && text("from application factor") \
+  &x_0 = 0.02 && text("SKF Weibull Parameters") \
+  &theta = 4.459 && text("SKF Weibull Parameters") \
+  &b = 1.483 && text("SKF Weibull Parameters") \
+  &R_D = 0.9 && text("90% reliability") \
+  &a = 3 && text("for ball bearings") \
+$
 
+for $x_0$, we do the following calculations
+$
+  &L_10 = 10^6 \
+  &L_D = 500 "hours" \
+  &x_D = frac(60 L_D n, L_10) = 2*10^(-5)
+$
+Plugging these values in yields...
+
+$
+  C_10 = 1.39 text("kN") <= 8.87 text("kN")
+$
+
+so this bearing is suited for this task! Because we're using inches and SKF does not offer the exact 0.625 inch bearing bore, we use the *#201-2RS Angular Contact Bearing* because it has similar characteristics and can be purchase off Temu.com for relatively cheap.
+
+==== Deep Groove Ball Bearing at A 
+
+For the bearing at A, we have the following forces:
+
+$
+  A_x = -9.87 "N" wide A_z = -7.99 "N"
+$
+
+which results in an overall radial force of
+
+$
+  F_R = sqrt(A_x^2+A_z^2) = 12.7 "N"
+$
+
+$x_D$, $x_0$, $theta$, $b$, $R_D$ are the same as for the angular contact bearing, so we simply recalculate $C_10$:
+
+$
+  C_10 = 0.393 < 8.87 
+$
+
+so we can use the 0.625 inch 02-Series Deep-Groove bearing. Since this 02-Series is not available for inch-based shaft diameters, we opt for the over-specced *R10ZZ $frac(5,8)\" "Deep Groove Ball Bearing"$* available on BearingsCanada.com.
+
+=== Keyway Calculations for Worm Gear
+
+To allow for torque transmission from the worm gear to the camera shaft, we need a keyway. For this low-torque application, a square aluminum key is cheap, easy to manufacture, and effective. We will use Aluminum 6061 for this key, which has the following properties.
+
+$
+  s_u = 18 "ksi" wide s_y = 12 "ksi"
+$
+
+For a shaft diameter of 0.75 in at the worm gear, the recommended key width is 0.1875 in from Table 11-1. We use a standard safety factor N = 3. So, our key parameters are
+$
+  T = 5.886 "Nm" = 52.1 "lbf in" wide D = 0.75 wide N = 3 wide W = 0.1875
+$
+
+Since Aluminum 6061 is much weaker than Aluminum 2014-O, we can simply use the following equation:
+$
+  L_min = frac(4 T N, D W s_y) = 0.37 "in"
+$
+
+This is much smaller than usual key sizes, which are recommended to be between 1-1.5 inches. As such, we decide that the square Aluminum 6061 key be 1 inch long. 
+
+This is very short for a key, so we go up to a minimum key length 
 == Belt and Pulley Calculations <bnpcalc>
 A typical stepper motor can outpout around $3000 "rpm"$ and $1.2 "N" dot "m"$ of torque. \
 We desire an output speed of around $0.05886 "rpm"$ at $0.0694 "N" dot "m"$ of torque. \
@@ -1023,7 +1124,7 @@ This gives us $S_n' = 10.608 "ksi"$
 
 We then plug in the equation for minimum diameter based on bending and torque.
 
-$ D = ((32N)/pi sqrt(((K_t M)/(s'_n))^2 + (3/4) (T/s_y)^2))^(1/3) $ 
+$ D = ((32N)/pi sqrt(((K_t M)/(s_n'))^2 + (3/4) (T/s_y)^2))^(1/3) $ 
 
 and minimum diameter based on shear 
 
