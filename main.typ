@@ -668,7 +668,105 @@ D = 0.42 text("in") < 0.625 text("in")
 $
 so our shaft is fit for our needs!
 
+== Shaft 3 Calculations
 
+#align(center,image("bram-images-420340594432/shaft_anal.png", width: 70%))
+_Note: the angle of 49\u{00B0} is dependent on the location of the star tracker. In Vancouver, the latitude angle
+is 49\u{00B0} so that's what we use._
+#align(center,image("bram-images-420340594432/shaft_outline.png"))
+$
+Sigma F_z= A_z+B_z+C_z -F sin(phi)= 0 \
+Sigma F_y= A_y+B_y+C_y - F cos(phi) =0 \
+Sigma F_x= A_x+B_x+C_x = 0 \
+Sigma M_(A,text("vertical")) = B_z (17.397)+C_z (54.5)-F sin(phi)(86.624) = 0 \
+Sigma M_(A,text("horizontal")) = B_x (17.397)+C_x (54.5) = 0
+$
+_Distances for moment calculations are in mm._
+
+From worm gear calculations, we know:
+$
+B_x, B_y, B_z
+  &=-3.28 text("lbf"), 3.019 text("lbf"), -1.61 text("lbf") \
+  &=-14.5 text("N"), 13.42 text("N"), -7.16 text("N")
+$
+  Using these values, we get reaction forces of:
+
+$
+A_x = -9.87 text("N") wide A_z = -7.99 text("N") \
+C_x = -4.63 text("N") wide C_y = 25.72 text("N") wide C_z = 44.7 text("N") 
+$
+
+We now verify that Aluminum 2014-O is suitable for this application.
+
+Aluminum 2014-O has the following characteristics:
+$
+S_u = 27 wide S_y = 14 wide V_text("str") = 18 wide S_n' = 13
+$
+To find all the parameters, we consulted the following tables and got these results:
+$
+  &k_a = 0.8 && text("from Table x.x") \ 
+  &k_b = 0.924 && text("from equation") 0.879 d^(-0.107) \ 
+  &k_c = 1 && text("from Table x.x, bending") \
+  &k_d = 1 && text("from Table x.x") \ 
+  &k_e = 0.814 && text("for 99% reliability") \ 
+  &k_f = 1 && text("No misc. factors") \
+  &S_e' = 13.5 text("ksi") && text("from Eqn x.x") \
+$
+$
+  S_e = k_a k_b k_c k_d k_e k_f S_e' = 8.12 text("ksi")
+$
+
+For this material to be considered valid for this operation, we need to verify
+$
+  S_e >= frac(32 M_max n_d, pi d^3)
+$
+
+We use shear and bending moment diagrams in X and Z to find the maximum bending moment along the shaft.
+#figure(
+  grid(
+    columns: 2,
+    gutter: 1mm,
+    image("bram-images-420340594432/shearx.png", width: 100%),
+    image("bram-images-420340594432/shearz.png", width: 100%),
+    image("bram-images-420340594432/bendx.png", width: 100%),
+    image("bram-images-420340594432/bendz.png", width: 100%),
+  )
+)
+#image("bram-images-420340594432/shaft_calcs_shear.png")
+#image("bram-images-420340594432/bend_calcs.png")
+
+We see that the bending moment maximum is 
+$
+M_max = 950.18 text("N")text("mm") = 8.409 text("lbf") thin text("in")
+$
+
+Our shaft diameter was decided to be $frac(5,8)$\", so with a design factor of $n_d = 2.5$, we calculate
+
+$
+S_e >= frac(32 M_max n_d, pi d^3) = 872.9 text("psi") \
+8.12 text("ksi") >= 872.9 text("psi")
+$
+
+so we can be sure that the aluminum material is strong enough to resist the stress. We now calculate
+the minimum diameter required for this section of the shaft to ensure it is smaller than our design
+shaft diameter. We use the following equation:
+
+$
+D = [frac(32 N, pi) sqrt([frac(k_t M, s'_n)]^2+frac(3,4)[frac(T,s_y)]^2) thin]^frac(1,3)
+$
+
+All of these parameters were either previously derived or from the diagrams:
+
+$
+s'_n = 872.9 text("psi") wide T = 5.886 text("Nm") = 52.1 text("lbf in") \
+N = 2.5 wide s_y = 14 text("ksi") wide k_t = 3
+$
+
+Plugging in these values yields...
+$
+D = 0.42 text("in") < 0.625 text("in")
+$
+so our shaft is fit for our needs!
 
 == Shaft 3 Bearing Calculations
 
