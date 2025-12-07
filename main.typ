@@ -516,7 +516,7 @@ This represents $37%_("RMS")$ of the desired speed, which is below the acceptabl
 
 To support the axial load of the worm gear, a flanged bushing was selected. The low speed of the shafts allows the shaft shoulders to transfer axial load directly into the bushing flange with minimal wear. PEEK was chosen for its low friction, minimal wear, and resilience to moisture, making it suitable for outdoor operation.
 The final bushing selected is a 3/8:" shaft diameter, 1/4" long, 11/16" flange OD moisture-resistant, dry-running flanged sleeve bearing from McMaster-Carr.
-For design consistency, all bushings are standardized throughout the system. With a unit cost of \$6.42, the total cost for bushings in the design is \$25.68.
+For design consistency, all bushings are standardized throughout the system. With a unit cost of \$14.84, the total cost for bushings in the design is \$59.36.
 
 
 == Bearing Selection and Design Rationale
@@ -568,7 +568,7 @@ Validate length under thermal conditions.
 
 The StarTracker will only be operated at night and is primarily targeted to hobbyists in North America.  
 $T_("inf") = 77$ F - Typical summer nighttime temperature near the 49th parallel.  
-For nylon on steel, $f_s = 0.3$
+For nylon on steel, $f_s = 0.3$. Using Shigley Eqn. 12-49.
 
 $
 L >= (720  f_s  n_d  F  N) / (J h_("CR")  (T_f - T_("inf"))) $
@@ -580,6 +580,9 @@ $ L >= 4.95"e"-6 "in" $
 This is sufficiently smaller than the chosen L = 1/4 in
 
 ===== Force and Velocity Calculations
+
+Using the Shigley method of calculating bushing pressure and velocity. Using equations
+12-40, 12-41, 12-42.
 At the point experiencing the greatest load (next to the worm gear):
 
 $
