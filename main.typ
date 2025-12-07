@@ -20,6 +20,23 @@
 
 = INTRODUCTION
 
+The fundemental challenge of astrophotography is the amount of light gathered by a camera. While most cameras have no problem capturing photos in bright daylight, deep space objects and stars tend to be very dim. The amount of light gathered by a lens or telescope depends on a few factors, one of which is  its cross-sectional area (or _aperture_). To capture increasingly darker objects, it quickly becomes impractical to increase the diameter of the lens. A much more appropriate solution is to gather light for over a longer period of time at the camera, but this introduces its own issues.
+
+The main issue is that if a camera is held pointing at a particular area of the sky, over a significant period of time (as little as 2-4 seconds on a regular 50mm lens & camera), the earth will have rotated slightly, and the camera will be pointing in a marginally different direction. The net result of this is called _star streaking_ where instead of appearing as points, stars appear as _lines or arcs_ around the north star.
+
+IMAGE HERE 
+
+An _Equatorial Mount_ is a mechanical device intended to solve this issue. It was first invented in 1842, and its design has largely remained unchanged since. The idea is to mount your camera and have it rotate around one axis. This axis is the polar axis, and it points at the north star (polaris), which does not move in the sky from the perspective of an observer on Earth.
+
+IMAGE HERE
+
+== 3D Printing
+The advent of affordable 3D printing technology has fundamentally transformed the landscape of all hobbyist and amateur technical pursuits. Hobbies, such as astrophotography, which previouly required boutique and expensive products are now being approached from a new  perspective. Desktop 3D printers, which have dropped in price from tens of thousands to just a few hundred dollars over the past decade, have democratized the ability to rapidly prototype and fabricate custom tools. This accessibility has enabled hobbyists to tackle increasingly sophisticated projects that would have been impractical or impossible just years ago. The maker community has flourished as enthusiasts share designs, collaborate on complex builds, and push the boundaries of what can be achieved outside traditional manufacturing settings. 
+
+IMAGE HERE
+
+Astrophotography is one such older hobby with already established industry that serves it. All forms of telescopes, filters, cameras, mounts, controllers, and respective accessories already exist on the market, but due to the small volume of products these companies sell, design and manufacturing remains very expensive and outside of the range of many hobbiysts. In particular, equatorial mounts from astrophotography hobbyist stores can cost anywhere between \$1000 and \$10,000 CAD. 
+
 = PURPOSE
 
 = DETAILED ANALYSIS
