@@ -15,7 +15,6 @@
 )
 
 
-
 = Appendix A: 
 == Shaft 1 Force Calculations
 
@@ -128,5 +127,4 @@ After applying a design factor of 2, as Shigley recommends for static loads, we 
 
 $ (1/2)*T_("max,sm") = 1130 N*"mm" > 14.7 N*"mm" $
 
-$ (1/2)*T_("max,lg") = 2718.5 N*"mm" > 58.86 N*"mm"$
-
+$ (1/2)*T_("max,lg") = 2718.5 N*"mm" > 58.86 N*"mm" $
