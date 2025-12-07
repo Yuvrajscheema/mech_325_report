@@ -186,7 +186,19 @@ $
   // Add a label fo r referencing (use a name enclosed in angle brackets)
 ) <fig:2nd_shaft_itself>
 
+=== Shaft 3 Overview
+#figure(
+  image("bram-images-420340594432/naked_shaft.png", width: 70%),
+  caption: [Shaft 3],
+)
 
+#figure(
+  image("bram-images-420340594432/shaft3.png", width: 70%),
+  caption: [Shaft 3 in CAD assembly],
+)
+
+Shaft 3 transfers torque from the worm gear to actually rotating the camera to track stars! It is subjected to radial and axial forces and thus features
+an angular contact bearing as well as a deep groove bearing. It is machined out Aluminum 2014-O, same as the other two shafts.
 == Bushing Selection and Design Rationale
 
 === Overview
