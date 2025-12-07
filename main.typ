@@ -385,9 +385,25 @@ end near the camera, and a stabilizing deep grove bearing opposite the camera to
 allowed us to determine that *R10ZZ 5/8" Deep Groove Ball Bearing* and *3201-2RS Angular Contact Bearing* are ideal for this
 application. Both of these bearings can be purchased for arund \$14 each on BearingsCanada.com and Temu.com, respectively.
 
-= RESULTS & FINAL DEssSIGN
+= RESULTS & FINAL DESIGN
 
 = CONLUSIONS & RECOMENDATIONS
+The mechanical design developed for our star-tracking system successfully meets the performance requirements established earlier on in 
+the project. Through iterative concept development, load analysis, bearing and shaft sizing, and gear-train refinement, we verified 
+that the structure can reliably support a typical hobbyist camera load while maintaining the extremely small angular tracking tolerance necessary for 
+long-exposure astrophotography. The combination of a multi-stage reduction system, wormgear, belt and pulley, custom shaft designs, and precise alignment 
+features ensures smooth, controlled rotation, while the use of accessible, low-cost components keeps the system obtainable for our intended hobbyist demographic.
+
+Our analyses confirm that deflections in the primary support structure remain within acceptable limits, stresses in the shafts and 
+fasteners stay well below material yield strengths, and the worm-drive and belt-reduction stages deliver the required motion uniformity. 
+These results demonstrate that the design is both mechanically feasible and robust under real operating conditions, including operation in 
+outdoor environmental conditions. The systems calculated safety factor also verifies that the design is safe under operating conditions for users.
+
+Overall, the completed analyses give confidence that the system can perform with the consistency and precision demanded by astrophotography, 
+while still achieving the project’s central goals of affordability, accessibility, and reliability. If the project were to continue moving forward, 
+the next stages will focus on prototype fabrication, tolerance control, system integration with the electronics and control 
+subsystem, and validation through experimental testing under realistic outdoor conditions.
+
 
 = APPENDIX A
 
