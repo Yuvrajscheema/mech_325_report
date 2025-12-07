@@ -33,6 +33,8 @@ A worm and worm gear set from rushgears.com, and American manufacturing company 
 
 Due to the low power and speed conditions under which this worm drive will run, consideration of the material in terms of maximum strength is not as critical as the precision of the drive. While theoretically any material can be used as the worm and worm gear material, commercially, it is easiest to find bronze or cast iron gears. For this project, we selected bronze as opposed to cast iron for its precise machinability. For the final product, whatever is a good tradeoff between wear, precision, and cost would be selected. 
 
+In most other precision applications, the use of a worm gear may not be ideal due to the fundemental nature of gear backlash, but thankfully, this is not a concern here. Over the course of an exposure (and over the course of the night), the base only ever rotates in one direction. Thus, as far as precision is concened, all we can really do quantatively for this section with the tools learned in MECH 235 is analyze the forces and confirm that they are acceptable for the given material. 
+
 Given the  $5.886 N dot m m$ output torque, we can analyze the forces of the worm and gear as follows.
 
 === Given
@@ -70,6 +72,35 @@ The coefficient of friction is calculated using $ 0.124 e^(-0.74 v_s^0.645)$ (10
 - $W_f = 7.104 "N"$ (friction force, parallel to tooth face)
 
 - Resultant contact force: $W_c = sqrt(54.701^2 + 11.698^2 + 3.068^2) = 55.951 "N"$
+
+As we can see, these forces are extremely small. 
+
+=== Given additional parameters
+
+- Face width: $F = 0.5 "in" = 0.0127 "m"$
+- Gear speed: $n_G = 0.000694 "rpm"$
+- Diametral pitch: $P_d = 12 "teeth/in"$
+- Lewis form factor (for $phi_n = 14.5°$): $y = 0.100$
+
+=== Calculations
+
+- Normal circular pitch (10–38):
+  $ p_n = (pi cos lambda) / P_d = 0.2608 "in" = 0.006624 "m" $
+
+- Pitch line speed (10–41):
+  $ v_(t G) = (pi D_G n_G) / 12 = 0.001508 "ft/min" $
+
+- Velocity factor (10–40):
+  $ K_v = 1200 / (1200 + v_(t G)) = 1200 / (1200 + 0.001508) = 0.99999874 approx 1.000 $
+
+- Dynamic load (10–39):
+  $ W_d = 54.701 "N" = 12.293 "lbf" $
+
+- Tooth bending stress (10–37):
+  $ sigma = W_d / (y F p_n) = (12.293 "lbf") / (0.100 times 0.5 "in" times 0.2608 "in") = 942.6 "psi" = 6.50 "MPa" $
+
+  These are very small total loads on the teeth. Bronze gear fatigue strengths are in the range of 17,000 to 24,000 psi, so this type of loading is more than acceptable. There is no more analysis we can do in this section since (10-42) and beyond apply solely to steel worms and bronze gears.
+
 
 == Shaft Design 
 
