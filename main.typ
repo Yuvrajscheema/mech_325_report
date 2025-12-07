@@ -486,6 +486,12 @@ so our shaft is fit for our needs!
 
 
 == Shaft 3 Bearing Calculations
+
+We plan to use an angular contact ball bearing at C and a deep groove ball bearing at A. These locations are referenced in the figures
+for Shaft 3 Calculations. 
+
+=== Deep Groove Ball Bearing at A 
+
 == Belt and Pulley Calculations
 A typical stepper motor can outpout around $3000 "rpm"$ and $1.2 "N" dot "m"$ of torque. \
 We desire an output speed of around $0.05886 "rpm"$ at $0.0694 "N" dot "m"$ of torque. \
