@@ -525,7 +525,7 @@ For the shoulder, we assume a sharp radius, which gives us $K_t = 2.5$.
 
 We then calculate the required minimum diameters.
 
-We start with endurance strength $S_n = 13"ksi"$ from Appendix B.I. We choose $K_a = 0.8$ for machined finish, $K_b = 0.879d^(-0.107) = 1.02$, $K_c = 1$ for no axial load, $K_d = 1$ as operating temperature is around 20 celcius, $K_e = 1$ since we do not require infinite life, and $K_f$ = 1 for no miscelenous factors.
+We start with endurance strength $S_n = 13"ksi"$ from Appendix B.II. We choose $K_a = 0.8$ for machined finish, $K_b = 0.879d^(-0.107) = 1.02$, $K_c = 1$ for no axial load, $K_d = 1$ as operating temperature is around 20 celcius, $K_e = 1$ since we do not require infinite life, and $K_f$ = 1 for no miscelenous factors.
 
 This gives us $S_n' = 10.608 "ksi"$
 
