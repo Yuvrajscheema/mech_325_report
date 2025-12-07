@@ -524,7 +524,6 @@ $ ((Delta omega) / omega)_("RMS") = 37.7% $
 
 Which is within spec for this application
 
-<<<<<<< HEAD
 Plugging in these values yields...
 $
 D = 0.42 text("in") < 0.625 text("in")
@@ -537,7 +536,8 @@ so our shaft is fit for our needs!
 
 === Angular Contact Ball Bearing at C
 
-We assume the inner ring is rotating, so V = 1. We also have a shaft diameter of $0.625 text("in") $
+We assume the inner ring is rotating, so V = 1. We also have a shaft diameter of $0.625 text("in") = 15.875 text("mm")$
+Since we have a predefined shaft diameter, we can first determine the $C_0$ values from Table 11-2. 
 
 === Deep-Groove Ball Bearing at A
 
@@ -573,8 +573,6 @@ Our worst case safety factor, which shouldn't occur is $S F = frac(1.35, 1.2)=1.
 Now we calculate the wrap angles to be: \
 $phi_(D) = pi - arcsin frac(P D - p d, 2C D) = 2.364 "rad" quad "and" quad phi_(D) 
 = pi + arcsin frac(P D - p d, 2C D) = 3.92 "rad"$
-=======
->>>>>>> origin/main
 
 = APPENDIX B
 
