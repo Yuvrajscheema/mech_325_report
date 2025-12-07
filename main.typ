@@ -21,6 +21,10 @@
   size: 12pt
 )
 
+#show figure.where(
+  kind: image
+): set figure.caption(position: bottom)
+
 = INTRODUCTION
 
 The fundemental challenge of astrophotography is the amount of light gathered by a camera. While most cameras have no problem capturing photos in bright daylight, deep space objects and stars tend to be very dim. The amount of light gathered by a lens or telescope depends on a few factors, one of which is  its cross-sectional area (or _aperture_). To capture increasingly darker objects, it quickly becomes impractical to increase the diameter of the lens. A much more appropriate solution is to gather light for over a longer period of time at the camera, but this introduces its own issues.
@@ -1031,10 +1035,9 @@ $ (1/2)*T_("max,lg") = 2718.5 N*"mm" > 58.86 N*"mm" $
 
 
 = APPENDIX B
-
 == Gates Manual
 #figure(
-  image("yuvy_images/Gates_manual_selection_zones.png", width: 100%),
+  image("yuvy_images/Gates_manual_selection_zones.png", width: 80%),
   caption: [Belt Size Selection],
 ) <belt_sizing>
 #figure(
