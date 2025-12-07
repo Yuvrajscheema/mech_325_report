@@ -30,18 +30,64 @@
 
 == Shaft Design 
 
-- 2nd Shaft Analysis
+=== 2nd Shaft Analysis
 #figure(
   // The image function goes here (no '#' needed inside figure)
-  image("2nd_shaft_FBD.jpeg", width: 70%),
+  image("images/2nd_shaft_FBD.jpeg", width: 70%),
   // Add a caption using a content block ([...])
   caption: [FBD of 2nd shaft],
   // Add a label for referencing (use a name enclosed in angle brackets)
 ) <fig:2nd_shaft_FBD>
 
+
+
+Point A and D are the bushings, B is the worm gear, and C is the pulley for the timing belt.
+Force calculations are as follows: \
+\
+
+  $
+  Sigma F_x = 0 : -F_(A x) + F_(B x) - F_(C x) - F_(D x) &= 0 \
+  F_(A x) + F_(D x) &= F_(B x) - F_(C x) \
+  F_(A x) &= F_(B x) - F_(C x) - F_(D x) \
+  $
+  $
+  Sigma F_y = 0 : F_(A y) - F_(B y) &= 0 \
+  F_(A y) &= F_(B y)
+  \
+  $
+  $
+  Sigma F_z = 0 : F_(A z) - F_(B z) + F_(D z) &= 0 \
+  F_(A z) + F_(D z) &= F_(B z) \
+  F_(A z) &= F_(B z) - F_(D z)
+  $
+
+  $
+  Sigma M_(A x) = 0 : -L_(A B)F_(B z) + L_(A D)F_(D z) &= 0 \
+  F_(D z) &= L_(A B)/L_(A D)F_(B z) \ 
+  $
+  $
+  Sigma M_(A z) = 0 : -L_(A B)F_(B x) + L_(A C)F_(C x) +  L_(A D)F_(D x) &= 0 \
+  F_(D x) &= (L_(A B)F_(B x) - L_(A C)F_(C x))/L_(A D) \ 
+  $
+
+Using the known forces, we get following forces on A and D:
+
+$
+F_(A x) = 3.01 "lbf" \
+F_(A y) = 2.67 "lbf" \
+F_(A z) = 11.7 "lbf" \
+$
+
+$
+F_(D x) = -0.553 "lbf" \
+F_(D y) =  0.00 "lbf" \
+F_(D z) = 0.812 "lbf" \
+
+$
+
 #figure(
   // The image function goes here (no '#' needed inside figure)
-  image("2nd_shaft_torque.jpeg", width: 70%),
+  image("images/2nd_shaft_torque.jpeg", width: 70%),
   // Add a caption using a content block ([...])
   caption: [Torque diagram of 2nd shaft],
   // Add a label for referencing (use a name enclosed in angle brackets)
@@ -49,12 +95,23 @@
 
 #figure(
   // The image function goes here (no '#' needed inside figure)
-  image("2nd_shaft_shear_moment.jpeg", width: 70%),
+  image("images/2nd_shaft_shear_moment.jpeg", width: 70%),
   // Add a caption using a content block ([...])
   caption: [Shear and bending moment diagram],
   // Add a label for referencing (use a name enclosed in angle brackets)
 ) <fig:2nd_shaft_shear_moment>
 
+From Mott Appendix 9, we choose Aluminum 2014 O.
+
+#table(
+  columns: 2,
+  stroke: 1pt + black,
+  inset: 4pt,
+    [], [Aluminum 2014 O],
+    [$S_u$],[27 ksi],
+    [$S_y$],[14 ksi],
+    [$S_n '$],[13 ksi]
+)
 
 
 
