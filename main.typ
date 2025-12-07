@@ -128,7 +128,7 @@ As we can see, these forces are extremely small.
 
 == Shaft Design 
 
-= Shaft 1 Selection
+=== Shaft 1 Selection
 
 #figure(
   image("CFImages/shaft1.jpg", width: 70%),
