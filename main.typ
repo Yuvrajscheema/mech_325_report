@@ -342,24 +342,66 @@ Thus, Aluminum 2014 O is a suitable material for the 2nd shaft.
 == Bushing Selection and Design Rationale
 
 === Overview
-To suppport both ends of the two shafts in the reduction stage, two sets of Dry-Running Nylon Sleeve bushings were chosen for their minimal wear properties, low cost, and light weight.
+To support both ends of the two shafts in the reduction stage, two sets of Moisture-Resistant Dry-Running Flanged Sleeve Bearings were chosen for their minimal wear properties, high tolerances, low cost, and light weight.
 
-=== Key Selection Requirements
-- The bushings must have minimal wear to maintain the accuracy of the speed of the rotation 
-- The bushings must have minimal maintenance and lubrication requirements for the convience of the hobbiysts
-- Minimize length to keep overall reduction stage small
+==== Key Selection Requirements
++ The bushings must have minimal wear to maintain the accuracy of rotational speed.
++ The bushings must require minimal maintenance and eliminate lubrication requirements for the convenience of hobbyists.
++ Minimize length to keep the overall reduction stage compact.
++ Be resilient to moisture for outdoor operation.
 
-Bushings were selected instead of bearings because of the small loads required, keeping costs low and occupying minimal space. In particular,
-dry bushings were selected to minimize maintenance on the StarTracker and eliminating lubrication requirements
-to make construction convienient for hobbiysts.
+Bushings were selected instead of bearings due to the small loads involved, which reduces cost and minimizes space requirements. Dry bushings eliminate lubrication requirements and reduce maintenance, improving reliability and ease of construction for hobbyists.
+The low forces in this system allow the use of inexpensive bushings without compromising performance. The dominant selection criterion was tolerance.
 
-To support the axial load of the worm gear, a flanged bushing is used. The low speed of the shafts allow the 
-shoulder of the shafts to directly transfer axial load into the bushing flange with minimal wear. Nylon is perfect for this
-because of its low friction and minimal wearing properties.
+===== Tolerances
 
-Price was also another important consideration, which the Nylon bushings meet, with a unit price of \$4.59.
+A key requirement for the StarTracker is high accuracy with minimal speed variation. Bushing selection plays a role in achieving this. The primary contributors to speed variation are:
 
-In total this is why Dry-Running Nylon Sleeve bushings were selected.
+- _Eccentricity:_ radial play between the shafts and bushings can lead to wobble in the reduction system.  
+- _Friction (stick–slip):_ high friction can produce stick–slip motion, generating speed fluctuations.  
+- _Elastic deformation:_ loading of the bushing can compress it, introducing additional eccentricity.
+
+*Assumptions*
+
++ The shaft rolls without slipping.  
++ Shaft deflection at the bushing is negligible compared to bushing deformation.  
++ Eccentricities are small enough that the small-angle approximation applies.
+
+The contributors to variance were approximated as coming from manufacturing tolerance, maximum permissible wear, and potential deformation of the bushing and shaft. Since the bushing is much more ductile than the shaft, its deformation dominates.
+
+*Tolerance Calculation Overview*
+
+The goal of this calculation is to determine the maximum amplitude of variation in speed caused by eccentricity. Calculations focus on the first stage of reduction, where speed is highest.
+The overall eccentricity was approximated as the root-mean-square (RMS) of all considered contributions:
+#show table.cell.where(y: 0): strong
+
+#set table(
+  stroke: (x, y) => if y == 0 { (bottom: 0.7pt + black) },
+  align: (x, y) => if x == 0 { left } else { center }
+)
+#set align(center)
+#table(
+  columns: 2,
+  table.header(
+    [Symbol],
+    [Description]
+  ),
+  [R], [Input pulley radius (inches)],
+  [$Omega$], [Shaft angular speed (rad/s)],
+  [e], [Eccentricity of the bushing (inches)]
+)
+#set align(left)
+
+$ Delta omega_("max") approx 0.00230"rad"/"s" $
+
+This represents $37%_("RMS")$ of the desired speed, which is below the acceptable limit of 50% based on the tracking tolerance of the optical system. Therefore, the design is deemed satisfactory. In-depth calculations can be found in the Appendix.
+
+===== Final Bushing Selection
+
+To support the axial load of the worm gear, a flanged bushing was selected. The low speed of the shafts allows the shaft shoulders to transfer axial load directly into the bushing flange with minimal wear. PEEK was chosen for its low friction, minimal wear, and resilience to moisture, making it suitable for outdoor operation.
+The final bushing selected is a 3/8:" shaft diameter, 1/4" long, 11/16" flange OD moisture-resistant, dry-running flanged sleeve bearing from McMaster-Carr.
+For design consistency, all bushings are standardized throughout the system. With a unit cost of \$6.42, the total cost for bushings in the design is \$25.68.
+
 
 == Bearing Selection and Design Rationale
 
@@ -385,99 +427,104 @@ application. Both of these bearings can be purchased for arund \$14 each on Bear
 
 = APPENDIX A
 
-== Shaft 3 Calculations
+=== Bushing Calculations
 
-#align(center,image("bram-images-420340594432/shaft_anal.png", width: 70%))
-_Note: the angle of 49\u{00B0} is dependent on the location of the star tracker. In Vancouver, the latitude angle
-is 49\u{00B0} so that's what we use._
-#align(center,image("bram-images-420340594432/shaft_outline.png"))
-$
-Sigma F_z= A_z+B_z+C_z -F sin(phi)= 0 \
-Sigma F_y= A_y+B_y+C_y - F cos(phi) =0 \
-Sigma F_x= A_x+B_x+C_x = 0 \
-Sigma M_(A,text("vertical")) = B_z (17.397)+C_z (54.5)-F sin(phi)(86.624) = 0 \
-Sigma M_(A,text("horizontal")) = B_x (17.397)+C_x (54.5) = 0
-$
-_Distances for moment calculations are in mm._
-
-From worm gear calculations, we know:
-$
-B_x, B_y, B_z
-  &=-3.28 text("lbf"), 3.019 text("lbf"), -1.61 text("lbf") \
-  &=-14.5 text("N"), 13.42 text("N"), -7.16 text("N")
-$
-  Using these values, we get reaction forces of:
+===== Geometery Calculations
+From the shaft diameter, choose D = 3/16 in  
+To minimize the footprint, select a minimal length L = 1/4 in  
+This satisfies
 
 $
-A_x = -9.87 text("N") wide A_z = -7.99 text("N") \
-C_x = -4.63 text("N") wide C_y = 25.72 text("N") wide C_z = 44.7 text("N") 
+0.5 <= L / D <= 2.0
 $
 
-We now verify that Aluminum 2014-O is suitable for this application.
 
-Aluminum 2014-O has the following characteristics:
+This bearing application requires high precision, with low lubrication, but remains under constant load. Since the application is non-critical, a safety factor of 2 will be used:
+
 $
-S_u = 27 wide S_y = 14 wide V_text("str") = 18 wide S_n' = 13
-$
-To find all the parameters, we consulted the following tables and got these results:
-$
-  &k_a = 0.8 && text("from Table x.x") \ 
-  &k_b = 0.924 && text("from equation") 0.879 d^(-0.107) \ 
-  &k_c = 1 && text("from Table x.x, bending") \
-  &k_d = 1 && text("from Table x.x") \ 
-  &k_e = 0.814 && text("for 99% reliability") \ 
-  &k_f = 1 && text("No misc. factors") \
-  &S_e' = 13.5 text("ksi") && text("from Eqn x.x") \
-$
-$
-  S_e = k_a k_b k_c k_d k_e k_f S_e' = 8.12 text("ksi")
+n_d = 2.0
 $
 
-For this material to be considered valid for this operation, we need to verify
+
+Validate length under thermal conditions.
+
+*Assumptions*:  
+
+The StarTracker will only be operated at night and is primarily targeted to hobbyists in North America.  
+$T_("inf") = 77$ F - Typical summer nighttime temperature near the 49th parallel.  
+For nylon on steel, $f_s = 0.3$
+
 $
-  S_e >= frac(32 M_max n_d, pi d^3)
+L >= (720  f_s  n_d  F  N) / (J h_("CR")  (T_f - T_("inf"))) $
+$
+L >= (720  0.3 * 1.0 * 11.6 * 0.000694) / (778 * 2.7 * (300 - 77)) $
+$ L >= 4.95"e"-6 "in" $
+
+
+This is sufficiently smaller than the chosen L = 1/4 in
+
+===== Force and Velocity Calculations
+At the point experiencing the greatest load (next to the worm gear):
+
+$
+P_("max") = (4 / pi)  (F  n_d) / (D  L) = ((4 / pi)  11.6) / ((3/16)(1/4)) = 388.71 "psi" < 4,500 "psi"
 $
 
-We use shear and bending moment diagrams in X and Z to find the maximum bending moment along the shaft.
+$
+V = (pi  D  N  n_d) / 12 = 6.81"e"-5 "fpm" < 400 "fpm"
+$
+
+$
+P V = 0.00520 "psi-fpm" < 25,000 "psi-fpm"
+$
+
+The bushing selected comforatbly meets the requirements for presure and velocity.
+
+===== Tolerance Calculations
+
+
+*Assumptions*
+
+ 1. The primary assumption for calculations done to specify the tolerances on the bushings that the primary effect of bushing wear and ill-tolerancing impact the eccentricity of the 
+  shaft rotating inside of the bushing. Due to small loads and low friction effects like
+  stick-slip and major shaft misalignment and deflections can be ignored. 
+2. The next assumption is that eccentricity comes from three primary sources:
+    - Bushing tolerances: Assume worst case senario as eccentric as possible
+    - Wear: Eccentricity caused by runout
+    - Compression: Eccentricity caused by compression of the bushing
+
+To calculate the maximum possible eccentricity, find the sum of all of the maximum possible
+displacements. Displacements come from the material properties of the bushing, the manufactuer specified tolerance
+on the inner diameter (contacting the shaft) and the lifetime of the bushings.
+
+$ delta_("tolerance") = 0.001 "in" $
+$ delta_("wear") = 0.0001 "in" $
+$ delta_("deformation") = sigma / E = 328 "psi" / 435000 "psi" = 0.00075 "in" $
+
 #figure(
-  grid(
-    columns: 2,
-    gutter: 1mm,
-    image("bram-images-420340594432/shearx.png", width: 100%),
-    image("bram-images-420340594432/shearz.png", width: 100%),
-    image("bram-images-420340594432/bendx.png", width: 100%),
-    image("bram-images-420340594432/bendz.png", width: 100%),
-  )
+  image("sam_images/eccentricity.jpg", width: 70%),
+  caption: [ Demonstration of how displacement is being converted to eccentricity
+  ],
 )
-#image("bram-images-420340594432/shaft_calcs_shear.png")
-#image("bram-images-420340594432/bend_calcs.png")
 
-We see that the bending moment maximum is 
-$
-M_max = 950.18 text("N")text("mm") = 8.409 text("lbf") thin text("in")
-$
+Now calculating the eccentricity where $d$ is the diameter of the shaft.
 
-Our shaft diameter was decided to be $frac(5,8)$\", so with a design factor of $n_d = 2.5$, we calculate
+$ e = sqrt(1 - (d/ (d + delta_("tolerance") + delta_("wear") + delta_("deformation") ))^2) $
+$ e = 0.0989 $
 
-$
-S_e >= frac(32 M_max n_d, pi d^3) = 872.9 text("psi") \
-8.12 text("ksi") >= 872.9 text("psi")
-$
+Then to find the variation in speed, since eccentricity is small, a small angle approximation
+can be used. Then using the output speed of the reduction system, the variation of the speed 
+can be found.
+$ Delta omega approx e / R omega_0 = 0.0989 /((1/2)(3/8)) (0.000694 "rpm") 2 pi $
 
-so we can be sure that the aluminum material is strong enough to resist the stress. We now calculate
-the minimum diameter required for this section of the shaft to ensure it is smaller than our design
-shaft diameter. We use the following equation:
+Then comparing the $Delta omega$ to the operating $omega$ 
 
-$
-D = [frac(32 N, pi) sqrt([frac(k_t M, s'_n)]^2+frac(3,4)[frac(T,s_y)]^2) thin]^frac(1,3)
-$
+$ (Delta omega) / omega = 0.5278 $
+ Which gives an RMS within $50%$ of $omega$
 
-All of these parameters were either previously derived or from the diagrams:
+$ ((Delta omega) / omega)_("RMS") = 37.7% $
 
-$
-s'_n = 872.9 text("psi") wide T = 5.886 text("Nm") = 52.1 text("lbf in") \
-N = 2.5 wide s_y = 14 text("ksi") wide k_t = 3
-$
+Which is within spec for this application
 
 Plugging in these values yields...
 $
