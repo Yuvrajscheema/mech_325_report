@@ -118,24 +118,9 @@ Given the  $5.886 N dot m m$ output torque, we can analyze the forces of the wor
 - Worm lead angle: $lambda = 4.7666°$ (= 0.083176 rad)
 - Coefficient of friction: $mu = 0.124$
 
-The coefficient of friction is calculated using $ 0.124 e^(-0.74 v_s^0.645)$ (10–26). Due to the very slow speed, but $v_s != 0$, the coefficient is not $0.15$
-
-=== Mott equations
-
-- Tangential force (10–29):
-  $ W_(t G) = (2 T_0) / D_G $
-
-- Axial force (10–30):
-  $ W_(x G) = W_(t G) (cos phi_n sin lambda + mu cos lambda) / (cos phi_n cos lambda - mu sin lambda) $
-
-- Radial force (10–31):
-  $ W_(r G) = (W_(x G) sin phi_n) / (cos phi_n cos lambda - mu sin lambda) $
-
-- Friction force (10–32):
-  $ W_f = (mu W_(t G)) / (cos lambda cos phi_n - mu sin lambda) $
 
 === Numerical results
-
+Calculations for the following results can be found in #link(<MOTT_worm>)[appendix].
 - $W_(t G) = 54.701 "N"$
 
 - $W_(x G) = 11.698 "N"$ (axial / along worm axis)
@@ -155,22 +140,17 @@ As we can see, these forces are extremely small.
 - Diametral pitch: $P_d = 12 "teeth/in"$
 - Lewis form factor (for $phi_n = 14.5°$): $y = 0.100$
 
-=== Calculations
+=== Results
+Calculations for the following results can be found in #link(<Other_worm>)[appendix].
+- $p_n  = 0.2608 "in" = 0.006624 "m" $
 
-- Normal circular pitch (10–38):
-  $ p_n = (pi cos lambda) / P_d = 0.2608 "in" = 0.006624 "m" $
+- $v_(t G) = 0.001508 "ft/min" $
 
-- Pitch line speed (10–41):
-  $ v_(t G) = (pi D_G n_G) / 12 = 0.001508 "ft/min" $
+- $K_v approx 1.000 $
 
-- Velocity factor (10–40):
-  $ K_v = 1200 / (1200 + v_(t G)) = 1200 / (1200 + 0.001508) = 0.99999874 approx 1.000 $
+- $W_d = 54.701 "N" = 12.293 "lbf" $
 
-- Dynamic load (10–39):
-  $ W_d = 54.701 "N" = 12.293 "lbf" $
-
-- Tooth bending stress (10–37):
-  $ sigma = W_d / (y F p_n) = (12.293 "lbf") / (0.100 times 0.5 "in" times 0.2608 "in") = 942.6 "psi" = 6.50 "MPa" $
+- $sigma = 942.6 "psi" = 6.50 "MPa" $
 
   These are very small total loads on the teeth. Bronze gear fatigue strengths are in the range of 17,000 to 24,000 psi, so this type of loading is more than acceptable. There is no more analysis we can do in this section since (10-42) and beyond apply solely to steel worms and bronze gears.
 
@@ -297,12 +277,45 @@ end near the camera, and a stabilizing deep grove bearing opposite the camera to
 allowed us to determine that *R10ZZ 5/8" Deep Groove Ball Bearing* and *3201-2RS Angular Contact Bearing* are ideal for this
 application. Both of these bearings can be purchased for arund \$14 each on BearingsCanada.com and Temu.com, respectively.
 
-= RESULTS & FINAL DEssSIGN
+= RESULTS & FINAL DESIGN
 
 = CONLUSIONS & RECOMENDATIONS
 
 = APPENDIX A
 
+== Worm Gear Calculations
+
+Calculate the coefficient of friction to be: 
+$ 0.124 e^(-0.74 v_s^0.645)$ (10–26). Due to the very slow speed, but $v_s != 0$, the coefficient is not $0.15$
+
+=== MOTT Calculations <MOTT_worm>
+- Tangential force (10–29):
+  $ W_(t G) = (2 T_0) / D_G $
+
+- Axial force (10–30):
+  $ W_(x G) = W_(t G) (cos phi_n sin lambda + mu cos lambda) / (cos phi_n cos lambda - mu sin lambda) $
+
+- Radial force (10–31):
+  $ W_(r G) = (W_(x G) sin phi_n) / (cos phi_n cos lambda - mu sin lambda) $
+
+- Friction force (10–32):
+  $ W_f = (mu W_(t G)) / (cos lambda cos phi_n - mu sin lambda) $
+
+=== Other Calculations <Other_worm>
+- Normal circular pitch (10–38):
+  $ p_n = (pi cos lambda) / P_d = 0.2608 "in" = 0.006624 "m" $
+
+- Pitch line speed (10–41):
+  $ v_(t G) = (pi D_G n_G) / 12 = 0.001508 "ft/min" $
+
+- Velocity factor (10–40):
+  $ K_v = 1200 / (1200 + v_(t G)) = 1200 / (1200 + 0.001508) = 0.99999874 approx 1.000 $
+
+- Dynamic load (10–39):
+  $ W_d = 54.701 "N" = 12.293 "lbf" $
+
+- Tooth bending stress (10–37):
+  $ sigma = W_d / (y F p_n) = (12.293 "lbf") / (0.100 times 0.5 "in" times 0.2608 "in") = 942.6 "psi" = 6.50 "MPa" $
 == Shaft 2 Calculations
 
 Net driving force on the timing belt pulley is given by:
