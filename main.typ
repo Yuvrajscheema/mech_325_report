@@ -754,6 +754,7 @@ so our shaft is fit for our needs!
 
 == Shaft 3 Calculations
 
+=== Force and Material Analysis
 #align(center,image("bram-images-420340594432/shaft_anal.png", width: 70%))
 _Note: the angle of 49\u{00B0} is dependent on the location of the star tracker. In Vancouver, the latitude angle
 is 49\u{00B0} so that's what we use._
@@ -852,10 +853,9 @@ D = 0.42 text("in") < 0.625 text("in")
 $
 so our shaft is fit for our needs!
 
-== Shaft 3 Bearing Calculations
+=== Shaft 3 Bearing Calculations
 
-We plan to use an angular contact ball bearing at C and a deep groove ball bearing at A. These locations are referenced in the figures
-for Shaft 3 Calculations. 
+We plan to use an angular contact ball bearing at C and a deep groove ball bearing at A. These locations are referenced in the figures for Shaft 3 Calculations. Our calculations are for 02-Series Deep-Groove and Angular-Contact ball bearings. 
 
 == Aluminum Material Properties
 
@@ -896,12 +896,77 @@ $
 We can now calculate our working value for $C_10$ with the following equation:
 
 $
-C_10 = 
+C_10 = a_f F_e [frac(x_D,x_0+(theta-chi_0)[ln(frac(1,R_D))]^frac(1,b))]^frac(1,a)
 $
 
-=== Deep Groove Ball Bearing at A 
+We use the following parameters:
+$
+  &a_f = 1 && text("from application factor") \
+  &x_0 = 0.02 && text("SKF Weibull Parameters") \
+  &theta = 4.459 && text("SKF Weibull Parameters") \
+  &b = 1.483 && text("SKF Weibull Parameters") \
+  &R_D = 0.9 && text("90% reliability") \
+  &a = 3 && text("for ball bearings") \
+$
 
-== Belt and Pulley Calculations <bnpcalc>
+for $x_0$, we do the following calculations
+$
+  &L_10 = 10^6 \
+  &L_D = 500 "hours" \
+  &x_D = frac(60 L_D n, L_10) = 2*10^(-5)
+$
+Plugging these values in yields...
+
+$
+  C_10 = 1.39 text("kN") <= 8.87 text("kN")
+$
+
+so this bearing is suited for this task! Because we're using inches and SKF does not offer the exact 0.625 inch bearing bore, we use the *#201-2RS Angular Contact Bearing* because it has similar characteristics and can be purchase off Temu.com for relatively cheap.
+
+==== Deep Groove Ball Bearing at A 
+
+For the bearing at A, we have the following forces:
+
+$
+  A_x = -9.87 "N" wide A_z = -7.99 "N"
+$
+
+which results in an overall radial force of
+
+$
+  F_R = sqrt(A_x^2+A_z^2) = 12.7 "N"
+$
+
+$x_D$, $x_0$, $theta$, $b$, $R_D$ are the same as for the angular contact bearing, so we simply recalculate $C_10$:
+
+$
+  C_10 = 0.393 < 8.87 
+$
+
+so we can use the 0.625 inch 02-Series Deep-Groove bearing. Since this 02-Series is not available for inch-based shaft diameters, we opt for the over-specced *R10ZZ $frac(5,8)\" "Deep Groove Ball Bearing"$* available on BearingsCanada.com.
+
+=== Keyway Calculations for Worm Gear
+
+To allow for torque transmission from the worm gear to the camera shaft, we need a keyway. For this low-torque application, a square aluminum key is cheap, easy to manufacture, and effective. We will use Aluminum 6061 for this key, which has the following properties.
+
+$
+  s_u = 18 "ksi" wide s_y = 12 "ksi"
+$
+
+For a shaft diameter of 0.75 in at the worm gear, the recommended key width is 0.1875 in from Table 11-1. We use a standard safety factor N = 3. So, our key parameters are
+$
+  T = 5.886 "Nm" = 52.1 "lbf in" wide D = 0.75 wide N = 3 wide W = 0.1875
+$
+
+Since Aluminum 6061 is much weaker than Aluminum 2014-O, we can simply use the following equation:
+$
+  L_min = frac(4 T N, D W s_y) = 0.37 "in"
+$
+
+This is much smaller than usual key sizes, which are recommended to be between 1-1.5 inches. As such, we decide that the square Aluminum 6061 key be 1 inch long. 
+
+This is very short for a key, so we go up to a minimum key length 
+== Belt and Pulley Calculations
 A typical stepper motor can outpout around $3000 "rpm"$ and $1.2 "N" dot "m"$ of torque. \
 We desire an output speed of around $0.05886 "rpm"$ at $0.0694 "N" dot "m"$ of torque. \
 Our system will use this power but we design for the stepper maximum. \
@@ -1002,7 +1067,7 @@ This gives us $S_n' = 10.608 "ksi"$
 
 We then plug in the equation for minimum diameter based on bending and torque 
 
-$ D = ((32N)/pi sqrt(((K_t M)/(s'_n))^2 + (3/4) (T/s_y)^2))^(1/3) $ 
+$ D = ((32N)/pi sqrt(((K_t M)/(s_n'))^2 + (3/4) (T/s_y)^2))^(1/3) $ 
 
 and minimum diameter based on shear 
 
@@ -1017,7 +1082,7 @@ That gives us the following minimum diameters.
   caption: [Minimum shaft diameters],
 )
 
-This gives us a minimum diamter of \~0.1", which is limited by the shear at the small pulley. Therefore shaft 1 is strong enough.
+This gives us a minimum diamter of \~0.1\", which is limited by the shear at the small pulley. Therefore shaft 1 is strong enough.
 
 
 == Shaft 1 & 2 Setscrew Calculations
