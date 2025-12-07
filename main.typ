@@ -22,8 +22,16 @@
 )
 
 = INTRODUCTION
+A star tracker is a mechanical device that allows astrophotographers to take long-exposure images without the smearing caused by the Earth’s rotation. Our goal is to create 
+a DIY-buildable equatorial tracking system that provides the rotational precision typically found only in expensive, closed-market astronomy mounts. Our client is best described as 
+the amateur astrophotography community – students, hobbyists, and early-stage professionals who want access to long-exposure tracking without investing thousands of dollars in 
+commercial gear. This design has the potential to serve as a platform for anyone looking to enter astrophotography at a reasonable cost.
 
 = PURPOSE
+We chose this project because the current commercial options are largely high-cost systems that are difficult to customize or repair. There is a clear gap in the market for an 
+affordable, open design that still achieves professional-grade imaging stability. To achieve this, we identified several requirements and evaluation criteria regarding 
+functionality, manufacturability, usability, compatibility with components, and cost.
+
 
 = DETAILED ANALYSIS
 
