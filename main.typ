@@ -2,11 +2,11 @@
 
 
 #show: clean-cnam-template.with(
-  title: "Machine design my gpa",
+  title: "Startracker",
   author: "Yuvraj Cheema, Samuel Sjoden, Connor Floyd, Taichi Kamei,
   Ari Cholakian, Bram Banik, Austin Bai",
   class: "MECH 325",
-  subtitle: "StarTracker",
+  subtitle: "A Hobbyist-Friendly Equatorial Camera Mount",
   main-color: "#C4122E",
   default-font: "New Computer Modern",
   outline-code: outline(
