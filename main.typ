@@ -209,7 +209,6 @@ Net driving force on the timing belt pulley is given by:
 $
   F_N = T_C / (D_C / 2) = 0.521 "lbf"
 $
-\
 Bending force on C is given by:
 $
   F_C = 1.5 F_N = 0.866 "lbf"
@@ -219,6 +218,7 @@ Since z components of timing belt cancles out, we only consider x component of $
 $
 F_(C x) = F_C cos(phi) = 0.819 "lbf"
 $
+Where $phi$ is the angle between the belt and horizontal plane, calculated in above section.\
 \
 #figure(
   // The image function goes here (no '#' needed inside figure)
