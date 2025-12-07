@@ -365,6 +365,14 @@ A key requirement for the StarTracker is high accuracy with minimal speed variat
 + Shaft deflection at the bushing is negligible compared to bushing deformation.  
 + Eccentricities are small enough that the small-angle approximation applies.
 
+*Requirement*
+
+From the acceptable "smear" of pixels, we can calculate a constraint on the RMS variation
+of the speed from shaft wobble. To find the maximum RMS variation of the output speed that meets our requirements.
+
+This will depend on the maximum pixel smear permissible $s_("max")$ and the focal length $f$.
+$ Delta omega_("max RMS") approx s_("max")/ f = 20 / 50 = 40%_("RMS")  $
+
 The contributors to variance were approximated as coming from manufacturing tolerance, maximum permissible wear, and potential deformation of the bushing and shaft. Since the bushing is much more ductile than the shaft, its deformation dominates.
 
 *Tolerance Calculation Overview*
@@ -372,28 +380,9 @@ The contributors to variance were approximated as coming from manufacturing tole
 The goal of this calculation is to determine the maximum amplitude of variation in speed caused by any eccentricity in the bushing
 resulting the shaft "warbling" in the bushing. Since the system is very sensitive to speed variations,
 a high tolerance bushing with low wear is required.
-#show table.cell.where(y: 0): strong
-
-#set table(
-  stroke: (x, y) => if y == 0 { (bottom: 0.7pt + black) },
-  align: (x, y) => if x == 0 { left } else { center }
-)
-#set align(center)
-#table(
-  columns: 2,
-  table.header(
-    [Symbol],
-    [Description]
-  ),
-  [R], [Input pulley radius (inches)],
-  [$Omega$], [Shaft angular speed (rad/s)],
-  [e], [Eccentricity of the bushing (inches)]
-)
-#set align(left)
-
 $ Delta omega_("max") approx 0.00230"rad"/"s" $
 
-This represents $37%_("RMS")$ of the desired speed, which is below the acceptable limit of 50% based on the tracking tolerance of the optical system. Therefore, the design is deemed satisfactory. In-depth calculations can be found in the Appendix.
+This represents $37%_("RMS")$ of the desired speed, which is below the acceptable limit of 40% based on the tracking tolerance of the optical system. Therefore, the design is deemed satisfactory. In-depth calculations can be found in the Appendix.
 
 ===== Final Bushing Selection
 
@@ -526,7 +515,8 @@ $ (Delta omega) / omega = 0.5278 $
 
 $ ((Delta omega) / omega)_("RMS") = 37.7% $
 
-Which is within spec for this application
+Which is within spec for this application as specified in the Bushing Selection and Design Rationale.
+
 
 
 = APPENDIX B
