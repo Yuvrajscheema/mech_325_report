@@ -66,7 +66,7 @@ because of its low friction and minimal wearing properties.
 
 Price was also another important consideration, which the Nylon bushings meet, with a unit price of \$4.59.
 
-In total this is why Dry-Running Nylon Sleeve bushings were selected.
+In total this is why Dry-Running Nylon Sleeve bushings were selected.+
 
 = RESULTS & FINAL DESIGN
 
