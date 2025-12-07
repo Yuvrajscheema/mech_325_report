@@ -61,8 +61,6 @@ As a way to ensure that a small mishap does not cause an entire night's worth of
   caption: [Equatorial Mount Explained cont.],
 )
 
-
-== 3D Printing
 The advent of affordable 3D printing technology has fundamentally transformed the landscape of all hobbyist and amateur technical pursuits. Hobbies, such as astrophotography, which previouly required boutique and expensive products are now being approached from a new  perspective. Desktop 3D printers, which have dropped in price from tens of thousands to just a few hundred dollars over the past decade, have democratized the ability to rapidly prototype and fabricate custom tools. This accessibility has enabled hobbyists to tackle increasingly sophisticated projects that would have been impractical or impossible just years ago. The maker community has flourished as enthusiasts share designs, collaborate on complex builds, and push the boundaries of what can be achieved outside traditional manufacturing settings. 
 
 Astrophotography is one such older hobby with already established industry that serves it. All forms of telescopes, filters, cameras, mounts, controllers, and respective accessories already exist on the market, but due to the small volume of products these companies sell, design and manufacturing remains very expensive and outside of the range of many hobbiysts. In particular, equatorial mounts from astrophotography hobbyist stores can cost anywhere between \$1000 and \$10,000 CAD. 
@@ -206,9 +204,19 @@ Calculations for the following results can be found in #link(<Other_worm>)[appen
 
 
 == Shaft Design
+== Shaft Design
 
 === Shaft 1 Overview
+=== Shaft 1 Overview
 
+Shaft 1 is part of an intermediate stage in the speed reducer system. Two pulleys are mounted on it, and it is secured with bushings on either end. The shaft is subject to forces from the two pulleys and two bushings. There are no axial forces.
+
+#align(center)[
+  #figure(
+    image("CFImages/shaft1.jpg", width: 60%),
+    caption: [Shaft 1],
+  )
+]
 Shaft 1 is part of an intermediate stage in the speed reducer system. Two pulleys are mounted on it, and it is secured with bushings on either end. The shaft is subject to forces from the two pulleys and two bushings. There are no axial forces.
 
 #align(center)[
@@ -244,7 +252,34 @@ Shaft 1 is part of an intermediate stage in the speed reducer system. Two pulley
     [2014 O aluminum]
   )
 ]
+#align(center)[
+  #figure(
+    image("CFImages/gearboxShaft1Image.jpg", width: 70%),
+    caption: [Shaft 1 in CAD assembly],
+  )
+]
 
+#align(center)[
+  #table(
+    columns: 2,
+    stroke: none,
+    align: center,
+
+    [Shaft Length],
+    [2-in],
+
+    [Shaft Diameter],
+    [1/4\" major diameter],
+
+    [Shoulders],
+    [1/4\" long, 3/16\" diameter],
+
+    [Material],
+    [2014 O aluminum]
+  )
+]
+
+=== Shaft 2 Overview
 === Shaft 2 Overview
 The 2nd shaft transmits torque from the worm gear to the pulley which drives the timing belt. The shaft is supported by two bushings on either end. The shaft is subjected to forces from the worm gear and pulley as well as reaction forces from the bushings.
 \
@@ -397,7 +432,66 @@ application. Both of these bearings can be purchased for arund \$14 each on Bear
 
 = RESULTS & FINAL DESIGN
 
+#align(center)[#table(
+  columns: 3,
+  align: (left, left),
+  table.header([*Part*], [*Specification*], [*Part Number*]),
+  [Worm], [12 pitch, 14.5° pitch angle, 4.76° lead angle, Single thread, Bronze], [rushgears.com, WB12L],
+  [Worm Gear], [12 pitch, 100 teeth, 14.5° pitch angle, 4.76° lead angle, Bronze], [rushgears.com, WB1200L],
+  [Bushing], [Dry-Running PEEK Flanged Sleeve Bearing, for 3/8" Shaft Diameter and 15/32" Housing ID, 1/4" Long], [McMaster-Carr 6627K412],
+  [Shaft 1], [1/4" major diameter, 2" long],[N/A],
+  [Deep-Groove Ball Bearing],[5/8" bore, deep groove ball bearing],[R10ZZ 5/8", BearingsCanada.com],
+  [Angular Contact Ball Bearing],[5/8" bore, angular contact],[201-2RS Angular Contact Bearing, Temu.com],
+  [Smaller Pulley], [18 groove pulley], [ www.mcmaster.com 3764N106],
+  [Larger Pulley], [72 groove pulley],  [www.mcmaster.com 3764N119],
+  [Timing Belt], [7.559 in pitch length timing belt], [www.motioncanada.ca E2MR-192-04]
+)]
+
+Here are some final photos of the design of the equatorial mount.
+
+#figure(
+  image("images/Design 1.png", width: 100%),
+  caption: [Labelled design],
+)
+
+#figure(
+  image("images/Design 2.png", width: 100%),
+  caption: [Design],
+)
+
+#figure(
+  image("images/Design 3.png", width: 80%),
+  caption: [Section View],
+)
+
+#figure(
+  image("images/Design 4.png", width: 90%),
+  caption: [Design],
+)
+
+#figure(
+  image("images/Design 5.png", width: 90%),
+  caption: [Design],
+)
+
+#figure(
+  image("images/Design 6.png", width: 90%),
+  caption: [Design],
+)
+
+
+
 = CONLUSIONS & RECOMENDATIONS
+
+The mechanical design developed for our star-tracking system successfully meets the performance requirements established earlier in 
+the project. Through iterative concept development, load analysis, bearing and shaft sizing, and gear-train refinement, we verified 
+that the structure can reliably support a typical hobbyist camera load while maintaining the extremely small angular tracking tolerance necessary for long-exposure astrophotography. The combination of a multi-stage reduction system, worm gear, belt and pulley, custom shaft designs, and precise alignment features ensures smooth, controlled rotation, while the use of accessible, low-cost components keeps the system obtainable for our intended hobbyist demographic.
+
+Our analyses confirm that deflections in the primary support structure remain within acceptable limits, stresses in the shafts and 
+bushings stay well below material yield strengths, and the worm-drive and belt-reduction stages deliver the required motion uniformity. These results demonstrate that the design is both mechanically feasible and robust under real operating conditions, including operation in 
+outdoor environmental conditions. The systems calculated safety factor also verifies that the design is safe under operating conditions for users.
+
+Overall, the system can perform with the consistency and precision demanded by astrophotography while still achieving the project’s central goals of affordability, accessibility, and reliability. If the project were to continue moving forward, the next stages will focus on prototype fabrication, tolerance control, system integration with the electronics and control subsystem, and validation through experimental testing under realistic outdoor conditions.
 
 = APPENDIX A
 
@@ -1009,14 +1103,50 @@ $
 
 This is much smaller than usual key sizes, which are recommended to be between 1-1.5 inches. As such, we decide that the square Aluminum 6061 key be 1 inch long. 
 
+This is very short for a key, so we go up to a minimum key length 
+== Belt and Pulley Calculations <bnpcalc>
+A typical stepper motor can outpout around $3000 "rpm"$ and $1.2 "N" dot "m"$ of torque. \
+We desire an output speed of around $0.05886 "rpm"$ at $0.0694 "N" dot "m"$ of torque. \
+Our system will use this power but we design for the stepper maximum. \
+\
+From @belt_sizing we select a 2GMT belt. \
+We can assume that the belt is going to run at less than $10 "rpm"$ so from table @smaller_sheave 
+we select a $6 "mm"$ wide belt and the smaller sprocket size of $18$ grooves which is rated for 
+$1.35 "N" dot "m"$ of torque at this speed. \
+\
+We want the stepper to spin at around $1.1" rpm"$ so then $V R = 14.4$ and to 
+reduce complexity we use the same pair of sprockets twice. \
+Since a stepper motor can run at variable speed we will say that each belt will 
+need a reduction of $1:4$. \ 
+So we select the larger sprocket size to be $72$ groove. The pitch diameters 
+are found from @pulley_inf:
+$ p d = 0.301 "in" quad P D = 1.805 "in" $
+\
+We want the center distance to be small so temporarily select $C D=1.9 "in"$ since
+we want to minimize size.\
+$ P L = 2 dot C D + [1.57 dot (p d + P D)] + frac((P D - p d)^2, 4 C D) = 1.984 "in" $
+\
+So using @belt_selection $P L = 7.559$
+which is a stock length. \
+$ K = 4 P L - 6.28 dot (P D + p d) $
+$ C D = frac(K + sqrt(K^2 - 32(P D - p d)^2), 17 ) = 1.984 "in" $
+Giving our center distance.\
+Our nominal safety factor is given by $S F = frac(1.35, 0.05886)=23$.\
+Our worst case safety factor, which shouldn't occur is $S F = frac(1.35, 1.2)=1.125$.\
+Now we calculate the wrap angles to be: \
+$phi.alt_(D) = pi - arcsin frac(P D - p d, 2C D) = 2.364 "rad" quad "and" quad phi.alt_(D) 
+= pi + arcsin frac(P D - p d, 2C D) = 3.92 "rad"$
 
-== Shaft 1 & 2 Setscrew Calculations
+== Shaft 1 Force Calculations
 
-There are four pulleys which are secured to shafts through setscrews. The ones to fail, if any, would be either pulley 3, which experiences the highest torque of the small pulleys, or pulley 4, which experiences the highest torque of the large pulleys.
+As stated earlier, the torque on shaft 1 is 14.7 N*mm. The first stage of the force calculations was determining the direction in which the belt tension acts. In the CAD below, the endview of the gear reducer has been shown, with the diagonal lines representing belts going between pulleys. As can be seen, the belts act at a 19.79 degree angle.
 
-$ T_(max) = (F_(max) D) / 2$
+#figure(
+  image("CFImages/shaft1Pulleys.jpg", width: 70%),
+  caption: [End view of shaft 1, belt angles shown],
+)
 
-Where $T_(max)$ is the maximum torque the setscrews can trasmit, $F_(max)$ is the setscrew holding power according to the table below, and D is the shaft diameter.
+Then, a FBD diagram was drawn, and forces calculated.
 
 #figure(
   image("CFImages/setscrewTable.png", width: 50%),
