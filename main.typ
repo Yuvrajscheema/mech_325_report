@@ -74,13 +74,27 @@ Astrophotography is one such older hobby with already established industry that 
 
 = PURPOSE
 
-The purpose of this project is to create an equatorial mount for student and hobbyist astrophotographers. Our ideal client is only a beginner astrophotograper, with access to a machine shop and 3D printer, very basic turning skills,  and some patience in wanting to learn how to put together the equatorial mount. Our specific design is intended to be used near the 49th latitude line, but this is easily modified due to the 3D printed nature of the design. If the hobbysit is travelling 
+The purpose of this project is to create an equatorial mount for student and hobbyist astrophotographers. Our ideal client is only a beginner astrophotograper, with access to a machine shop and 3D printer, very basic turning skills,  and some patience in wanting to learn how to put together the equatorial mount. Our specific design is intended to be used near the 49th latitude line, but this is easily modified due to the 3D printed nature of the design. If the hobbysit is travelling, then the base can be customized to take on an angle equal to the latitude.
 
-The requirements for the equatorial mount itself are 
-focal length 50mm 
-max smear of 20 pixels
-under \$500
-parts available to consumers
+The star tracker must be able to support a variety of cameras and lenses. For long distance photos, these lenses can become long and heavy. We will design a camera and a lens which weighs at most 4kg with a center of mass 150mm away from the point of rotation. This configuration conservatively supports typical hobby cameras like the Nikon Z50 II or Nikon Z8 which weigh around 1kg and can support various lenses like the high quality NIKKOR Z 600mm (1.39kg) for high quality astrophotography. Due to the large variation in length and weight, we chose a conservative upper bound for both metrics.
+
+To allow for maximum compatibilty with existing astrophotography equipment, the mount must be able to support the Vixen (V-style) Mount for most common/light telescopes, but also allow for the mounting of an adapter to a 1/4" UNC camera mount.
+
+
+#align(center)[#table(
+  columns: 2,
+  align: (left, left),
+  table.header([*Requirement*], [*Specification*]),
+  [Focal length], [50 mm],
+  [Maximum smear], [20 pixels],
+  [Weight], [ < 4kg],
+  [Length], [ < 30 cm],
+  [Output rotation speed], [1 rotation/day],
+  [Output rotation torque], [5.8 Nm],
+  [Lifetime], [20x nights, 4 hours/night, 5 years],
+  [Operation temperature], [-5°C],
+  [Budget], [<\$500],
+)]
 
 = DETAILED ANALYSIS
 
