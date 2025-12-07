@@ -129,11 +129,11 @@ As we can see, these forces are extremely small.
 == Shaft Design 
 
 === 2nd Shaft Overview
-
-
 The 2nd shaft transmits torque from the worm gear to the pulley which drives the timing belt. The shaft is supported by two bushings on either end. The shaft is subjected to forces from the worm gear and pulley as well as reaction forces from the bushings.
-  
+\
+==== 2nd Shaft Key Specifications:
 $"Shaft Length" &: "8-in" \
+\
 "Worm" &: "1⅝-in long shoulder with ¾-in diameter" \
 "Pulley" &: "¾-in long shoulder with ⅕-in diameter" \
 "Bushings" &: "¼-in long shoulders with 3/16-in diameter" \
@@ -167,6 +167,32 @@ $
     // Add a label for referencing (use a name enclosed in angle brackets)
   )
 )
+
+==== 2nd Shaft Design Choice:
+The 2nd shaft will be made of Aluminum 2014 O for its high ductility, decent strength, and cheap cost of about \$1 per inch. The shaft diameter is determined by bending and torsional stress calculations to ensure it can withstand the applied loads with an appropriate safety factor. Detailed calculations are provided in Appendix A.
+
+
+=== Aluminum 2014 O Material Properties
+#align(center,
+  figure(
+    table(
+      columns: 2,
+      stroke: (x: none),
+      row-gutter: (2.2pt, auto),
+      table.header[Property][Value],
+      [Tensile Strength], [27 ksi],
+      [Yield Strength], [14 ksi],
+      [Shear Strength], [18 ksi],
+      [Endurance Strength], [13 ksi],
+    ),
+    caption: [Material Properties of Aluminum 2014 O],
+  )
+)
+\
+Reasons:
+- Cheap (< \$1 per inch)
+- Easy to machine
+- Required minimum diameter below all components' bore diameter
 
 
 == Bushing Selection and Design Rationale
@@ -416,7 +442,7 @@ D_min = [
 $
 \
 For the material choice, we want to use an affordable, and easy to machine. Therefore, we will use Aluminum for the shaft material. \
-From Mott Appendix 9, we choose Aluminum 2014 O for its high ductility, decent strength, and cheap cost of about \$1 per inch.
+From Appendix B I, we choose Aluminum 2014 O for its high ductility, decent strength, and cheap cost of about \$1 per inch.
 \
 #align(center,
   figure(
@@ -659,4 +685,13 @@ Which is within spec for this application
 
 = APPENDIX B
 
+== Aluminum Material Properties
+
+#figure(
+  // The image function goes here (no '#' needed inside figure)
+  image("images/Mott_appendix_9.png", width: 70%),
+  // Add a caption using a content block ([...])
+  caption: [Typical Properties of Aluminum from Mott Appendix 9],
+  // Add a label for referencing (use a name enclosed in angle brackets)
+)
 
