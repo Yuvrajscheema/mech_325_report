@@ -370,6 +370,39 @@ application. Both of these bearings can be purchased for arund \$14 each on Bear
 
 = APPENDIX A
 
+== Belt and Pulley Calculations <bnpcalc>
+A typical stepper motor can outpout around $3000 "rpm"$ and $1.2 "N" dot "m"$ of torque. \
+We desire an output speed of around $0.05886 "rpm"$ at $0.0694 "N" dot "m"$ of torque. \
+Our system will use this power but we design for the stepper maximum. \
+\
+From @belt_sizing we select a 2GMT belt. \
+We can assume that the belt is going to run at less than $10 "rpm"$ so from table @smaller_sheave 
+we select a $6 "mm"$ wide belt and the smaller sprocket size of $18$ grooves which is rated for 
+$1.35 "N" dot "m"$ of torque at this speed. \
+\
+We want the stepper to spin at around $1.1" rpm"$ so then $V R = 14.4$ and to 
+reduce complexity we use the same pair of sprockets twice. \
+Since a stepper motor can run at variable speed we will say that each belt will 
+need a reduction of $1:4$. \ 
+So we select the larger sprocket size to be $72$ groove. The pitch diameters 
+are found from @pulley_inf:
+$ p d = 0.301 "in" quad P D = 1.805 "in" $
+\
+We want the center distance to be small so temporarily select $C D=1.9 "in"$ since
+we want to minimize size.\
+$ P L = 2 dot C D + [1.57 dot (p d + P D)] + frac((P D - p d)^2, 4 C D) = 1.984 "in" $
+\
+So using @belt_selection $P L = 7.559$
+which is a stock length. \
+$ K = 4 P L - 6.28 dot (P D + p d) $
+$ C D = frac(K + sqrt(K^2 - 32(P D - p d)^2), 17 ) = 1.984 "in" $
+Giving our center distance.\
+Our nominal safety factor is given by $S F = frac(1.35, 0.05886)=23$.\
+Our worst case safety factor, which shouldn't occur is $S F = frac(1.35, 1.2)=1.125$.\
+Now we calculate the wrap angles to be: \
+$phi.alt_(D) = pi - arcsin frac(P D - p d, 2C D) = 2.364 "rad" quad "and" quad phi.alt_(D) 
+= pi + arcsin frac(P D - p d, 2C D) = 3.92 "rad"$
+
 == Worm Gear Calculations
 
 Calculate the coefficient of friction to be: 
@@ -403,6 +436,86 @@ $ 0.124 e^(-0.74 v_s^0.645)$ (10–26). Due to the very slow speed, but $v_s != 
 
 - Tooth bending stress (10–37):
   $ sigma = W_d / (y F p_n) = (12.293 "lbf") / (0.100 times 0.5 "in" times 0.2608 "in") = 942.6 "psi" = 6.50 "MPa" $
+== Shaft 1 Force Calculations
+
+As stated earlier, the torque on shaft 1 is 14.7 N*mm. The first stage of the force calculations was determining the direction in which the belt tension acts. In the CAD below, the end view of the speed reducer has been shown, with the diagonal lines representing belts going between pulleys. As can be seen, the belts act at a 19.79 degree angle.
+
+#figure(
+  image("CFImages/shaft1Pulleys.jpg", width: 70%),
+  caption: [End view of shaft 1, belt angles shown],
+)
+
+Then, a FBD diagram was drawn, and forces calculated.
+
+#figure(
+  image("CFImages/shaft1FBD.png", width: 70%),
+  caption: [Shaft 1 FBD],
+)
+
+The FBD shows the reaction forces of bushings at both ends, as well as the forces from the belts.
+
+Next, the forces were calculated. The total force from each pulley was calculated using the torque and pulley radius. Then, using the 19.79 degree angle, the total force was broken up into y and z components. Moment equations around bushing 1 were used to find the reaction forces at bushing 2. Lastly, using $F_("net") = 0$, the reaction forces at bushing 1 were calculated.
+
+#figure(
+  image("CFImages/shaft1Forces.jpg", width: 70%),
+  caption: [Shaft 1 Forces],
+)
+
+From these forces, the following torsion, shear, and bending diagrams were plotted.
+
+#figure(
+  image("CFImages/torsionGraph.png", width: 50%),
+  caption: [Graph of Torsion vs Position],
+)
+
+#figure(
+  image("CFImages/yShearGraph.png", width: 50%),
+  caption: [Graph of Y Shear vs Position],
+)
+
+#figure(
+  image("CFImages/zShearGraph.png", width: 50%),
+  caption: [Graph of Z Shear vs Position],
+)
+
+#figure(
+  image("CFImages/yBendingGraph.png", width: 50%),
+  caption: [Graph of Y Shear vs Position],
+)
+
+#figure(
+  image("CFImages/zBendingGraph.png", width: 50%),
+  caption: [Graph of Z Bending vs Position],
+)
+
+The next step of the force calculations is to determine the stress concentration factors for the setscrew flat and shoulders. Since a specific value was not given, we assumed a conservative stress concentration factor $K_t$ of 2 for the setscrew flat.
+
+For the shoulder, we assume a sharp radius, which gives us $K_t = 2.5$.
+
+We then calculate the required minimum diameters.
+
+We start with endurance strength $S_n = 13"ksi"$ from Appendix B.I. We choose $K_a = 0.8$ for machined finish, $K_b = 0.879d^(-0.107) = 1.02$, $K_c = 1$ for no axial load, $K_d = 1$ as operating temperature is around 20 celcius, $K_e = 1$ since we do not require infinite life, and $K_f$ = 1 for no miscelenous factors.
+
+This gives us $S_n' = 10.608 "ksi"$
+
+We then plug in the equation for minimum diameter based on bending and torque.
+
+$ D = ((32N)/pi sqrt(((K_t M)/(s_n'))^2 + (3/4) (T/s_y)^2))^(1/3) $ 
+
+and minimum diameter based on shear 
+
+$ D = sqrt((2.95 K_t V N)/(s'_n)) $
+
+We assume a safety factor N = 2.
+
+That gives us the following minimum diameters. 
+
+#figure(
+  image("CFImages/shaft1minD.jpg", width: 70%),
+  caption: [Minimum shaft diameters],
+)
+
+This gives us a minimum diameter of \~0.1\", which is limited by the shear at the small pulley. Therefore shaft 1 is strong enough.
 == Shaft 2 Calculations
 
 Net driving force on the timing belt pulley is given by:
@@ -604,7 +717,7 @@ D_min = [
 $
 \
 For the material choice, we want to use an affordable, and easy to machine. Therefore, we will use Aluminum for the shaft material. \
-From Appendix B II, we choose Aluminum 2014 O for its high ductility, decent strength, and cheap cost of about \$1 per inch.
+From Appendix B I, we choose Aluminum 2014 O for its high ductility, decent strength, and cheap cost of about \$1 per inch.
 \
 #align(center,
   figure(
@@ -614,21 +727,28 @@ From Appendix B II, we choose Aluminum 2014 O for its high ductility, decent str
       inset: 4pt,
         [$S_u$], [27 ksi],
         [$S_y$], [14 ksi],
-        [$S_(n')$], [13 ksi],
+        [$S_(n)$], [13 ksi],
     ),
     caption: [Material Properties of Aluminum 2014 O],
   )
 )
 \
+
+$S_n' = 10.608 "ksi"$
+The modified endurance strength is same as Shaft 1 calculations. \
 $K_t = 2.5$ as sharp fillet is used for the shaft shoulders.\
 $N = 2.0$ is chosen for our design factor since aluminum is a ductile material and the design factor is in the range of $1.5 < N < 2.5$. 
 \
-Substituting the values into the minimum diameter equation, we get:
+Substituting the values into the minimum diameter based on moment and torque, we get:
 $
 D_(min, i) = [
   (64) / pi sqrt((2.5 M_("total", i) / 13000)^2 + (3/4) (T_i / 14000)^2)
 ]^(1/3) "for" i = A, B, C, D
 $
+
+and minimum diameter based on shear 
+
+$ D_(min "shear") = sqrt((2.95 K_t V_i N)/(s'_n)) "for" i = A, B, C, D $
 \
 Using eqn () and table (), we calculate the minimum shaft diameter at each location: \
 \
@@ -653,9 +773,138 @@ The minimum shaft diameter at each location is well below the allowable shaft di
 Thus, Aluminum 2014 O is a suitable material for the 2nd shaft.
 \
 
+
 == Shaft 3 Calculations
 
+=== Force and Material Analysis
+#align(center,image("bram-images-420340594432/shaft_anal.png", width: 70%))
+_Note: the angle of 49\u{00B0} is dependent on the location of the star tracker. In Vancouver, the latitude angle
+is 49\u{00B0} so that's what we use._
+#align(center,image("bram-images-420340594432/shaft_outline.png"))
+$
+Sigma F_z= A_z+B_z+C_z -F sin(phi)= 0 \
+Sigma F_y= A_y+B_y+C_y - F cos(phi) =0 \
+Sigma F_x= A_x+B_x+C_x = 0 \
+Sigma M_(A,text("vertical")) = B_z (17.397)+C_z (54.5)-F sin(phi)(86.624) = 0 \
+Sigma M_(A,text("horizontal")) = B_x (17.397)+C_x (54.5) = 0
+$
+_Distances for moment calculations are in mm._
 
+From worm gear calculations, we know:
+$
+B_x, B_y, B_z
+  &=-3.28 text("lbf"), 3.019 text("lbf"), -1.61 text("lbf") \
+  &=-14.5 text("N"), 13.42 text("N"), -7.16 text("N")
+$
+  Using these values, we get reaction forces of:
+
+$
+A_x = -9.87 text("N") wide A_z = -7.99 text("N") \
+C_x = -4.63 text("N") wide C_y = 25.72 text("N") wide C_z = 44.7 text("N") 
+$
+
+We now verify that Aluminum 2014-O is suitable for this application.
+
+Aluminum 2014-O has the following characteristics:
+$
+S_u = 27 wide S_y = 14 wide V_text("str") = 18 wide S_n' = 13
+$
+To find all the parameters, we consulted the following tables and got these results:
+$
+  &k_a = 0.8 && text("from Table x.x") \ 
+  &k_b = 0.924 && text("from equation") 0.879 d^(-0.107) \ 
+  &k_c = 1 && text("from Table x.x, bending") \
+  &k_d = 1 && text("from Table x.x") \ 
+  &k_e = 0.814 && text("for 99% reliability") \ 
+  &k_f = 1 && text("No misc. factors") \
+  &S_e' = 13.5 text("ksi") && text("from Eqn x.x") \
+$
+$
+  S_e = k_a k_b k_c k_d k_e k_f S_e' = 8.12 text("ksi")
+$
+
+For this material to be considered valid for this operation, we need to verify
+$
+  S_e >= frac(32 M_max n_d, pi d^3)
+$
+
+We use shear and bending moment diagrams in X and Z to find the maximum bending moment along the shaft.
+#figure(
+  grid(
+    columns: 2,
+    gutter: 1mm,
+    image("bram-images-420340594432/shearx.png", width: 100%),
+    image("bram-images-420340594432/shearz.png", width: 100%),
+    image("bram-images-420340594432/bendx.png", width: 100%),
+    image("bram-images-420340594432/bendz.png", width: 100%),
+  )
+)
+#image("bram-images-420340594432/shaft_calcs_shear.png")
+#image("bram-images-420340594432/bend_calcs.png")
+
+We see that the bending moment maximum is 
+$
+M_max = 950.18 text("N")text("mm") = 8.409 text("lbf") thin text("in")
+$
+
+Our shaft diameter was decided to be $frac(5,8)$\", so with a design factor of $n_d = 2.5$, we calculate
+
+$
+S_e >= frac(32 M_max n_d, pi d^3) = 872.9 text("psi") \
+8.12 text("ksi") >= 872.9 text("psi")
+$
+
+so we can be sure that the aluminum material is strong enough to resist the stress. We now calculate
+the minimum diameter required for this section of the shaft to ensure it is smaller than our design
+shaft diameter. We use the following equation:
+
+$
+D = [frac(32 N, pi) sqrt([frac(k_t M, s'_n)]^2+frac(3,4)[frac(T,s_y)]^2) thin]^frac(1,3)
+$
+
+All of these parameters were either previously derived or from the diagrams:
+
+$
+s'_n = 872.9 text("psi") wide T = 5.886 text("Nm") = 52.1 text("lbf in") \
+N = 2.5 wide s_y = 14 text("ksi") wide k_t = 3
+$
+
+Plugging in these values yields...
+$
+D = 0.42 text("in") < 0.625 text("in")
+$
+so our shaft is fit for our needs!
+
+=== Shaft 3 Bearing Calculations
+
+We plan to use an angular contact ball bearing at C and a deep groove ball bearing at A. These locations are referenced in the figures for Shaft 3 Calculations. Our calculations are for 02-Series Deep-Groove and Angular-Contact ball bearings. 
+
+
+== Shaft 1 & 2 Setscrew Calculations
+
+There are four pulleys which are secured to shafts through setscrews. The ones to fail, if any, would be either pulley 3, which experiences the highest torque of the small pulleys, or pulley 4, which experiences the highest torque of the large pulleys.
+
+$ T_(max) = (F_(max) D) / 2$
+
+Where $T_(max)$ is the maximum torque the setscrews can trasmit, $F_(max)$ is the setscrew holding power according to the table below, and D is the shaft diameter.
+
+#figure(
+  image("CFImages/setscrewTable.png", width: 50%),
+  caption: [Shigley table 7-4 Typical Holding Power (Force) for Socket Setscrews],
+)
+
+The small pulley uses \#4 setscrews, while the large pulley uses \#8 setscrews.
+
+$ T_("max,sm") = (160*(1/4))/2 "lb"*"in" = 20 "lb"*"in" = 2260 N*"mm" $
+
+
+$ T_("max,lg") = (385*(1/4))/2 "lb"*"in" = 48.125 "lb"*"in" = 5437 N*"mm" $
+
+After applying a design factor of 2, as Shigley recommends for static loads, we can see that neither setscrew will fail.
+
+$ (1/2)*T_("max,sm") = 1130 N*"mm" > 14.7 N*"mm" $
+
+$ (1/2)*T_("max,lg") = 2718.5 N*"mm" > 58.86 N*"mm" $
 
 == Bushing Selection and Design Rationale
 
@@ -839,360 +1088,9 @@ $
 so our shaft is fit for our needs!
 
 
-== Shaft 3 Calculations
 
-=== Force and Material Analysis
-#align(center,image("bram-images-420340594432/shaft_anal.png", width: 70%))
-_Note: the angle of 49\u{00B0} is dependent on the location of the star tracker. In Vancouver, the latitude angle
-is 49\u{00B0} so that's what we use._
-#align(center,image("bram-images-420340594432/shaft_outline.png"))
-$
-Sigma F_z= A_z+B_z+C_z -F sin(phi)= 0 \
-Sigma F_y= A_y+B_y+C_y - F cos(phi) =0 \
-Sigma F_x= A_x+B_x+C_x = 0 \
-Sigma M_(A,text("vertical")) = B_z (17.397)+C_z (54.5)-F sin(phi)(86.624) = 0 \
-Sigma M_(A,text("horizontal")) = B_x (17.397)+C_x (54.5) = 0
-$
-_Distances for moment calculations are in mm._
 
-From worm gear calculations, we know:
-$
-B_x, B_y, B_z
-  &=-3.28 text("lbf"), 3.019 text("lbf"), -1.61 text("lbf") \
-  &=-14.5 text("N"), 13.42 text("N"), -7.16 text("N")
-$
-  Using these values, we get reaction forces of:
 
-$
-A_x = -9.87 text("N") wide A_z = -7.99 text("N") \
-C_x = -4.63 text("N") wide C_y = 25.72 text("N") wide C_z = 44.7 text("N") 
-$
-
-We now verify that Aluminum 2014-O is suitable for this application.
-
-Aluminum 2014-O has the following characteristics:
-$
-S_u = 27 wide S_y = 14 wide V_text("str") = 18 wide S_n' = 13
-$
-To find all the parameters, we consulted the following tables and got these results:
-$
-  &k_a = 0.8 && text("from Table x.x") \ 
-  &k_b = 0.924 && text("from equation") 0.879 d^(-0.107) \ 
-  &k_c = 1 && text("from Table x.x, bending") \
-  &k_d = 1 && text("from Table x.x") \ 
-  &k_e = 0.814 && text("for 99% reliability") \ 
-  &k_f = 1 && text("No misc. factors") \
-  &S_e' = 13.5 text("ksi") && text("from Eqn x.x") \
-$
-$
-  S_e = k_a k_b k_c k_d k_e k_f S_e' = 8.12 text("ksi")
-$
-
-For this material to be considered valid for this operation, we need to verify
-$
-  S_e >= frac(32 M_max n_d, pi d^3)
-$
-
-We use shear and bending moment diagrams in X and Z to find the maximum bending moment along the shaft.
-#figure(
-  grid(
-    columns: 2,
-    gutter: 1mm,
-    image("bram-images-420340594432/shearx.png", width: 100%),
-    image("bram-images-420340594432/shearz.png", width: 100%),
-    image("bram-images-420340594432/bendx.png", width: 100%),
-    image("bram-images-420340594432/bendz.png", width: 100%),
-  )
-)
-#image("bram-images-420340594432/shaft_calcs_shear.png")
-#image("bram-images-420340594432/bend_calcs.png")
-
-We see that the bending moment maximum is 
-$
-M_max = 950.18 text("N")text("mm") = 8.409 text("lbf") thin text("in")
-$
-
-Our shaft diameter was decided to be $frac(5,8)$\", so with a design factor of $n_d = 2.5$, we calculate
-
-$
-S_e >= frac(32 M_max n_d, pi d^3) = 872.9 text("psi") \
-8.12 text("ksi") >= 872.9 text("psi")
-$
-
-so we can be sure that the aluminum material is strong enough to resist the stress. We now calculate
-the minimum diameter required for this section of the shaft to ensure it is smaller than our design
-shaft diameter. We use the following equation:
-
-$
-D = [frac(32 N, pi) sqrt([frac(k_t M, s'_n)]^2+frac(3,4)[frac(T,s_y)]^2) thin]^frac(1,3)
-$
-
-All of these parameters were either previously derived or from the diagrams:
-
-$
-s'_n = 872.9 text("psi") wide T = 5.886 text("Nm") = 52.1 text("lbf in") \
-N = 2.5 wide s_y = 14 text("ksi") wide k_t = 3
-$
-
-Plugging in these values yields...
-$
-D = 0.42 text("in") < 0.625 text("in")
-$
-so our shaft is fit for our needs!
-
-=== Shaft 3 Bearing Calculations
-
-We plan to use an angular contact ball bearing at C and a deep groove ball bearing at A. These locations are referenced in the figures for Shaft 3 Calculations. Our calculations are for 02-Series Deep-Groove and Angular-Contact ball bearings. 
-
-== Aluminum Material Properties
-
-#figure(
-  // The image function goes here (no '#' needed inside figure)
-  image("images/Mott_appendix_9.png", width: 70%),
-  // Add a caption using a content block ([...])
-  caption: [Typical Properties of Aluminum from Mott Appendix 9],
-  // Add a label for referencing (use a name enclosed in angle brackets)
-)
-=== Angular Contact Bearing at C
-We are finding a bearing to fit our pre-defined shaft diameter of $frac(5,8)$ in, or 15.875 mm. We can use interpolation to find $C_0$ from table 11-2.
-For our shaft diameter,
-
-$
-C_10 = frac(9.95-8.06, 17-15)*(15.875-15) + 8.06 = 8.87 text("kN")
-$
-
-similarly, we interpolate $C_0$
-
-$
-C_0 = frac(4.75-3.65,17-15)*(15.875-15) + 3.65 = 4.13 text("kN")
-$
-
-Since we have both a thrust and radial force, we need to determine if $frac(F_a,C_0) <= e$ to see if we consider the thrust force in our bearing
-calculation. 
-$
-F_a = sqrt(F_z^2+F_x^2) = 44.9 text("N") \ 
-frac(F_a,C_0) = 0.006
-$
-The lowest value of $e$ on the table is 0.19 for $frac(F_a,C_0) = 0.014$, so we can safely ignore the thrust component and 
-set $X_1 = 1$.
-
-$
-F_e = X_1 V F_r + Y_1 F_a = 44.9 text("N")
-$
-
-We can now calculate our working value for $C_10$ with the following equation:
-
-$
-C_10 = a_f F_e [frac(x_D,x_0+(theta-chi_0)[ln(frac(1,R_D))]^frac(1,b))]^frac(1,a)
-$
-
-We use the following parameters:
-$
-  &a_f = 1 && text("from application factor") \
-  &x_0 = 0.02 && text("SKF Weibull Parameters") \
-  &theta = 4.459 && text("SKF Weibull Parameters") \
-  &b = 1.483 && text("SKF Weibull Parameters") \
-  &R_D = 0.9 && text("90% reliability") \
-  &a = 3 && text("for ball bearings") \
-$
-
-for $x_0$, we do the following calculations
-$
-  &L_10 = 10^6 \
-  &L_D = 500 "hours" \
-  &x_D = frac(60 L_D n, L_10) = 2*10^(-5)
-$
-Plugging these values in yields...
-
-$
-  C_10 = 1.39 text("kN") <= 8.87 text("kN")
-$
-
-so this bearing is suited for this task! Because we're using inches and SKF does not offer the exact 0.625 inch bearing bore, we use the *#201-2RS Angular Contact Bearing* because it has similar characteristics and can be purchase off Temu.com for relatively cheap.
-
-==== Deep Groove Ball Bearing at A 
-
-For the bearing at A, we have the following forces:
-
-$
-  A_x = -9.87 "N" wide A_z = -7.99 "N"
-$
-
-which results in an overall radial force of
-
-$
-  F_R = sqrt(A_x^2+A_z^2) = 12.7 "N"
-$
-
-$x_D$, $x_0$, $theta$, $b$, $R_D$ are the same as for the angular contact bearing, so we simply recalculate $C_10$:
-
-$
-  C_10 = 0.393 < 8.87 
-$
-
-so we can use the 0.625 inch 02-Series Deep-Groove bearing. Since this 02-Series is not available for inch-based shaft diameters, we opt for the over-specced *R10ZZ $frac(5,8)\" "Deep Groove Ball Bearing"$* available on BearingsCanada.com.
-
-=== Keyway Calculations for Worm Gear
-
-To allow for torque transmission from the worm gear to the camera shaft, we need a keyway. For this low-torque application, a square aluminum key is cheap, easy to manufacture, and effective. We will use Aluminum 6061 for this key, which has the following properties.
-
-$
-  s_u = 18 "ksi" wide s_y = 12 "ksi"
-$
-
-For a shaft diameter of 0.75 in at the worm gear, the recommended key width is 0.1875 in from Table 11-1. We use a standard safety factor N = 3. So, our key parameters are
-$
-  T = 5.886 "Nm" = 52.1 "lbf in" wide D = 0.75 wide N = 3 wide W = 0.1875
-$
-
-Since Aluminum 6061 is much weaker than Aluminum 2014-O, we can simply use the following equation:
-$
-  L_min = frac(4 T N, D W s_y) = 0.37 "in"
-$
-
-This is much smaller than usual key sizes, which are recommended to be between 1-1.5 inches. As such, we decide that the square Aluminum 6061 key be 1 inch long. 
-
-This is very short for a key, so we go up to a minimum key length 
-== Belt and Pulley Calculations <bnpcalc>
-A typical stepper motor can outpout around $3000 "rpm"$ and $1.2 "N" dot "m"$ of torque. \
-We desire an output speed of around $0.05886 "rpm"$ at $0.0694 "N" dot "m"$ of torque. \
-Our system will use this power but we design for the stepper maximum. \
-\
-From @belt_sizing we select a 2GMT belt. \
-We can assume that the belt is going to run at less than $10 "rpm"$ so from table @smaller_sheave 
-we select a $6 "mm"$ wide belt and the smaller sprocket size of $18$ grooves which is rated for 
-$1.35 "N" dot "m"$ of torque at this speed. \
-\
-We want the stepper to spin at around $1.1" rpm"$ so then $V R = 14.4$ and to 
-reduce complexity we use the same pair of sprockets twice. \
-Since a stepper motor can run at variable speed we will say that each belt will 
-need a reduction of $1:4$. \ 
-So we select the larger sprocket size to be $72$ groove. The pitch diameters 
-are found from @pulley_inf:
-$ p d = 0.301 "in" quad P D = 1.805 "in" $
-\
-We want the center distance to be small so temporarily select $C D=1.9 "in"$ since
-we want to minimize size.\
-$ P L = 2 dot C D + [1.57 dot (p d + P D)] + frac((P D - p d)^2, 4 C D) = 1.984 "in" $
-\
-So using @belt_selection $P L = 7.559$
-which is a stock length. \
-$ K = 4 P L - 6.28 dot (P D + p d) $
-$ C D = frac(K + sqrt(K^2 - 32(P D - p d)^2), 17 ) = 1.984 "in" $
-Giving our center distance.\
-Our nominal safety factor is given by $S F = frac(1.35, 0.05886)=23$.\
-Our worst case safety factor, which shouldn't occur is $S F = frac(1.35, 1.2)=1.125$.\
-Now we calculate the wrap angles to be: \
-$phi.alt_(D) = pi - arcsin frac(P D - p d, 2C D) = 2.364 "rad" quad "and" quad phi.alt_(D) 
-= pi + arcsin frac(P D - p d, 2C D) = 3.92 "rad"$
-
-== Shaft 1 Force Calculations
-
-As stated earlier, the torque on shaft 1 is 14.7 N*mm. The first stage of the force calculations was determining the direction in which the belt tension acts. In the CAD below, the end view of the speed reducer has been shown, with the diagonal lines representing belts going between pulleys. As can be seen, the belts act at a 19.79 degree angle.
-
-#figure(
-  image("CFImages/shaft1Pulleys.jpg", width: 70%),
-  caption: [End view of shaft 1, belt angles shown],
-)
-
-Then, a FBD diagram was drawn, and forces calculated.
-
-#figure(
-  image("CFImages/shaft1FBD.png", width: 70%),
-  caption: [Shaft 1 FBD],
-)
-
-The FBD shows the reaction forces of bushings at both ends, as well as the forces from the belts.
-
-Next, the forces were calculated. The total force from each pulley was calculated using the torque and pulley radius. Then, using the 19.79 degree angle, the total force was broken up into y and z components. Moment equations around bushing 1 were used to find the reaction forces at bushing 2. Lastly, using $F_("net") = 0$, the reaction forces at bushing 1 were calculated.
-
-#figure(
-  image("CFImages/shaft1Forces.jpg", width: 70%),
-  caption: [Shaft 1 Forces],
-)
-
-From these forces, the following torsion, shear, and bending diagrams were plotted.
-
-#figure(
-  image("CFImages/torsionGraph.png", width: 50%),
-  caption: [Graph of Torsion vs Position],
-)
-
-#figure(
-  image("CFImages/yShearGraph.png", width: 50%),
-  caption: [Graph of Y Shear vs Position],
-)
-
-#figure(
-  image("CFImages/zShearGraph.png", width: 50%),
-  caption: [Graph of Z Shear vs Position],
-)
-
-#figure(
-  image("CFImages/yBendingGraph.png", width: 50%),
-  caption: [Graph of Y Shear vs Position],
-)
-
-#figure(
-  image("CFImages/zBendingGraph.png", width: 50%),
-  caption: [Graph of Z Bending vs Position],
-)
-
-The next step of the force calculations is to determine the stress concentration factors for the setscrew flat and shoulders. Since a specific value was not given, we assumed a conservative stress concentration factor $K_t$ of 2 for the setscrew flat.
-
-For the shoulder, we assume a sharp radius, which gives us $K_t = 2.5$.
-
-We then calculate the required minimum diameters.
-
-We start with endurance strength $S_n = 13"ksi"$ from Appendix B.I. We choose $K_a = 0.8$ for machined finish, $K_b = 0.879d^(-0.107) = 1.02$, $K_c = 1$ for no axial load, $K_d = 1$ as operating temperature is around 20 celcius, $K_e = 1$ since we do not require infinite life, and $K_f$ = 1 for no miscelenous factors.
-
-This gives us $S_n' = 10.608 "ksi"$
-
-We then plug in the equation for minimum diameter based on bending and torque.
-
-$ D = ((32N)/pi sqrt(((K_t M)/(s_n'))^2 + (3/4) (T/s_y)^2))^(1/3) $ 
-
-and minimum diameter based on shear 
-
-$ D = sqrt((2.95 K_t V N)/(s'_n)) $
-
-We assume a safety factor N = 2.
-
-That gives us the following minimum diameters. 
-
-#figure(
-  image("CFImages/shaft1minD.jpg", width: 70%),
-  caption: [Minimum shaft diameters],
-)
-
-This gives us a minimum diameter of \~0.1\", which is limited by the shear at the small pulley. Therefore shaft 1 is strong enough.
-
-
-== Shaft 1 & 2 Setscrew Calculations
-
-There are four pulleys which are secured to shafts through setscrews. The ones to fail, if any, would be either pulley 3, which experiences the highest torque of the small pulleys, or pulley 4, which experiences the highest torque of the large pulleys.
-
-$ T_(max) = (F_(max) D) / 2$
-
-Where $T_(max)$ is the maximum torque the setscrews can trasmit, $F_(max)$ is the setscrew holding power according to the table below, and D is the shaft diameter.
-
-#figure(
-  image("CFImages/setscrewTable.png", width: 50%),
-  caption: [Shigley table 7-4 Typical Holding Power (Force) for Socket Setscrews],
-)
-
-The small pulley uses \#4 setscrews, while the large pulley uses \#8 setscrews.
-
-$ T_("max,sm") = (160*(1/4))/2 "lb"*"in" = 20 "lb"*"in" = 2260 N*"mm" $
-
-
-$ T_("max,lg") = (385*(1/4))/2 "lb"*"in" = 48.125 "lb"*"in" = 5437 N*"mm" $
-
-After applying a design factor of 2, as Shigley recommends for static loads, we can see that neither setscrew will fail.
-
-$ (1/2)*T_("max,sm") = 1130 N*"mm" > 14.7 N*"mm" $
-
-$ (1/2)*T_("max,lg") = 2718.5 N*"mm" > 58.86 N*"mm" $
 
 
 = APPENDIX B
@@ -1213,12 +1111,3 @@ $ (1/2)*T_("max,lg") = 2718.5 N*"mm" > 58.86 N*"mm" $
   image("yuvy_images/Gates_manual_belts.png", width: 100%),
   caption: [Belt Selection],
 ) <belt_selection>
-
-== Aluminum Material Properties
-#figure(
-  // The image function goes here (no '#' needed inside figure)
-  image("images/Mott_appendix_9.png", width: 70%),
-  // Add a caption using a content block ([...])
-  caption: [Typical Properties of Aluminum from Mott Appendix 9],
-  // Add a label for referencing (use a name enclosed in angle brackets)
-)
