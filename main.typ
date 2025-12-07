@@ -717,7 +717,7 @@ D_min = [
 $
 \
 For the material choice, we want to use an affordable, and easy to machine. Therefore, we will use Aluminum for the shaft material. \
-From Appendix B I, we choose Aluminum 2014 O for its high ductility, decent strength, and cheap cost of about \$1 per inch.
+From Appendix B II, we choose Aluminum 2014 O for its high ductility, decent strength, and cheap cost of about \$1 per inch.
 \
 #align(center,
   figure(
@@ -727,35 +727,42 @@ From Appendix B I, we choose Aluminum 2014 O for its high ductility, decent stre
       inset: 4pt,
         [$S_u$], [27 ksi],
         [$S_y$], [14 ksi],
-        [$S_(n')$], [13 ksi],
+        [$S_(n)$], [13 ksi],
     ),
     caption: [Material Properties of Aluminum 2014 O],
   )
 )
 \
+
+$S_n' = 10.608 "ksi"$
+The modified endurance strength is same as Shaft 1 calculations. \
 $K_t = 2.5$ as sharp fillet is used for the shaft shoulders.\
 $N = 2.0$ is chosen for our design factor since aluminum is a ductile material and the design factor is in the range of $1.5 < N < 2.5$. 
 \
-Substituting the values into the minimum diameter equation, we get:
+
+Substituting the values into the minimum diameter based on moment and torque, we get:
 $
 D_(min, i) = [
-  (64) / pi sqrt((2.5 M_("total", i) / 13000)^2 + (3/4) (T_i / 14000)^2)
+  (64) / pi sqrt((2.5 M_("total", i) / 10608)^2 + (3/4) (T_i / 14000)^2)
 ]^(1/3) "for" i = A, B, C, D
 $
+
+Minimum diameter based on shear:
+$ D_(min "shear") = sqrt((2.95 K_t V_i N)/(s'_n)) "for" i = A, B, C, D $
 \
-Using eqn () and table (), we calculate the minimum shaft diameter at each location: \
+Using eqn (6.4.25), (6.4.26) and table 2,3, we calculate the minimum shaft diameter at each location: \
 \
 #align(center,
   figure(
     table(
-      columns: 3,
+      columns: 4,
       stroke: 1pt + black,
       inset: 4pt,
-        [], [$D_min "(in)"$],[$D_"Allowable" "(in)"$],
-        [$D_A$], [0.00],[-],
-        [$D_B$], [0.362],[0.75],
-        [$D_C$], [0.172],[0.25],
-        [$D_D$], [0.00], [-]
+        [], [$D_min "(in)"$],[$D_(min "shear") "(in)"$],[$D_"Allowable" "(in)"$],
+        [$D_A$], [0.00],[0.130],[-],
+        [$D_B$], [0.362],[0.0345],[0.75],
+        [$D_C$], [0.172],[0.0370],[0.25],
+        [$D_D$], [0.00],[0.00], [-]
     ),
     caption: [Minimum and Allowable Shaft Diameters],
   )
@@ -1203,3 +1210,9 @@ so our shaft is fit for our needs!
   image("yuvy_images/Gates_Manual_belts.png", width: 100%),
   caption: [Belt Selection],
 ) <belt_selection>
+
+== Aluminum Material Properties
+#figure(
+  image("images/Mott_appendix_9.png", width: 70%),
+  caption: [Material Properties of Aluminum 2014 O],
+)
