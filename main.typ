@@ -662,6 +662,184 @@ $ ((Delta omega) / omega)_("RMS") = 37.7% $
 
 Which is within spec for this application
 
+Plugging in these values yields...
+$
+D = 0.42 text("in") < 0.625 text("in")
+$
+so our shaft is fit for our needs!
+
+== Shaft 3 Calculations
+
+#align(center,image("bram-images-420340594432/shaft_anal.png", width: 70%))
+_Note: the angle of 49\u{00B0} is dependent on the location of the star tracker. In Vancouver, the latitude angle
+is 49\u{00B0} so that's what we use._
+#align(center,image("bram-images-420340594432/shaft_outline.png"))
+$
+Sigma F_z= A_z+B_z+C_z -F sin(phi)= 0 \
+Sigma F_y= A_y+B_y+C_y - F cos(phi) =0 \
+Sigma F_x= A_x+B_x+C_x = 0 \
+Sigma M_(A,text("vertical")) = B_z (17.397)+C_z (54.5)-F sin(phi)(86.624) = 0 \
+Sigma M_(A,text("horizontal")) = B_x (17.397)+C_x (54.5) = 0
+$
+_Distances for moment calculations are in mm._
+
+From worm gear calculations, we know:
+$
+B_x, B_y, B_z
+  &=-3.28 text("lbf"), 3.019 text("lbf"), -1.61 text("lbf") \
+  &=-14.5 text("N"), 13.42 text("N"), -7.16 text("N")
+$
+  Using these values, we get reaction forces of:
+
+$
+A_x = -9.87 text("N") wide A_z = -7.99 text("N") \
+C_x = -4.63 text("N") wide C_y = 25.72 text("N") wide C_z = 44.7 text("N") 
+$
+
+We now verify that Aluminum 2014-O is suitable for this application.
+
+Aluminum 2014-O has the following characteristics:
+$
+S_u = 27 wide S_y = 14 wide V_text("str") = 18 wide S_n' = 13
+$
+To find all the parameters, we consulted the following tables and got these results:
+$
+  &k_a = 0.8 && text("from Table x.x") \ 
+  &k_b = 0.924 && text("from equation") 0.879 d^(-0.107) \ 
+  &k_c = 1 && text("from Table x.x, bending") \
+  &k_d = 1 && text("from Table x.x") \ 
+  &k_e = 0.814 && text("for 99% reliability") \ 
+  &k_f = 1 && text("No misc. factors") \
+  &S_e' = 13.5 text("ksi") && text("from Eqn x.x") \
+$
+$
+  S_e = k_a k_b k_c k_d k_e k_f S_e' = 8.12 text("ksi")
+$
+
+For this material to be considered valid for this operation, we need to verify
+$
+  S_e >= frac(32 M_max n_d, pi d^3)
+$
+
+We use shear and bending moment diagrams in X and Z to find the maximum bending moment along the shaft.
+#figure(
+  grid(
+    columns: 2,
+    gutter: 1mm,
+    image("bram-images-420340594432/shearx.png", width: 100%),
+    image("bram-images-420340594432/shearz.png", width: 100%),
+    image("bram-images-420340594432/bendx.png", width: 100%),
+    image("bram-images-420340594432/bendz.png", width: 100%),
+  )
+)
+#image("bram-images-420340594432/shaft_calcs_shear.png")
+#image("bram-images-420340594432/bend_calcs.png")
+
+We see that the bending moment maximum is 
+$
+M_max = 950.18 text("N")text("mm") = 8.409 text("lbf") thin text("in")
+$
+
+Our shaft diameter was decided to be $frac(5,8)$\", so with a design factor of $n_d = 2.5$, we calculate
+
+$
+S_e >= frac(32 M_max n_d, pi d^3) = 872.9 text("psi") \
+8.12 text("ksi") >= 872.9 text("psi")
+$
+
+so we can be sure that the aluminum material is strong enough to resist the stress. We now calculate
+the minimum diameter required for this section of the shaft to ensure it is smaller than our design
+shaft diameter. We use the following equation:
+
+$
+D = [frac(32 N, pi) sqrt([frac(k_t M, s'_n)]^2+frac(3,4)[frac(T,s_y)]^2) thin]^frac(1,3)
+$
+
+All of these parameters were either previously derived or from the diagrams:
+
+$
+s'_n = 872.9 text("psi") wide T = 5.886 text("Nm") = 52.1 text("lbf in") \
+N = 2.5 wide s_y = 14 text("ksi") wide k_t = 3
+$
+
+Plugging in these values yields...
+$
+D = 0.42 text("in") < 0.625 text("in")
+$
+so our shaft is fit for our needs!
+
+== Shaft 3 Bearing Calculations
+
+We plan to use an angular contact ball bearing at C and a deep groove ball bearing at A. These locations are referenced in the figures
+for Shaft 3 Calculations. 
+
+=== Angular Contact Bearing at C
+We are finding a bearing to fit our pre-defined shaft diameter of $frac(5,8)$ in, or 15.875 mm. We can use interpolation to find $C_0$ from table 11-2.
+For our shaft diameter,
+
+$
+C_10 = frac(9.95-8.06, 17-15)*(15.875-15) + 8.06 = 8.87 text("kN")
+$
+
+similarly, we interpolate $C_0$
+
+$
+C_0 = frac(4.75-3.65,17-15)*(15.875-15) + 3.65 = 4.13 text("kN")
+$
+
+Since we have both a thrust and radial force, we need to determine if $frac(F_a,C_0) <= e$ to see if we consider the thrust force in our bearing
+calculation. 
+$
+F_a = sqrt(F_z^2+F_x^2) = 44.9 text("N") \ 
+frac(F_a,C_0) = 0.006
+$
+The lowest value of $e$ on the table is 0.19 for $frac(F_a,C_0) = 0.014$, so we can safely ignore the thrust component and 
+set $X_1 = 1$.
+
+$
+F_e = X_1 V F_r + Y_1 F_a = 44.9 text("N")
+$
+
+We can now calculate our working value for $C_10$ with the following equation:
+
+$
+C_10 = 
+$
+
+=== Deep Groove Ball Bearing at A 
+
+== Belt and Pulley Calculations
+A typical stepper motor can outpout around $3000 "rpm"$ and $1.2 "N" dot "m"$ of torque. \
+We desire an output speed of around $0.05886 "rpm"$ at $0.0694 "N" dot "m"$ of torque. \
+Our system will use this power but we design for the stepper maximum. \
+\
+From table *ENTER TABLE* we select a 2GMT belt. \
+We can assume that the belt is going to run at less than $10 "rpm"$ so from table *ENTER TABLE* 
+we select a $6 "mm"$ wide belt and the smaller sprocket size of $18$ grooves which is rated for 
+$1.35 "N" dot "m"$ of torque at this speed. \
+\
+We want the stepper to spin at around $1.1" rpm"$ so then $V R = 14.4$ and to 
+reduce complexity we use the same pair of sprockets twice. \
+Since a stepper motor can run at variable speed we will say that each belt will 
+need a reduction of $1:4$. \ 
+So we select the larger sprocket size to be $72$ groove. The pitch diameters 
+are found from *ENTER TABLE* to be:
+$ p d = 0.301 "in" quad P D = 1.805 "in" $
+\
+We want the center distance to be small so temporarily select $C D=1.9 "in"$ since
+we want to minimize size.\
+$ P L = 2 dot C D + [1.57 dot (p d + P D)] + frac((P D - p d)^2, 4 C D) = 1.984 "in" $
+\
+So using *ENTER TABLE* we select a 2MR-192 belt with a pitch length $P L = 7.559$
+which is a stock length. \
+$ K = 4 P L - 6.28 dot (P D + p d) $
+$ C D = frac(K + sqrt(K^2 - 32(P D - p d)^2), 17 ) = 1.984 "in" $
+Giving our center distance.\
+Our nominal safety factor is given by $S F = frac(1.35, 0.05886)=23$.\
+Our worst case safety factor, which shouldn't occur is $S F = frac(1.35, 1.2)=1.125$.\
+Now we calculate the wrap angles to be: \
+$phi_(D) = pi - arcsin frac(P D - p d, 2C D) = 2.364 "rad" quad "and" quad phi_(D) 
+= pi + arcsin frac(P D - p d, 2C D) = 3.92 "rad"$
 == Shaft 1 Force Calculations
 
 As stated earlier, the torque on shaft 1 is 14.7 N*mm. The first stage of the force calculations was determining the direction in which the belt tension acts. In the CAD below, the endview of the gear reducer has been shown, with the diagonal lines representing belts going between pulleys. As can be seen, the belts act at a 19.79 degree angle.
