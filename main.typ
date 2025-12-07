@@ -27,6 +27,49 @@
 == RPM Considerations
 
 == Worm Gear Selection
+For the fine resolution required at the output, it was important to able to do large gear ratios for the last stage of the drive. After the 1:16 ratio of the timing belt drive stage, a solution was needed to achieve single stage large ratio in the magnitude of 1:100. In reality, there are several ways to achieve this (e.g. see #link("https://en.wikipedia.org/wiki/Cycloidal_drive")[Cycloidal Drives]) but a solution for high ratios explicitly recommended by Mott and Shigley is a worm gear drive. These are sold commercially in gear ratios of up to 1:100 and this was what was selected for the final design. 
+
+A worm and worm gear set from rushgears.com, and American manufacturing company was selected. This manufacturer sells standard gears but can also grind custom gears if required. We selected the WB12L and WB1200L gears for our prototype. The set is a 12 pitch, has a 14.5° standard pitch angle and a very low 4.6° lead angle. The worm has a signle thread and the worm gear has 100 teeth. The self-locking feature is somewhat important to ensure that unbalanced loads are not created on the rest of the system.
+
+Due to the low power and speed conditions under which this worm drive will run, consideration of the material in terms of maximum strength is not as critical as the precision of the drive. While theoretically any material can be used as the worm and worm gear material, commercially, it is easiest to find bronze or cast iron gears. For this project, we selected bronze as opposed to cast iron for its precise machinability. For the final product, whatever is a good tradeoff between wear, precision, and cost would be selected. 
+
+Given the  $5.886 N dot m m$ output torque, we can analyze the forces of the worm and gear as follows.
+
+=== Given
+
+- Pitch diameter: $D_G = 8.333 "in" = 0.2116582 "m"$
+- Torque on worm wheel: $T_0 = 5.789 "N·m"$
+- Normal pressure angle: $phi_n = 14.5°$
+- Worm lead angle: $lambda = 4.7666°$ (= 0.083176 rad)
+- Coefficient of friction: $mu = 0.124$
+
+The coefficient of friction is calculated using $ 0.124 e^(-0.74 v_s^0.645)$ (10–26). Due to the very slow speed, but $v_s != 0$, the coefficient is not $0.15$
+
+=== Mott equations
+
+- Tangential force (10–29):
+  $ W_(t G) = (2 T_0) / D_G $
+
+- Axial force (10–30):
+  $ W_(x G) = W_(t G) (cos phi_n sin lambda + mu cos lambda) / (cos phi_n cos lambda - mu sin lambda) $
+
+- Radial force (10–31):
+  $ W_(r G) = (W_(x G) sin phi_n) / (cos phi_n cos lambda - mu sin lambda) $
+
+- Friction force (10–32):
+  $ W_f = (mu W_(t G)) / (cos lambda cos phi_n - mu sin lambda) $
+
+=== Numerical results
+
+- $W_(t G) = 54.701 "N"$
+
+- $W_(x G) = 11.698 "N"$ (axial / along worm axis)
+
+- $W_(r G) = 3.068 "N"$ (radial, toward gear center)
+
+- $W_f = 7.104 "N"$ (friction force, parallel to tooth face)
+
+- Resultant contact force: $W_c = sqrt(54.701^2 + 11.698^2 + 3.068^2) = 55.951 "N"$
 
 == Shaft Design 
 
