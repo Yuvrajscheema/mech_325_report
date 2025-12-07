@@ -82,7 +82,6 @@ $
 F_(D x) = -0.553 "lbf" \
 F_(D y) =  0.00 "lbf" \
 F_(D z) = 0.812 "lbf" \
-
 $
 
 #figure(
@@ -101,17 +100,88 @@ $
   // Add a label for referencing (use a name enclosed in angle brackets)
 ) <fig:2nd_shaft_shear_moment>
 
+#table(
+  columns: 3,
+  stroke: 1pt + black,
+  inset: 4pt,
+    [],[$"V"_("horizontal") "(lbf)"$],  [$"V"_("vertical") "(lbf)"$],
+    [A],[-3.01],              [11.7],
+    [B],[0.267],               [-0.812],
+    [C],[-0.553],              [-0.812],
+    [D],[0.00],                [0.00]
+)
+
+#table(
+  columns: 4,
+  stroke: 1pt + black,
+  inset: 4pt,
+    [], [$"M"_("horizontal plane") "(lbf)"$], [$"M"_("vertical plane") "(lbf)"$], [$"M"_("total") "(lbf)"$],
+    [A],[0.00],[0.00],[0.00],
+    [B],[-3.01],[11.7],[12.1],
+    [C],[-1.23],[0.406],[1.30],
+    [D],[0.00],[0.00],[0.00]
+)
+
+#table(
+  columns: 2,
+  stroke: 1pt + black,
+  inset: 4pt,
+    [], [$"T (lbf·in)"$],
+    [A], [0.00],
+    [B],   [0.521],
+    [C],   [-0.521],
+    [D], [0.00]
+)
+
+#table(
+  columns: 3,
+  stroke: 1pt + black,
+  inset: 4pt,
+    [], [$"M"_("total") "(lbf)"$], [$"T (lbf·in)"$],
+    [A], [0.00],  [0.00],
+    [B], [12.1],  [0.521],
+    [C], [1.30],  [-0.521],
+    [D], [0.00],  [0.00]
+)
+
 From Mott Appendix 9, we choose Aluminum 2014 O.
 
 #table(
   columns: 2,
   stroke: 1pt + black,
   inset: 4pt,
-    [], [Aluminum 2014 O],
+    [], [Aluminum 2014 O],  
     [$S_u$],[27 ksi],
     [$S_y$],[14 ksi],
     [$S_n '$],[13 ksi]
 )
+
+Sharp fillet is used for the shaft shoulders so $K_t = 2.5$ \
+Aluminum is a ductile material so the deisgn shoud range from $1.5 < N < 2.5$. We choose $N = 2.0$ for our design.
+
+From Mott eqn 
+
+$D_min = [
+  (32N) / pi sqrt((k_t M / S_n')^2 + (3/4) (T / S_y)^2)
+]^(1/3)$
+
+$D_(min, i) = [
+  (64) / pi sqrt((2.5 M_("total", i) / 13000)^2 + (3/4) (T_i / 14000)^2)
+]^(1/3)$
+for $i = A, B, C, D$
+
+#table(
+  columns: 2,
+  stroke: 1pt + black,
+  inset: 4pt,
+    [], [$D_min "(in)"$],
+    [$D_A$], [0.00],
+    [$D_B$], [0.362],
+    [$D_C$], [0.172],
+    [$D_D$], [0.00]
+)
+
+
 
 
 
